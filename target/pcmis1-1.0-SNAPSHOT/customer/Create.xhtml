@@ -118,9 +118,13 @@
                                                var="seat"
                                                itemValue="#{seat}"/>
                             </p:selectOneMenu>
-                            
+
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_sport}" for="sport" />
-                            <p:inputText id="sport" value="#{customerController.selected.sport}" title="#{bundle.CreateCustomerTitle_sport}" />
+                            <p:selectOneMenu id="sport" value="#{customerController.selected.sport}">
+                                <f:selectItems value="#{enumController.sport}"
+                                               var="sport"
+                                               itemValue="#{sport}"/>
+                            </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_interest}" for="interest" />
                             <p:inputText id="interest" value="#{customerController.selected.interest}" title="#{bundle.CreateCustomerTitle_interest}" />
@@ -131,7 +135,7 @@
                                                var="meal"
                                                itemValue="#{meal}"/>
                             </p:selectOneMenu>
-                            
+
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_card_type}" for="card_type" />
                             <p:inputText id="card_type" value="#{customerController.selected.card_type}" title="#{bundle.CreateCustomerTitle_card_type}" />
 

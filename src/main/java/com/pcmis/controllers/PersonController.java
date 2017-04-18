@@ -27,6 +27,11 @@ public class PersonController implements Serializable {
     private com.pcmis.facades.PersonFacade ejbFacade;
     private List<Person> items = null;
     private Person selected;
+    
+    private Person loggedPerson;
+    private boolean logged;
+    private String userName;
+    private String password;
 
     public PersonController() {
     }
@@ -115,6 +120,38 @@ public class PersonController implements Serializable {
 
     public List<Person> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public Person getLoggedPerson() {
+        return loggedPerson;
+    }
+
+    public void setLoggedPerson(Person loggedPerson) {
+        this.loggedPerson = loggedPerson;
+    }
+
+    public boolean isLogged() {
+        return logged;
+    }
+
+    public void setLogged(boolean logged) {
+        this.logged = logged;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @FacesConverter(forClass = Person.class)
