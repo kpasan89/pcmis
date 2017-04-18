@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservationCreateDlg" widgetVar="ReservationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateReservationTitle}">
+            <h:form id="ReservationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{reservationController.selected.id}" title="#{bundle.CreateReservationTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_adult_count}" for="adult_count" />
+                        <p:inputText id="adult_count" value="#{reservationController.selected.adult_count}" title="#{bundle.CreateReservationTitle_adult_count}" />
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_kids_count}" for="kids_count" />
+                        <p:inputText id="kids_count" value="#{reservationController.selected.kids_count}" title="#{bundle.CreateReservationTitle_kids_count}" />
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_dep_airport}" for="dep_airport" />
+                        <p:inputText id="dep_airport" value="#{reservationController.selected.dep_airport}" title="#{bundle.CreateReservationTitle_dep_airport}" />
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_arr_airport}" for="arr_airport" />
+                        <p:inputText id="arr_airport" value="#{reservationController.selected.arr_airport}" title="#{bundle.CreateReservationTitle_arr_airport}" />
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_preff_airline}" for="preff_airline" />
+                        <p:inputText id="preff_airline" value="#{reservationController.selected.preff_airline}" title="#{bundle.CreateReservationTitle_preff_airline}" />
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_preff_class}" for="preff_class" />
+                        <p:inputText id="preff_class" value="#{reservationController.selected.preff_class}" title="#{bundle.CreateReservationTitle_preff_class}" />
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_travel_date}" for="travel_date" />
+                        <p:calendar id="travel_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{reservationController.selected.travel_date}" title="#{bundle.EditReservationTitle_travel_date}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_return_date}" for="return_date" />
+                        <p:calendar id="return_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{reservationController.selected.return_date}" title="#{bundle.EditReservationTitle_return_date}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_res_customer}" for="res_customer" />
+                        <p:selectOneMenu id="res_customer" value="#{reservationController.selected.res_customer}" >
+                            <f:selectItems value="#{customerController.itemsAvailableSelectOne}"
+                                           var="res_customerItem"
+                                           itemValue="#{res_customerItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reservationController.create}" value="#{bundle.Save}" update="display,:ReservationListForm:datalist,:growl" oncomplete="handleSubmit(args,'ReservationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReservationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaymentEditDlg" widgetVar="PaymentEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPaymentTitle}">
+            <h:form id="PaymentEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{paymentController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPaymentLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{paymentController.selected.id}" title="#{bundle.EditPaymentTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditPaymentLabel_expenseType}" for="expenseType" />
+                        <p:inputText id="expenseType" value="#{paymentController.selected.expenseType}" title="#{bundle.EditPaymentTitle_expenseType}" />
+                        <p:outputLabel value="#{bundle.EditPaymentLabel_ticket_number}" for="ticket_number" />
+                        <p:inputText id="ticket_number" value="#{paymentController.selected.ticket_number}" title="#{bundle.EditPaymentTitle_ticket_number}" />
+                        <p:outputLabel value="#{bundle.EditPaymentLabel_value_ticket}" for="value_ticket" />
+                        <p:inputText id="value_ticket" value="#{paymentController.selected.value_ticket}" title="#{bundle.EditPaymentTitle_value_ticket}" />
+                        <p:outputLabel value="#{bundle.EditPaymentLabel_points}" for="points" />
+                        <p:inputText id="points" value="#{paymentController.selected.points}" title="#{bundle.EditPaymentTitle_points}" />
+                        <p:outputLabel value="#{bundle.EditPaymentLabel_pay_customer}" for="pay_customer" />
+                        <p:selectOneMenu id="pay_customer" value="#{paymentController.selected.pay_customer}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{customerController.itemsAvailableSelectOne}"
+                                           var="pay_customerItem"
+                                           itemValue="#{pay_customerItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{paymentController.update}" value="#{bundle.Save}" update="display,:PaymentListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PaymentEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PaymentEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

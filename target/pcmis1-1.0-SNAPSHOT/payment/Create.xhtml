@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaymentCreateDlg" widgetVar="PaymentCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePaymentTitle}">
+            <h:form id="PaymentCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{paymentController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePaymentLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{paymentController.selected.id}" title="#{bundle.CreatePaymentTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreatePaymentLabel_expenseType}" for="expenseType" />
+                        <p:inputText id="expenseType" value="#{paymentController.selected.expenseType}" title="#{bundle.CreatePaymentTitle_expenseType}" />
+                        <p:outputLabel value="#{bundle.CreatePaymentLabel_ticket_number}" for="ticket_number" />
+                        <p:inputText id="ticket_number" value="#{paymentController.selected.ticket_number}" title="#{bundle.CreatePaymentTitle_ticket_number}" />
+                        <p:outputLabel value="#{bundle.CreatePaymentLabel_value_ticket}" for="value_ticket" />
+                        <p:inputText id="value_ticket" value="#{paymentController.selected.value_ticket}" title="#{bundle.CreatePaymentTitle_value_ticket}" />
+                        <p:outputLabel value="#{bundle.CreatePaymentLabel_points}" for="points" />
+                        <p:inputText id="points" value="#{paymentController.selected.points}" title="#{bundle.CreatePaymentTitle_points}" />
+                        <p:outputLabel value="#{bundle.CreatePaymentLabel_pay_customer}" for="pay_customer" />
+                        <p:selectOneMenu id="pay_customer" value="#{paymentController.selected.pay_customer}" >
+                            <f:selectItems value="#{customerController.itemsAvailableSelectOne}"
+                                           var="pay_customerItem"
+                                           itemValue="#{pay_customerItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{paymentController.create}" value="#{bundle.Save}" update="display,:PaymentListForm:datalist,:growl" oncomplete="handleSubmit(args,'PaymentCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PaymentCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

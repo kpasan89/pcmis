@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonEditDlg" widgetVar="PersonEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonTitle}">
+            <h:form id="PersonEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPersonLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{personController.selected.id}" title="#{bundle.EditPersonTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditPersonLabel_full_name}" for="full_name" />
+                        <p:inputText id="full_name" value="#{personController.selected.full_name}" title="#{bundle.EditPersonTitle_full_name}" />
+                        <p:outputLabel value="#{bundle.EditPersonLabel_appoinment}" for="appoinment" />
+                        <p:inputText id="appoinment" value="#{personController.selected.appoinment}" title="#{bundle.EditPersonTitle_appoinment}" />
+                        <p:outputLabel value="#{bundle.EditPersonLabel_joined_date}" for="joined_date" />
+                        <p:calendar id="joined_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{personController.selected.joined_date}" title="#{bundle.EditPersonTitle_joined_date}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPersonLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{personController.selected.username}" title="#{bundle.EditPersonTitle_username}" />
+                        <p:outputLabel value="#{bundle.EditPersonLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{personController.selected.password}" title="#{bundle.EditPersonTitle_password}" />
+                        <p:outputLabel value="#{bundle.EditPersonLabel_cunfirm_password}" for="cunfirm_password" />
+                        <p:inputText id="cunfirm_password" value="#{personController.selected.cunfirm_password}" title="#{bundle.EditPersonTitle_cunfirm_password}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personController.update}" value="#{bundle.Save}" update="display,:PersonListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
