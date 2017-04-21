@@ -13,4 +13,5 @@ public enum Appoinment {
     Manager,
     Technician,
     Operator,
+    System_Administrator,
 }

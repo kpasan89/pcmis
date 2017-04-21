@@ -5,8 +5,14 @@
  */
 package com.pcmis.facades;
 
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import javax.persistence.EntityManager;
+import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -20,6 +26,32 @@ public abstract class AbstractFacade<T> {
     }
 
     protected abstract EntityManager getEntityManager();
+    
+    public T findFirstBySQL(String temSQL, Map<String, Object> parameters) {
+        TypedQuery<T> qry = getEntityManager().createQuery(temSQL, entityClass);
+        Set s = parameters.entrySet();
+        Iterator it = s.iterator();
+        while (it.hasNext()) {
+            Map.Entry m = (Map.Entry) it.next();
+            String pPara = (String) m.getKey();
+            if (m.getValue() instanceof Date) {
+                Date pVal = (Date) m.getValue();
+                qry.setParameter(pPara, pVal, TemporalType.DATE);
+//                //System.out.println("Parameter " + pPara + "\tVal" + pVal);
+            } else {
+                Object pVal = (Object) m.getValue();
+                qry.setParameter(pPara, pVal);
+//                //System.out.println("Parameter " + pPara + "\tVal" + pVal);
+            }
+        }
+        List<T> l = qry.getResultList();
+        if (l != null && l.isEmpty() == false) {
+            return l.get(0);
+        } else {
+            return null;
+        }
+    }
+
 
     public void create(T entity) {
         getEntityManager().persist(entity);

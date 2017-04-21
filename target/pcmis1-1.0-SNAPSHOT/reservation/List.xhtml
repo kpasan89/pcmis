@@ -13,7 +13,7 @@
             <h:outputText value="#{bundle.ListReservationTitle}"></h:outputText>
         </ui:define>
 
-        <ui:define name="body">
+        <ui:define name="body" rendered="#{personController.logged}">
             <h:form id="ReservationListForm">
                 <p:panel header="#{bundle.ListReservationTitle}">
                     <p:dataTable id="datalist" value="#{reservationController.items}" var="item"

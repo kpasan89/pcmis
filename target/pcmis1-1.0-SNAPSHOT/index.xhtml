@@ -1,23 +1,17 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
+        <ui:composition template="./template.xhtml"></ui:composition>
         Hello from Facelets
         <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <br />
-        <h:link outcome="/customer/List" value="Show All Customer Items"/>
-        <br />
-        <h:link outcome="/payment/List" value="Show All Payment Items"/>
-        <br />
-        <h:link outcome="/person/List" value="Show All Person Items"/>
-        <br />
-        <h:link outcome="/reservation/List" value="Show All Reservation Items"/>
+        
     </h:body>
 
 

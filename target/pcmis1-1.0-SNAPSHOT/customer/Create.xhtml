@@ -17,6 +17,7 @@
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_title}" for="title" />
                             <p:selectOneMenu id="title" value="#{customerController.selected.title}">
+                                <f:selectItem itemLabel="Select Item"></f:selectItem>
                                 <f:selectItems value="#{enumController.title}"
                                                var="title"
                                                itemValue="#{title}"/>
@@ -24,6 +25,7 @@
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_maritial_status}" for="maritial_status" />
                             <p:selectOneMenu id="maritial_status" value="#{customerController.selected.maritial_status}">
+                                <f:selectItem itemLabel="Select Item"></f:selectItem>
                                 <f:selectItems value="#{enumController.status}"
                                                var="status"
                                                itemValue="#{status}"/>
@@ -31,6 +33,7 @@
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_gender}" for="gender" />
                             <p:selectOneMenu id="gender" value="#{customerController.selected.gender}">
+                                <f:selectItem itemLabel="Select Item"></f:selectItem>
                                 <f:selectItems value="#{enumController.gender}"
                                                var="gender"
                                                itemValue="#{gender}"/>
@@ -53,6 +56,7 @@
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_nationality}" for="nationality" />
                             <p:selectOneMenu id="nationality" value="#{customerController.selected.nationality}">
+                                <f:selectItem itemLabel="Select Item"></f:selectItem>
                                 <f:selectItems value="#{enumController.nationality}"
                                                var="nationality"
                                                itemValue="#{nationality}"/>
@@ -60,6 +64,7 @@
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_country}" for="country" />
                             <p:selectOneMenu id="country" value="#{customerController.selected.country}">
+                                <f:selectItem itemLabel="Select Item"></f:selectItem>
                                 <f:selectItems value="#{enumController.country}"
                                                var="country"
                                                itemValue="#{country}"/>
@@ -85,6 +90,7 @@
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_customer_type}" for="customerType" />
                             <p:selectOneMenu id="customerType" value="#{customerController.selected.customer_type}">
+                                <f:selectItem itemLabel="Select Item"></f:selectItem>
                                 <f:selectItems value="#{enumController.customerType}"
                                                var="customerType"
                                                itemValue="#{customerType}"/>
@@ -92,6 +98,7 @@
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_job_title}" for="jobTitle" />
                             <p:selectOneMenu id="jobTitle" value="#{customerController.selected.job_title}">
+                                <f:selectItem itemLabel="Select Item"></f:selectItem>
                                 <f:selectItems value="#{enumController.job}"
                                                var="job"
                                                itemValue="#{job}"/>
@@ -114,6 +121,7 @@
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_seat}" for="seatPreference" />
                             <p:selectOneMenu id="seatPreference" value="#{customerController.selected.seat}">
+                                <f:selectItem itemLabel="Select Item"></f:selectItem>
                                 <f:selectItems value="#{enumController.seat}"
                                                var="seat"
                                                itemValue="#{seat}"/>
@@ -121,6 +129,7 @@
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_sport}" for="sport" />
                             <p:selectOneMenu id="sport" value="#{customerController.selected.sport}">
+                                <f:selectItem itemLabel="Select Item"></f:selectItem>
                                 <f:selectItems value="#{enumController.sport}"
                                                var="sport"
                                                itemValue="#{sport}"/>
@@ -131,6 +140,7 @@
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_meal}" for="mealPreference" />
                             <p:selectOneMenu id="mealPreference" value="#{customerController.selected.meal}">
+                                <f:selectItem itemLabel="Select Item"></f:selectItem>
                                 <f:selectItems value="#{enumController.meal}"
                                                var="meal"
                                                itemValue="#{meal}"/>

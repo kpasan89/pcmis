@@ -6,7 +6,9 @@ import com.pcmis.controllers.util.JsfUtil.PersistAction;
 import com.pcmis.facades.PersonFacade;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,13 +29,55 @@ public class PersonController implements Serializable {
     private com.pcmis.facades.PersonFacade ejbFacade;
     private List<Person> items = null;
     private Person selected;
-    
+
     private Person loggedPerson;
     private boolean logged;
-    private String userName;
+    private String username;
     private String password;
+    private String addPassword;
+    private String addCunfirmPassword;
 
     public PersonController() {
+    }
+
+    public String login() {
+        if (getFacade().count() == 0) {
+            Person p = new Person();
+            p.setFull_name(username);
+            p.setUsername(username);
+            p.setPassword(CommonController.makeHash(password));
+            getFacade().create(p);
+            loggedPerson = p;
+            logged = true;
+        }
+        String j = "select p from Person p where p.retired=false and lower(p.username)=:un";
+        Map m = new HashMap();
+        m.put("un", username.toLowerCase());
+        Person p = getFacade().findFirstBySQL(j, m);
+        if (p == null) {
+            logged = false;
+            loggedPerson = null;
+            JsfUtil.addErrorMessage("No such user");
+            return "index";
+        }
+        if (CommonController.checkPassword(password, p.getPassword())) {
+            logged = true;
+            loggedPerson = p;
+            JsfUtil.addSuccessMessage("Logged Successfully");
+        } else {
+            logged = false;
+            loggedPerson = null;
+            username = null;
+            JsfUtil.addErrorMessage("Wrong Username or Password");
+        }
+        return "index";
+    }
+
+    public String logout() {
+        logged = false;
+        loggedPerson = null;
+        username = null;
+        return "/index";
     }
 
     public Person getSelected() {
@@ -57,10 +101,49 @@ public class PersonController implements Serializable {
     public Person prepareCreate() {
         selected = new Person();
         initializeEmbeddableKey();
+        selected.setPassword(CommonController.makeHash(selected.getPassword()));
+        selected.setCunfirm_password(CommonController.makeHash(selected.getCunfirm_password()));
         return selected;
     }
 
     public void create() {
+        if (selected != null) {
+            setEmbeddableKeys();
+            try {
+                addPassword = CommonController.makeHash(selected.getPassword());
+                addCunfirmPassword = CommonController.makeHash(selected.getCunfirm_password());
+
+                Person p = new Person();
+                p.setFull_name(selected.getFull_name());
+                p.setAppoinment(selected.getAppoinment());
+                p.setJoined_date(selected.getJoined_date());
+                p.setUsername(selected.getUsername());
+                p.setPassword(addPassword);
+                p.setCunfirm_password(addCunfirmPassword);
+                getFacade().create(p);
+                JsfUtil.addSuccessMessage("Person was successfully created");
+            } catch (EJBException ex) {
+                String msg = "";
+                Throwable cause = ex.getCause();
+                if (cause != null) {
+                    msg = cause.getLocalizedMessage();
+                }
+                if (msg.length() > 0) {
+                    JsfUtil.addErrorMessage(msg);
+                } else {
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            }
+        }
+        if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
+    }
+
+    public void createOld() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PersonCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -123,6 +206,9 @@ public class PersonController implements Serializable {
     }
 
     public Person getLoggedPerson() {
+        if (loggedPerson == null) {
+            loggedPerson = new Person();
+        }
         return loggedPerson;
     }
 
@@ -138,20 +224,36 @@ public class PersonController implements Serializable {
         this.logged = logged;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAddPassword() {
+        return addPassword;
+    }
+
+    public void setAddPassword(String addPassword) {
+        this.addPassword = addPassword;
+    }
+
+    public String getAddCunfirmPassword() {
+        return addCunfirmPassword;
+    }
+
+    public void setAddCunfirmPassword(String addCunfirmPassword) {
+        this.addCunfirmPassword = addCunfirmPassword;
     }
 
     @FacesConverter(forClass = Person.class)

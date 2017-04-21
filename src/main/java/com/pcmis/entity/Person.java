@@ -5,9 +5,11 @@
  */
 package com.pcmis.entity;
 
+import com.pcmis.controllers.PersonController;
 import com.pcmis.enums.Appoinment;
 import java.io.Serializable;
 import java.util.Date;
+import javax.inject.Inject;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,6 +36,8 @@ public class Person implements Serializable {
     private String username;
     private String password;
     private String cunfirm_password;
+    private boolean retired;
+    PersonController personController;
 
     public Long getId() {
         return id;
@@ -114,6 +118,14 @@ public class Person implements Serializable {
 
     public void setCunfirm_password(String cunfirm_password) {
         this.cunfirm_password = cunfirm_password;
+    }
+
+    public boolean isRetired() {
+        return retired;
+    }
+
+    public void setRetired(boolean retired) {
+        this.retired = retired;
     }
     
 }

@@ -12,8 +12,6 @@
             <h:form id="PersonViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{personController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPersonLabel_id}"/>
-                        <h:outputText value="#{personController.selected.id}" title="#{bundle.ViewPersonTitle_id}"/>
                         <h:outputText value="#{bundle.ViewPersonLabel_full_name}"/>
                         <h:outputText value="#{personController.selected.full_name}" title="#{bundle.ViewPersonTitle_full_name}"/>
                         <h:outputText value="#{bundle.ViewPersonLabel_appoinment}"/>
@@ -24,10 +22,6 @@
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewPersonLabel_username}"/>
                         <h:outputText value="#{personController.selected.username}" title="#{bundle.ViewPersonTitle_username}"/>
-                        <h:outputText value="#{bundle.ViewPersonLabel_password}"/>
-                        <h:outputText value="#{personController.selected.password}" title="#{bundle.ViewPersonTitle_password}"/>
-                        <h:outputText value="#{bundle.ViewPersonLabel_cunfirm_password}"/>
-                        <h:outputText value="#{personController.selected.cunfirm_password}" title="#{bundle.ViewPersonTitle_cunfirm_password}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PersonViewDialog.hide()"/>
                 </h:panelGroup>

@@ -13,7 +13,7 @@
             <h:outputText value="#{bundle.ListPaymentTitle}"></h:outputText>
         </ui:define>
 
-        <ui:define name="body">
+        <ui:define name="body" rendered="#{personController.logged}">
             <h:form id="PaymentListForm">
                 <p:panel header="#{bundle.ListPaymentTitle}">
                     <p:dataTable id="datalist" value="#{paymentController.items}" var="item"
