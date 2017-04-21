@@ -36,7 +36,7 @@ public class PersonController implements Serializable {
     private String password;
     private String addPassword;
     private String addCunfirmPassword;
-
+    
     public PersonController() {
     }
 
@@ -79,7 +79,7 @@ public class PersonController implements Serializable {
         username = null;
         return "/index";
     }
-
+    
     public Person getSelected() {
         return selected;
     }
@@ -101,27 +101,32 @@ public class PersonController implements Serializable {
     public Person prepareCreate() {
         selected = new Person();
         initializeEmbeddableKey();
-        selected.setPassword(CommonController.makeHash(selected.getPassword()));
-        selected.setCunfirm_password(CommonController.makeHash(selected.getCunfirm_password()));
         return selected;
     }
-
     public void create() {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                addPassword = CommonController.makeHash(selected.getPassword());
-                addCunfirmPassword = CommonController.makeHash(selected.getCunfirm_password());
 
-                Person p = new Person();
-                p.setFull_name(selected.getFull_name());
-                p.setAppoinment(selected.getAppoinment());
-                p.setJoined_date(selected.getJoined_date());
-                p.setUsername(selected.getUsername());
-                p.setPassword(addPassword);
-                p.setCunfirm_password(addCunfirmPassword);
-                getFacade().create(p);
-                JsfUtil.addSuccessMessage("Person was successfully created");
+                if (!userNameAvailable(selected.getUsername())) {
+                    JsfUtil.addErrorMessage("User name already exists. Plese enter another user name");
+                } else if (!selected.getPassword().equals(selected.getCunfirm_password())) {
+                    JsfUtil.addErrorMessage("Password and Re-entered password are not matching");
+                } else {
+
+                    addPassword = CommonController.makeHash(selected.getPassword());
+                    addCunfirmPassword = CommonController.makeHash(selected.getCunfirm_password());
+
+                    Person p = new Person();
+                    p.setFull_name(selected.getFull_name());
+                    p.setAppoinment(selected.getAppoinment());
+                    p.setJoined_date(selected.getJoined_date());
+                    p.setUsername(selected.getUsername());
+                    p.setPassword(addPassword);
+                    p.setCunfirm_password(addCunfirmPassword);
+                    getFacade().create(p);
+                    JsfUtil.addSuccessMessage("Person was successfully created");
+                }
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
@@ -141,6 +146,17 @@ public class PersonController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+    }
+
+    public Boolean userNameAvailable(String username) {
+        Boolean available = true;
+        List<Person> allUsers = getFacade().findAll();
+        for (Person p : allUsers) {
+            if (username.toLowerCase().equals(p.getUsername())) {
+                available = false;
+            }
+        }
+        return available;
     }
 
     public void createOld() {

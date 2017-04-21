@@ -26,6 +26,8 @@
                         <p:inputText id="username" value="#{personController.selected.username}" title="#{bundle.CreatePersonTitle_username}" />
                         <p:outputLabel value="#{bundle.CreatePersonLabel_password}" for="password" />
                         <p:password id="password" value="#{personController.selected.password}" title="#{bundle.CreatePersonTitle_password}" />
+                        <p:outputLabel value="#{bundle.CreatePersonLabel_cunfirm_password}" for="cunfirm_password" />
+                        <p:password id="cunfirm_password" value="#{personController.selected.cunfirm_password}" title="#{bundle.CreatePersonTitle_cunfirm_password}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{personController.create}" value="#{bundle.Save}" update="display,:PersonListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PersonCreateDialog.hide()"/>
