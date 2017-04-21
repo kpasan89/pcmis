@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserRoleCreateDlg" widgetVar="UserRoleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserRoleTitle}">
+            <h:form id="UserRoleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userRoleController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUserRoleLabel_userRole}" for="userRole" />
+                        <p:inputText id="userRole" value="#{userRoleController.selected.userRole}" title="#{bundle.CreateUserRoleTitle_userRole}" />
+                        <p:outputLabel value="#{bundle.CreateUserRoleLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{userRoleController.selected.description}" title="#{bundle.CreateUserRoleTitle_description}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userRoleController.create}" value="#{bundle.Save}" update="display,:UserRoleListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserRoleCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserRoleCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

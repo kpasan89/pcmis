@@ -24,6 +24,8 @@
                         <p:calendar id="joined_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{personController.selected.joined_date}" title="#{bundle.EditPersonTitle_joined_date}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreatePersonLabel_username}" for="username" />
                         <p:inputText id="username" value="#{personController.selected.username}" title="#{bundle.CreatePersonTitle_username}" />
+                        <p:outputLabel value="#{bundle.CreatePersonLabel_password}" for="password" />
+                        <p:password id="password" value="#{personController.selected.password}" title="#{bundle.CreatePersonTitle_password}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{personController.create}" value="#{bundle.Save}" update="display,:PersonListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PersonCreateDialog.hide()"/>

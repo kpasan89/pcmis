@@ -11,152 +11,152 @@
         <p:dialog id="CustomerCreateDlg" widgetVar="CustomerCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCustomerTitle}">
 
             <h:form id="CustomerCreateForm">
-                <p:scrollPanel style="height:600px">
+                <p:scrollPanel style="height:600px; width: 475px">
                     <h:panelGroup id="display">
                         <p:panelGrid columns="2" rendered="#{customerController.selected != null}">
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_title}" for="title" />
-                            <p:selectOneMenu id="title" value="#{customerController.selected.title}">
-                                <f:selectItem itemLabel="Select Item"></f:selectItem>
+                            <p:selectOneMenu id="title" value="#{customerController.selected.title}" style="width:300px">
+                                <f:selectItem itemLabel="Select Title"></f:selectItem>
                                 <f:selectItems value="#{enumController.title}"
                                                var="title"
                                                itemValue="#{title}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_maritial_status}" for="maritial_status" />
-                            <p:selectOneMenu id="maritial_status" value="#{customerController.selected.maritial_status}">
-                                <f:selectItem itemLabel="Select Item"></f:selectItem>
+                            <p:selectOneMenu id="maritial_status" value="#{customerController.selected.maritial_status}" style="width:300px">
+                                <f:selectItem itemLabel="Select Status"></f:selectItem>
                                 <f:selectItems value="#{enumController.status}"
                                                var="status"
                                                itemValue="#{status}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_gender}" for="gender" />
-                            <p:selectOneMenu id="gender" value="#{customerController.selected.gender}">
-                                <f:selectItem itemLabel="Select Item"></f:selectItem>
+                            <p:selectOneMenu id="gender" value="#{customerController.selected.gender}" style="width:300px">
+                                <f:selectItem itemLabel="Select Gender"></f:selectItem>
                                 <f:selectItems value="#{enumController.gender}"
                                                var="gender"
                                                itemValue="#{gender}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_dom}" for="dom" />
-                            <p:calendar id="dom" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.dom}" title="#{bundle.EditCustomerTitle_dom}"  showOn="button"/>
+                            <p:calendar id="dom" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.dom}" title="#{bundle.EditCustomerTitle_dom}"  style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_first_name}" for="first_name" />
-                            <p:inputText id="first_name" value="#{customerController.selected.first_name}" title="#{bundle.CreateCustomerTitle_first_name}" />
+                            <p:inputText id="first_name" value="#{customerController.selected.first_name}" title="#{bundle.CreateCustomerTitle_first_name}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_family_name}" for="family_name" />
-                            <p:inputText id="family_name" value="#{customerController.selected.family_name}" title="#{bundle.CreateCustomerTitle_family_name}" />
+                            <p:inputText id="family_name" value="#{customerController.selected.family_name}" title="#{bundle.CreateCustomerTitle_family_name}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_full_name}" for="full_name" />
-                            <p:inputText id="full_name" value="#{customerController.selected.full_name}" title="#{bundle.CreateCustomerTitle_full_name}" />
+                            <p:inputText id="full_name" value="#{customerController.selected.full_name}" title="#{bundle.CreateCustomerTitle_full_name}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_dob}" for="dob" />
-                            <p:calendar id="dob" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.dob}" title="#{bundle.EditCustomerTitle_dob}"  showOn="button"/>
+                            <p:calendar id="dob" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.dob}" title="#{bundle.EditCustomerTitle_dob}"  style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_nationality}" for="nationality" />
-                            <p:selectOneMenu id="nationality" value="#{customerController.selected.nationality}">
-                                <f:selectItem itemLabel="Select Item"></f:selectItem>
+                            <p:selectOneMenu id="nationality" value="#{customerController.selected.nationality}" style="width:300px">
+                                <f:selectItem itemLabel="Select Nationality"></f:selectItem>
                                 <f:selectItems value="#{enumController.nationality}"
                                                var="nationality"
                                                itemValue="#{nationality}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_country}" for="country" />
-                            <p:selectOneMenu id="country" value="#{customerController.selected.country}">
-                                <f:selectItem itemLabel="Select Item"></f:selectItem>
+                            <p:selectOneMenu id="country" value="#{customerController.selected.country}" style="width:300px">
+                                <f:selectItem itemLabel="Select Country"></f:selectItem>
                                 <f:selectItems value="#{enumController.country}"
                                                var="country"
                                                itemValue="#{country}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_address}" for="address" />
-                            <p:inputText id="address" value="#{customerController.selected.address}" title="#{bundle.CreateCustomerTitle_address}" />
+                            <p:inputText id="address" value="#{customerController.selected.address}" title="#{bundle.CreateCustomerTitle_address}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_bussiness_address}" for="bussiness_address" />
-                            <p:inputText id="bussiness_address" value="#{customerController.selected.bussiness_address}" title="#{bundle.CreateCustomerTitle_bussiness_address}" />
+                            <p:inputText id="bussiness_address" value="#{customerController.selected.bussiness_address}" title="#{bundle.CreateCustomerTitle_bussiness_address}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_passport}" for="passport" />
-                            <p:inputText id="passport" value="#{customerController.selected.passport}" title="#{bundle.CreateCustomerTitle_passport}" />
+                            <p:inputText id="passport" value="#{customerController.selected.passport}" title="#{bundle.CreateCustomerTitle_passport}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_nic}" for="nic" />
-                            <p:inputText id="nic" value="#{customerController.selected.nic}" title="#{bundle.CreateCustomerTitle_nic}" />
+                            <p:inputText id="nic" value="#{customerController.selected.nic}" title="#{bundle.CreateCustomerTitle_nic}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_pp_issued_date}" for="pp_issued_date" />
-                            <p:calendar id="pp_issued_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.pp_issued_date}" title="#{bundle.EditCustomerTitle_pp_issued_date}"  showOn="button"/>
+                            <p:calendar id="pp_issued_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.pp_issued_date}" title="#{bundle.EditCustomerTitle_pp_issued_date}"  style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_pp_expire_date}" for="pp_expire_date" />
-                            <p:calendar id="pp_expire_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.pp_expire_date}" title="#{bundle.EditCustomerTitle_pp_expire_date}"  showOn="button"/>
+                            <p:calendar id="pp_expire_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.pp_expire_date}" title="#{bundle.EditCustomerTitle_pp_expire_date}"  style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_customer_type}" for="customerType" />
-                            <p:selectOneMenu id="customerType" value="#{customerController.selected.customer_type}">
-                                <f:selectItem itemLabel="Select Item"></f:selectItem>
+                            <p:selectOneMenu id="customerType" value="#{customerController.selected.customer_type}" style="width:300px">
+                                <f:selectItem itemLabel="Select Customer Type"></f:selectItem>
                                 <f:selectItems value="#{enumController.customerType}"
                                                var="customerType"
                                                itemValue="#{customerType}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_job_title}" for="jobTitle" />
-                            <p:selectOneMenu id="jobTitle" value="#{customerController.selected.job_title}">
-                                <f:selectItem itemLabel="Select Item"></f:selectItem>
+                            <p:selectOneMenu id="jobTitle" value="#{customerController.selected.job_title}" style="width:300px">
+                                <f:selectItem itemLabel="Select Job Title"></f:selectItem>
                                 <f:selectItems value="#{enumController.job}"
                                                var="job"
                                                itemValue="#{job}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_company_name}" for="company_name" />
-                            <p:inputText id="company_name" value="#{customerController.selected.company_name}" title="#{bundle.CreateCustomerTitle_company_name}" />
+                            <p:inputText id="company_name" value="#{customerController.selected.company_name}" title="#{bundle.CreateCustomerTitle_company_name}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_telepone}" for="telepone" />
-                            <p:inputText id="telepone" value="#{customerController.selected.telepone}" title="#{bundle.CreateCustomerTitle_telepone}" />
+                            <p:inputText id="telepone" value="#{customerController.selected.telepone}" title="#{bundle.CreateCustomerTitle_telepone}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_mobile}" for="mobile" />
-                            <p:inputText id="mobile" value="#{customerController.selected.mobile}" title="#{bundle.CreateCustomerTitle_mobile}" />
+                            <p:inputText id="mobile" value="#{customerController.selected.mobile}" title="#{bundle.CreateCustomerTitle_mobile}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_fax}" for="fax" />
-                            <p:inputText id="fax" value="#{customerController.selected.fax}" title="#{bundle.CreateCustomerTitle_fax}" />
+                            <p:inputText id="fax" value="#{customerController.selected.fax}" title="#{bundle.CreateCustomerTitle_fax}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_email}" for="email" />
-                            <p:inputText id="email" value="#{customerController.selected.email}" title="#{bundle.CreateCustomerTitle_email}" />
+                            <p:inputText id="email" value="#{customerController.selected.email}" title="#{bundle.CreateCustomerTitle_email}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_seat}" for="seatPreference" />
-                            <p:selectOneMenu id="seatPreference" value="#{customerController.selected.seat}">
-                                <f:selectItem itemLabel="Select Item"></f:selectItem>
+                            <p:selectOneMenu id="seatPreference" value="#{customerController.selected.seat}" style="width:300px">
+                                <f:selectItem itemLabel="Select Seat"></f:selectItem>
                                 <f:selectItems value="#{enumController.seat}"
                                                var="seat"
                                                itemValue="#{seat}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_sport}" for="sport" />
-                            <p:selectOneMenu id="sport" value="#{customerController.selected.sport}">
-                                <f:selectItem itemLabel="Select Item"></f:selectItem>
+                            <p:selectOneMenu id="sport" value="#{customerController.selected.sport}" style="width:300px">
+                                <f:selectItem itemLabel="Select Sport"></f:selectItem>
                                 <f:selectItems value="#{enumController.sport}"
                                                var="sport"
                                                itemValue="#{sport}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_interest}" for="interest" />
-                            <p:inputText id="interest" value="#{customerController.selected.interest}" title="#{bundle.CreateCustomerTitle_interest}" />
+                            <p:inputText id="interest" value="#{customerController.selected.interest}" title="#{bundle.CreateCustomerTitle_interest}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_meal}" for="mealPreference" />
-                            <p:selectOneMenu id="mealPreference" value="#{customerController.selected.meal}">
-                                <f:selectItem itemLabel="Select Item"></f:selectItem>
+                            <p:selectOneMenu id="mealPreference" value="#{customerController.selected.meal}" style="width:300px">
+                                <f:selectItem itemLabel="Select Meal"></f:selectItem>
                                 <f:selectItems value="#{enumController.meal}"
                                                var="meal"
                                                itemValue="#{meal}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_card_type}" for="card_type" />
-                            <p:inputText id="card_type" value="#{customerController.selected.card_type}" title="#{bundle.CreateCustomerTitle_card_type}" />
+                            <p:inputText id="card_type" value="#{customerController.selected.card_type}" title="#{bundle.CreateCustomerTitle_card_type}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_bussiness_bought}" for="bussiness_bought" />
-                            <p:inputText id="bussiness_bought" value="#{customerController.selected.bussiness_bought}" title="#{bundle.CreateCustomerTitle_bussiness_bought}" />
+                            <p:inputText id="bussiness_bought" value="#{customerController.selected.bussiness_bought}" title="#{bundle.CreateCustomerTitle_bussiness_bought}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_bussiness_tel}" for="bussiness_tel" />
-                            <p:inputText id="bussiness_tel" value="#{customerController.selected.bussiness_tel}" title="#{bundle.CreateCustomerTitle_bussiness_tel}" />
+                            <p:inputText id="bussiness_tel" value="#{customerController.selected.bussiness_tel}" title="#{bundle.CreateCustomerTitle_bussiness_tel}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_bussiness_email}" for="bussiness_email" />
-                            <p:inputText id="bussiness_email" value="#{customerController.selected.bussiness_email}" title="#{bundle.CreateCustomerTitle_bussiness_email}" />
+                            <p:inputText id="bussiness_email" value="#{customerController.selected.bussiness_email}" title="#{bundle.CreateCustomerTitle_bussiness_email}" style="width:293px"/>
 
                         </p:panelGrid>
                         <p:commandButton actionListener="#{customerController.create}" value="#{bundle.Save}" update="display,:CustomerListForm:datalist,:growl" oncomplete="handleSubmit(args,'CustomerCreateDialog');"/>
