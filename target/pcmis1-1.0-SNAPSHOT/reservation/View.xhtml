@@ -35,7 +35,7 @@
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewReservationLabel_res_customer}"/>
-                        <h:outputText value="#{reservationController.selected.res_customer}" title="#{bundle.ViewReservationTitle_res_customer}"/>
+                        <h:outputText value="#{reservationController.selected.res_customer.full_name}" title="#{bundle.ViewReservationTitle_res_customer}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ReservationViewDialog.hide()"/>
                 </h:panelGroup>

@@ -3,6 +3,7 @@ package com.pcmis.controllers;
 import com.pcmis.entity.Person;
 import com.pcmis.controllers.util.JsfUtil;
 import com.pcmis.controllers.util.JsfUtil.PersistAction;
+import com.pcmis.enums.Appoinment;
 import com.pcmis.facades.PersonFacade;
 
 import java.io.Serializable;
@@ -37,6 +38,11 @@ public class PersonController implements Serializable {
     private String addPassword;
     private String addCunfirmPassword;
     
+    private boolean systemAdministrator = false;
+    private boolean systemUser =false;
+    private boolean operator = false;
+    private boolean manager = false;
+    
     public PersonController() {
     }
 
@@ -45,6 +51,7 @@ public class PersonController implements Serializable {
             Person p = new Person();
             p.setFull_name(username);
             p.setUsername(username);
+            p.setAppoinment(Appoinment.System_Administrator);
             p.setPassword(CommonController.makeHash(password));
             getFacade().create(p);
             loggedPerson = p;
@@ -64,6 +71,15 @@ public class PersonController implements Serializable {
             logged = true;
             loggedPerson = p;
             JsfUtil.addSuccessMessage("Logged Successfully");
+            if(p.getAppoinment().equals(Appoinment.System_Administrator)){
+                systemAdministrator = true;
+            }else if(p.getAppoinment().equals(Appoinment.System_User)){
+                systemUser = true;
+            }else if(p.getAppoinment().equals(Appoinment.Operator)){
+                operator = true;
+            }else if(p.getAppoinment().equals(Appoinment.Manager)){
+                manager = true;
+            }
         } else {
             logged = false;
             loggedPerson = null;
@@ -77,6 +93,10 @@ public class PersonController implements Serializable {
         logged = false;
         loggedPerson = null;
         username = null;
+        systemAdministrator = false;
+        systemUser = false;
+        operator = false;
+        manager = false;
         return "/index";
     }
     
@@ -270,6 +290,38 @@ public class PersonController implements Serializable {
 
     public void setAddCunfirmPassword(String addCunfirmPassword) {
         this.addCunfirmPassword = addCunfirmPassword;
+    }
+
+    public boolean isSystemAdministrator() {
+        return systemAdministrator;
+    }
+
+    public void setSystemAdministrator(boolean systemAdministrator) {
+        this.systemAdministrator = systemAdministrator;
+    }
+
+    public boolean isSystemUser() {
+        return systemUser;
+    }
+
+    public void setSystemUser(boolean systemUser) {
+        this.systemUser = systemUser;
+    }
+
+    public boolean isOperator() {
+        return operator;
+    }
+
+    public void setOperator(boolean operator) {
+        this.operator = operator;
+    }
+
+    public boolean isManager() {
+        return manager;
+    }
+
+    public void setManager(boolean manager) {
+        this.manager = manager;
     }
 
     @FacesConverter(forClass = Person.class)
