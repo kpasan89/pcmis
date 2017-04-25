@@ -88,7 +88,8 @@
                             <f:facet name="header">
                                 <h:outputText value="Customer Category"/>
                             </f:facet>
-                            <h:outputText value="#{item.permenant}"/>
+                            <h:outputText style="color: deeppink" rendered="#{item.permenant eq true}" value="#{item.permenant eq true ; 'Permanent Customer'}"/>
+                            <h:outputText style="color: blue" rendered="#{item.permenant eq false}" value="#{item.permenant eq false ; 'Registered Customer'}"/>
                         </p:column>
 
                         <f:facet name="footer">
