@@ -37,12 +37,12 @@ public class PersonController implements Serializable {
     private String password;
     private String addPassword;
     private String addCunfirmPassword;
-    
+
     private boolean systemAdministrator = false;
-    private boolean systemUser =false;
+    private boolean systemUser = false;
     private boolean operator = false;
     private boolean manager = false;
-    
+
     public PersonController() {
     }
 
@@ -71,13 +71,13 @@ public class PersonController implements Serializable {
             logged = true;
             loggedPerson = p;
             JsfUtil.addSuccessMessage("Logged Successfully");
-            if(p.getAppoinment().equals(Appoinment.System_Administrator)){
+            if (p.getAppoinment().equals(Appoinment.System_Administrator)) {
                 systemAdministrator = true;
-            }else if(p.getAppoinment().equals(Appoinment.System_User)){
+            } else if (p.getAppoinment().equals(Appoinment.System_User)) {
                 systemUser = true;
-            }else if(p.getAppoinment().equals(Appoinment.Operator)){
+            } else if (p.getAppoinment().equals(Appoinment.Operator)) {
                 operator = true;
-            }else if(p.getAppoinment().equals(Appoinment.Manager)){
+            } else if (p.getAppoinment().equals(Appoinment.Manager)) {
                 manager = true;
             }
         } else {
@@ -99,7 +99,7 @@ public class PersonController implements Serializable {
         manager = false;
         return "/index";
     }
-    
+
     public Person getSelected() {
         return selected;
     }
@@ -123,6 +123,7 @@ public class PersonController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+
     public void create() {
         if (selected != null) {
             setEmbeddableKeys();
@@ -203,6 +204,12 @@ public class PersonController implements Serializable {
             items = getFacade().findAll();
         }
         return items;
+    }
+
+    public List<Person> completePersons(String qry) {
+        String temSql;
+        temSql = "SELECT p FROM Person p where p.retired=false and LOWER(p.full_name) like '%" + qry.toLowerCase() + "%' order by p.full_name";
+        return getFacade().findBySQL(temSql);
     }
 
     private void persist(PersistAction persistAction, String successMessage) {

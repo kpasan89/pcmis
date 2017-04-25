@@ -80,6 +80,16 @@ public class CustomerController implements Serializable {
         }
         return items;
     }
+    
+    public List<Customer> completeCustomers(String qry) {
+        String temSql;
+        temSql = "SELECT c FROM Customer c where c.retired=false and LOWER(c.full_name) like '%" + qry.toLowerCase() + "%' order by c.full_name";
+        return getFacade().findBySQL(temSql);
+    }
+    
+    public String createReservation(){
+        return "/customerReservation/List.xhtml";
+    }
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {

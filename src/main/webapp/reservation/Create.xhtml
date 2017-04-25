@@ -31,12 +31,12 @@
                         <p:outputLabel value="#{bundle.CreateReservationLabel_return_date}" for="return_date" />
                         <p:calendar id="return_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{reservationController.selected.return_date}" title="#{bundle.EditReservationTitle_return_date}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateReservationLabel_res_customer}" for="res_customer" />
-                        <p:selectOneMenu id="res_customer" value="#{reservationController.selected.res_customer}" >
-                            <f:selectItems value="#{customerController.itemsAvailableSelectOne}"
-                                           var="res_customerItem"
-                                           itemValue="#{res_customerItem}"
-                                           itemLabel="#{res_customerItem.full_name}"/>
-                        </p:selectOneMenu>
+                        <p:autoComplete id="res_customer" value="#{reservationController.selected.res_customer}" 
+                                        completeMethod="#{reservationController.customerController.completeCustomers}"                                            
+                                                                var="rc" forceSelection="true" 
+                                                                itemLabel="#{rc.full_name}"
+                                                                itemValue="#{rc}" >
+                                                </p:autoComplete>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{reservationController.create}" value="#{bundle.Save}" update="display,:ReservationListForm:datalist,:growl" oncomplete="handleSubmit(args,'ReservationCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ReservationCreateDialog.hide()"/>

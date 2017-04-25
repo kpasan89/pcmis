@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservationEditDlg" widgetVar="ReservationEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditReservationTitle}">
+            <h:form id="ReservationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservationController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditReservationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{reservationController.selected.id}" title="#{bundle.EditReservationTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditReservationLabel_adult_count}" for="adult_count" />
+                        <p:inputText id="adult_count" value="#{reservationController.selected.adult_count}" title="#{bundle.EditReservationTitle_adult_count}" />
+                        <p:outputLabel value="#{bundle.EditReservationLabel_kids_count}" for="kids_count" />
+                        <p:inputText id="kids_count" value="#{reservationController.selected.kids_count}" title="#{bundle.EditReservationTitle_kids_count}" />
+                        <p:outputLabel value="#{bundle.EditReservationLabel_dep_airport}" for="dep_airport" />
+                        <p:inputText id="dep_airport" value="#{reservationController.selected.dep_airport}" title="#{bundle.EditReservationTitle_dep_airport}" />
+                        <p:outputLabel value="#{bundle.EditReservationLabel_arr_airport}" for="arr_airport" />
+                        <p:inputText id="arr_airport" value="#{reservationController.selected.arr_airport}" title="#{bundle.EditReservationTitle_arr_airport}" />
+                        <p:outputLabel value="#{bundle.EditReservationLabel_preff_airline}" for="preff_airline" />
+                        <p:inputText id="preff_airline" value="#{reservationController.selected.preff_airline}" title="#{bundle.EditReservationTitle_preff_airline}" />
+                        <p:outputLabel value="#{bundle.EditReservationLabel_preff_class}" for="preff_class" />
+                        <p:inputText id="preff_class" value="#{reservationController.selected.preff_class}" title="#{bundle.EditReservationTitle_preff_class}" />
+                        <p:outputLabel value="#{bundle.EditReservationLabel_travel_date}" for="travel_date" />
+                        <p:calendar id="travel_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{reservationController.selected.travel_date}" title="#{bundle.EditReservationTitle_travel_date}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditReservationLabel_return_date}" for="return_date" />
+                        <p:calendar id="return_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{reservationController.selected.return_date}" title="#{bundle.EditReservationTitle_return_date}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditReservationLabel_res_customer}" for="res_customer" />
+                        <p:selectOneMenu id="res_customer" value="#{reservationController.selected.res_customer}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{customerController.itemsAvailableSelectOne}"
+                                           var="res_customerItem"
+                                           itemValue="#{res_customerItem}"
+                                           itemLabel="#{res_customerItem.full_name}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reservationController.update}" value="#{bundle.Save}" update="display,:ReservationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReservationEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReservationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

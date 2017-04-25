@@ -84,6 +84,7 @@ public class Customer implements Serializable {
     private String bussiness_bought;
     private String bussiness_tel;
     private String bussiness_email;
+    private boolean retired = false;
 
     public Long getId() {
         return id;
@@ -372,6 +373,14 @@ public class Customer implements Serializable {
 
     public void setMeal(Meal meal) {
         this.meal = meal;
+    }
+
+    public boolean isRetired() {
+        return retired;
+    }
+
+    public void setRetired(boolean retired) {
+        this.retired = retired;
     }
 
 }

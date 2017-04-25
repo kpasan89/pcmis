@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservationViewDlg" widgetVar="ReservationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewReservationTitle}">
+            <h:form id="ReservationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewReservationLabel_id}"/>
+                        <h:outputText value="#{reservationController.selected.id}" title="#{bundle.ViewReservationTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewReservationLabel_adult_count}"/>
+                        <h:outputText value="#{reservationController.selected.adult_count}" title="#{bundle.ViewReservationTitle_adult_count}"/>
+                        <h:outputText value="#{bundle.ViewReservationLabel_kids_count}"/>
+                        <h:outputText value="#{reservationController.selected.kids_count}" title="#{bundle.ViewReservationTitle_kids_count}"/>
+                        <h:outputText value="#{bundle.ViewReservationLabel_dep_airport}"/>
+                        <h:outputText value="#{reservationController.selected.dep_airport}" title="#{bundle.ViewReservationTitle_dep_airport}"/>
+                        <h:outputText value="#{bundle.ViewReservationLabel_arr_airport}"/>
+                        <h:outputText value="#{reservationController.selected.arr_airport}" title="#{bundle.ViewReservationTitle_arr_airport}"/>
+                        <h:outputText value="#{bundle.ViewReservationLabel_preff_airline}"/>
+                        <h:outputText value="#{reservationController.selected.preff_airline}" title="#{bundle.ViewReservationTitle_preff_airline}"/>
+                        <h:outputText value="#{bundle.ViewReservationLabel_preff_class}"/>
+                        <h:outputText value="#{reservationController.selected.preff_class}" title="#{bundle.ViewReservationTitle_preff_class}"/>
+                        <h:outputText value="#{bundle.ViewReservationLabel_travel_date}"/>
+                        <h:outputText value="#{reservationController.selected.travel_date}" title="#{bundle.ViewReservationTitle_travel_date}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReservationLabel_return_date}"/>
+                        <h:outputText value="#{reservationController.selected.return_date}" title="#{bundle.ViewReservationTitle_return_date}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReservationLabel_res_customer}"/>
+                        <h:outputText value="#{reservationController.selected.res_customer.full_name}" title="#{bundle.ViewReservationTitle_res_customer}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ReservationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

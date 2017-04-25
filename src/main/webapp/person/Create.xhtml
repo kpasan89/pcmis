@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundle.CreatePersonLabel_full_name}" for="full_name" />
                         <p:inputText id="full_name" value="#{personController.selected.full_name}" title="#{bundle.CreatePersonTitle_full_name}" />
                         <p:outputLabel value="#{bundle.CreatePersonLabel_appoinment}" for="appoinment" />
-                        <p:selectOneMenu id="appoinment" value="#{personController.selected.appoinment}">
+                        <p:selectOneMenu id="appoinment" value="#{personController.selected.appoinment}" >
                             <f:selectItems value="#{enumController.appoinment}"
                                            var="appoinment"
                                            itemValue="#{appoinment}"/>

@@ -10,5 +10,8 @@ package com.pcmis.enums;
  * @author Pasan
  */
 public enum CustomerType {
-    
+    Army,
+    Navy,
+    Air_Force,
+    Civil
 }

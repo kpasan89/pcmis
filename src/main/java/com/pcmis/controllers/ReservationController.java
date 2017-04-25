@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @ManagedBean(name = "reservationController")
 @SessionScoped
@@ -27,6 +28,10 @@ public class ReservationController implements Serializable {
     private com.pcmis.facades.ReservationFacade ejbFacade;
     private List<Reservation> items = null;
     private Reservation selected;
+    @Inject
+    private PersonController personController;
+    @Inject
+    private CustomerController customerController;
 
     public ReservationController() {
     }
@@ -80,7 +85,7 @@ public class ReservationController implements Serializable {
         }
         return items;
     }
-
+    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -115,6 +120,22 @@ public class ReservationController implements Serializable {
 
     public List<Reservation> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public PersonController getPersonController() {
+        return personController;
+    }
+
+    public void setPersonController(PersonController personController) {
+        this.personController = personController;
+    }
+
+    public CustomerController getCustomerController() {
+        return customerController;
+    }
+
+    public void setCustomerController(CustomerController customerController) {
+        this.customerController = customerController;
     }
 
     @FacesConverter(forClass = Reservation.class)

@@ -24,8 +24,8 @@
                         <p:menuitem value="Customer Registration" outcome="/customer/List.xhtml" />
                         <p:menuitem value="Reservation Management" outcome="/reservation/List.xhtml" />
                         <p:menuitem value="Payments" outcome="/payment/List.xhtml" />
-                        <p:menuitem value="User Control" outcome="/person/List.xhtml" rendered="#{personController.systemAdministrator}"/>
-                        <p:submenu label="#{bundle.Maintenance}">
+                        <p:menuitem value="User Control" outcome="/person/List.xhtml"/>
+                        <p:submenu label="#{bundle.Maintenance}" rendered="#{personController.systemAdministrator}">
                             <p:menuitem value="Customer" outcome="/customer/List.xhtml" />
                             <p:menuitem value="Payment" outcome="/payment/List.xhtml" />
                             <p:menuitem value="Person" outcome="/person/List.xhtml" />
