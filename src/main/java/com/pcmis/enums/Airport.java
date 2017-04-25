@@ -11,4 +11,7 @@ package com.pcmis.enums;
  */
 public enum Airport {
     Katunayaka,
+    Qualalampoor,
+    Hithroo,
+    Sydny,
 }

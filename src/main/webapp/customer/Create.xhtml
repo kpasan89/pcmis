@@ -159,7 +159,7 @@
                             <p:inputText id="bussiness_email" value="#{customerController.selected.bussiness_email}" title="#{bundle.CreateCustomerTitle_bussiness_email}" style="width:293px"/>
 
                         </p:panelGrid>
-                        <p:commandButton actionListener="#{customerController.create}" value="#{bundle.Save}" update="display,:CustomerListForm:datalist,:growl" oncomplete="handleSubmit(args,'CustomerCreateDialog');"/>
+                        <p:commandButton actionListener="#{customerController.createNew()}" value="#{bundle.Save}" update="display,:CustomerListForm:datalist,:growl" oncomplete="handleSubmit(args,'CustomerCreateDialog');"/>
                         <p:commandButton value="#{bundle.Cancel}" onclick="CustomerCreateDialog.hide()"/>
                     </h:panelGroup>
                 </p:scrollPanel>

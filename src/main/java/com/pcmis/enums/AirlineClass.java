@@ -10,5 +10,7 @@ package com.pcmis.enums;
  * @author Pasan
  */
 public enum AirlineClass {
-    
+    Economy,
+    Luxury,
+    Bussiness,
 }

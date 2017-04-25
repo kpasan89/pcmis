@@ -3,10 +3,15 @@ package com.pcmis.controllers;
 import com.pcmis.entity.Reservation;
 import com.pcmis.controllers.util.JsfUtil;
 import com.pcmis.controllers.util.JsfUtil.PersistAction;
+import com.pcmis.entity.Customer;
+import com.pcmis.entity.Person;
+import com.pcmis.facades.CustomerFacade;
 import com.pcmis.facades.ReservationFacade;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +37,9 @@ public class ReservationController implements Serializable {
     private PersonController personController;
     @Inject
     private CustomerController customerController;
+    private Customer customer;
+    @EJB
+    private CustomerFacade customerFacade;
 
     public ReservationController() {
     }
@@ -60,6 +68,73 @@ public class ReservationController implements Serializable {
         return selected;
     }
 
+    private Customer resCustomer;
+    private int resCount;
+
+    public void selectReservationCustomer() {
+        String j = "select c from Customer c where c.retired=false and c.id=:rc";
+        Map m = new HashMap();
+        m.put("rc", selected.getRes_customer().getId());
+        resCustomer = getCustomerFacade().findFirstBySQL(j, m);
+        resCount = resCustomer.getReservationCount();
+        System.out.println("resCount = " + resCount + "  ..................");
+        System.out.println("resCustomer = " + resCustomer+ "  ..................");
+
+    }
+
+    public void createNew() {
+        if (selected != null) {
+            setEmbeddableKeys();
+            try {
+                Reservation r = new Reservation();
+                Customer c = new Customer();
+                r.setAdult_count(selected.getAdult_count());
+                r.setArr_airport(selected.getArr_airport());
+                r.setDep_airport(selected.getDep_airport());
+                r.setKids_count(selected.getKids_count());
+                r.setPreff_airline(selected.getPreff_airline());
+                r.setPreff_class(selected.getPreff_class());
+                r.setRes_customer(selected.getRes_customer());
+                r.setReturn_date(selected.getReturn_date());
+                r.setTravel_date(selected.getTravel_date());
+
+                selectReservationCustomer();
+
+                if (resCustomer.getReservationCount() <= 1) {
+                    resCustomer.setPermenant(false);
+                    System.out.println("permanent false");
+                } else {
+                    resCustomer.setPermenant(true);
+                    System.out.println("permanent true");
+                }
+
+                resCount = resCount + 1;
+                resCustomer.setReservationCount(resCount);
+                getFacade().edit(r);
+                getCustomerFacade().edit(resCustomer);
+                JsfUtil.addSuccessMessage("Reservation was successfully created");
+                
+            } catch (EJBException ex) {
+                String msg = "";
+                Throwable cause = ex.getCause();
+                if (cause != null) {
+                    msg = cause.getLocalizedMessage();
+                }
+                if (msg.length() > 0) {
+                    JsfUtil.addErrorMessage(msg);
+                } else {
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            }
+        }
+        if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
+    }
+
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ReservationCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -85,7 +160,7 @@ public class ReservationController implements Serializable {
         }
         return items;
     }
-    
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -136,6 +211,46 @@ public class ReservationController implements Serializable {
 
     public void setCustomerController(CustomerController customerController) {
         this.customerController = customerController;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public CustomerFacade getCustomerFacade() {
+        return customerFacade;
+    }
+
+    public void setCustomerFacade(CustomerFacade customerFacade) {
+        this.customerFacade = customerFacade;
+    }
+
+    public Customer getResCustomer() {
+        return resCustomer;
+    }
+
+    public void setResCustomer(Customer resCustomer) {
+        this.resCustomer = resCustomer;
+    }
+
+    public com.pcmis.facades.ReservationFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(com.pcmis.facades.ReservationFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public int getResCount() {
+        return resCount;
+    }
+
+    public void setResCount(int resCount) {
+        this.resCount = resCount;
     }
 
     @FacesConverter(forClass = Reservation.class)

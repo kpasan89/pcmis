@@ -10,5 +10,8 @@ package com.pcmis.enums;
  * @author Pasan
  */
 public enum Airline {
-    
+    Sri_Lankan_Air_Lines,
+    Quantas,
+    Emirates,
+    Etihad,
 }

@@ -29,6 +29,12 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReservationTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservationTitle_adult_count}"/>
                             </f:facet>
                             <h:outputText value="#{item.adult_count}"/>
@@ -85,7 +91,6 @@
                             </f:facet>
                             <h:outputText value="#{item.res_customer.full_name}"/>
                         </p:column>
-                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{reservationController.prepareCreate}" update=":ReservationCreateForm" oncomplete="PF('ReservationCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ReservationViewForm" oncomplete="PF('ReservationViewDialog').show()" disabled="#{empty reservationController.selected}"/>

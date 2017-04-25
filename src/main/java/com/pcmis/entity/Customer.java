@@ -85,6 +85,8 @@ public class Customer implements Serializable {
     private String bussiness_tel;
     private String bussiness_email;
     private boolean retired = false;
+    private boolean permenant = false;
+    private int reservationCount;
 
     public Long getId() {
         return id;
@@ -381,6 +383,22 @@ public class Customer implements Serializable {
 
     public void setRetired(boolean retired) {
         this.retired = retired;
+    }
+
+    public int getReservationCount() {
+        return reservationCount;
+    }
+
+    public void setReservationCount(int reservationCount) {
+        this.reservationCount = reservationCount;
+    }
+
+    public boolean isPermenant() {
+        return permenant;
+    }
+
+    public void setPermenant(boolean permenant) {
+        this.permenant = permenant;
     }
 
 }
