@@ -12,8 +12,6 @@
             <h:form id="PaymentCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{paymentController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreatePaymentLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{paymentController.selected.id}" title="#{bundle.CreatePaymentTitle_id}" />
                         <p:outputLabel value="#{bundle.CreatePaymentLabel_expenseType}" for="expenseType" />
                         <p:inputText id="expenseType" value="#{paymentController.selected.expenseType}" title="#{bundle.CreatePaymentTitle_expenseType}" />
                         <p:outputLabel value="#{bundle.CreatePaymentLabel_ticket_number}" for="ticket_number" />

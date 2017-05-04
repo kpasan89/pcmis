@@ -12,8 +12,6 @@
             <h:form id="ReservationCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{reservationController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateReservationLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{reservationController.selected.id}" title="#{bundle.CreateReservationTitle_id}" />
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_adult_count}" for="adult_count" />
                         <p:inputText id="adult_count" value="#{reservationController.selected.adult_count}" title="#{bundle.CreateReservationTitle_adult_count}" />
@@ -54,10 +52,10 @@
                         </p:selectOneMenu>
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_travel_date}" for="travel_date" />
-                        <p:calendar id="travel_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{reservationController.selected.travel_date}" title="#{bundle.EditReservationTitle_travel_date}"  showOn="button"/>
+                        <p:calendar id="travel_date" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{reservationController.selected.travel_date}" title="#{bundle.EditReservationTitle_travel_date}"  showOn="button"/>
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_return_date}" for="return_date" />
-                        <p:calendar id="return_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{reservationController.selected.return_date}" title="#{bundle.EditReservationTitle_return_date}"  showOn="button"/>
+                        <p:calendar id="return_date" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{reservationController.selected.return_date}" title="#{bundle.EditReservationTitle_return_date}"  showOn="button"/>
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_res_customer}" for="res_customer" />
                         <p:autoComplete id="res_customer" value="#{reservationController.selected.res_customer}" 

@@ -12,8 +12,6 @@
             <h:form id="MealPreferenceViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{mealPreferenceController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMealPreferenceLabel_id}"/>
-                        <h:outputText value="#{mealPreferenceController.selected.id}" title="#{bundle.ViewMealPreferenceTitle_id}"/>
                         <h:outputText value="#{bundle.ViewMealPreferenceLabel_name}"/>
                         <h:outputText value="#{mealPreferenceController.selected.name}" title="#{bundle.ViewMealPreferenceTitle_name}"/>
                         <h:outputText value="#{bundle.ViewMealPreferenceLabel_description}"/>

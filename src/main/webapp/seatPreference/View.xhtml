@@ -12,8 +12,6 @@
             <h:form id="SeatPreferenceViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{seatPreferenceController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSeatPreferenceLabel_id}"/>
-                        <h:outputText value="#{seatPreferenceController.selected.id}" title="#{bundle.ViewSeatPreferenceTitle_id}"/>
                         <h:outputText value="#{bundle.ViewSeatPreferenceLabel_name}"/>
                         <h:outputText value="#{seatPreferenceController.selected.name}" title="#{bundle.ViewSeatPreferenceTitle_name}"/>
                         <h:outputText value="#{bundle.ViewSeatPreferenceLabel_description}"/>

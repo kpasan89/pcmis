@@ -21,7 +21,7 @@
                                            itemValue="#{appoinment}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatePersonLabel_joined_date}" for="joined_date" />
-                        <p:calendar id="joined_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{personController.selected.joined_date}" title="#{bundle.EditPersonTitle_joined_date}"  showOn="button"/>
+                        <p:calendar id="joined_date" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{personController.selected.joined_date}" title="#{bundle.EditPersonTitle_joined_date}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreatePersonLabel_username}" for="username" />
                         <p:inputText id="username" value="#{personController.selected.username}" title="#{bundle.CreatePersonTitle_username}" />
                         <p:outputLabel value="#{bundle.CreatePersonLabel_password}" for="password" />

@@ -13,8 +13,6 @@
                 <p:scrollPanel style="height:600px">
                     <h:panelGroup id="display">
                         <p:panelGrid columns="2" rendered="#{customerController.selected != null}">
-                            <h:outputText value="#{bundle.ViewCustomerLabel_id}"/>
-                            <h:outputText value="#{customerController.selected.id}" title="#{bundle.ViewCustomerTitle_id}"/>
                             <h:outputText value="#{bundle.ViewCustomerLabel_title}"/>
                             <h:outputText value="#{customerController.selected.title}" title="#{bundle.ViewCustomerTitle_title}"/>
                             <h:outputText value="#{bundle.ViewCustomerLabel_maritial_status}"/>

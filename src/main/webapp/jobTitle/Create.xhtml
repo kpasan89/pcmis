@@ -12,8 +12,6 @@
             <h:form id="JobTitleCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{jobTitleController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateJobTitleLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{jobTitleController.selected.id}" title="#{bundle.CreateJobTitleTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateJobTitleLabel_name}" for="name" />
                         <p:inputText id="name" value="#{jobTitleController.selected.name}" title="#{bundle.CreateJobTitleTitle_name}" />
                         <p:outputLabel value="#{bundle.CreateJobTitleLabel_description}" for="description" />

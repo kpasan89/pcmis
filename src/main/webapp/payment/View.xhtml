@@ -12,8 +12,6 @@
             <h:form id="PaymentViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{paymentController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPaymentLabel_id}"/>
-                        <h:outputText value="#{paymentController.selected.id}" title="#{bundle.ViewPaymentTitle_id}"/>
                         <h:outputText value="#{bundle.ViewPaymentLabel_expenseType}"/>
                         <h:outputText value="#{paymentController.selected.expenseType}" title="#{bundle.ViewPaymentTitle_expenseType}"/>
                         <h:outputText value="#{bundle.ViewPaymentLabel_ticket_number}"/>

@@ -12,8 +12,6 @@
             <h:form id="NationalityViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{nationalityController.selected != null}">
-                        <h:outputText value="#{bundle.ViewNationalityLabel_id}"/>
-                        <h:outputText value="#{nationalityController.selected.id}" title="#{bundle.ViewNationalityTitle_id}"/>
                         <h:outputText value="#{bundle.ViewNationalityLabel_name}"/>
                         <h:outputText value="#{nationalityController.selected.name}" title="#{bundle.ViewNationalityTitle_name}"/>
                         <h:outputText value="#{bundle.ViewNationalityLabel_description}"/>

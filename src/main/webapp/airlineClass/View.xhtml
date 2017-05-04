@@ -12,8 +12,6 @@
             <h:form id="AirlineClassViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{airlineClassController.selected != null}">
-                        <h:outputText value="#{bundle.ViewAirlineClassLabel_id}"/>
-                        <h:outputText value="#{airlineClassController.selected.id}" title="#{bundle.ViewAirlineClassTitle_id}"/>
                         <h:outputText value="#{bundle.ViewAirlineClassLabel_name}"/>
                         <h:outputText value="#{airlineClassController.selected.name}" title="#{bundle.ViewAirlineClassTitle_name}"/>
                         <h:outputText value="#{bundle.ViewAirlineClassLabel_description}"/>

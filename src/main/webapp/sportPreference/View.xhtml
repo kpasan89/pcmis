@@ -12,8 +12,6 @@
             <h:form id="SportPreferenceViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sportPreferenceController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSportPreferenceLabel_id}"/>
-                        <h:outputText value="#{sportPreferenceController.selected.id}" title="#{bundle.ViewSportPreferenceTitle_id}"/>
                         <h:outputText value="#{bundle.ViewSportPreferenceLabel_name}"/>
                         <h:outputText value="#{sportPreferenceController.selected.name}" title="#{bundle.ViewSportPreferenceTitle_name}"/>
                         <h:outputText value="#{bundle.ViewSportPreferenceLabel_description}"/>

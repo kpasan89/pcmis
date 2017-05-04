@@ -12,8 +12,6 @@
             <h:form id="ReservationViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{reservationController.selected != null}">
-                        <h:outputText value="#{bundle.ViewReservationLabel_id}"/>
-                        <h:outputText value="#{reservationController.selected.id}" title="#{bundle.ViewReservationTitle_id}"/>
                         <h:outputText value="#{bundle.ViewReservationLabel_adult_count}"/>
                         <h:outputText value="#{reservationController.selected.adult_count}" title="#{bundle.ViewReservationTitle_adult_count}"/>
                         <h:outputText value="#{bundle.ViewReservationLabel_kids_count}"/>

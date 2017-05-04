@@ -19,6 +19,7 @@
                     <p:dataTable id="datalist" value="#{reservationController.items}" var="item"
                                  selectionMode="single" selection="#{reservationController.selected}"
                                  paginator="true"
+                                 rowIndexVar="iv"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
@@ -27,6 +28,12 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
+                        <p:column width="25">
+                            <f:facet name="header">
+                                <h:outputText value="No"/>
+                            </f:facet>
+                            <h:outputLabel value="#{iv + 1}"></h:outputLabel>
+                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservationTitle_adult_count}"/>

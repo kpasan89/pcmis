@@ -12,8 +12,6 @@
             <h:form id="ReservationEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{reservationController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditReservationLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{reservationController.selected.id}" title="#{bundle.EditReservationTitle_id}" />
                         <p:outputLabel value="#{bundle.EditReservationLabel_adult_count}" for="adult_count" />
                         <p:inputText id="adult_count" value="#{reservationController.selected.adult_count}" title="#{bundle.EditReservationTitle_adult_count}" />
                         <p:outputLabel value="#{bundle.EditReservationLabel_kids_count}" for="kids_count" />

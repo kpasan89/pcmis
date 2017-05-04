@@ -12,8 +12,6 @@
             <h:form id="AirlineClassCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{airlineClassController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateAirlineClassLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{airlineClassController.selected.id}" title="#{bundle.CreateAirlineClassTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateAirlineClassLabel_name}" for="name" />
                         <p:inputText id="name" value="#{airlineClassController.selected.name}" title="#{bundle.CreateAirlineClassTitle_name}" />
                         <p:outputLabel value="#{bundle.CreateAirlineClassLabel_description}" for="description" />

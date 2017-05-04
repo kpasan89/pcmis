@@ -12,8 +12,6 @@
             <h:form id="JobTitleViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{jobTitleController.selected != null}">
-                        <h:outputText value="#{bundle.ViewJobTitleLabel_id}"/>
-                        <h:outputText value="#{jobTitleController.selected.id}" title="#{bundle.ViewJobTitleTitle_id}"/>
                         <h:outputText value="#{bundle.ViewJobTitleLabel_name}"/>
                         <h:outputText value="#{jobTitleController.selected.name}" title="#{bundle.ViewJobTitleTitle_name}"/>
                         <h:outputText value="#{bundle.ViewJobTitleLabel_description}"/>

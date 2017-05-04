@@ -40,7 +40,7 @@
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_dom}" for="dom" />
-                            <p:calendar id="dom" pattern="MM/dd/yyyy" value="#{customerController.selected.dom}" title="#{bundle.EditCustomerTitle_dom}"  style="width:293px"/>
+                            <p:calendar id="dom" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.dom}" title="#{bundle.EditCustomerTitle_dom}"  style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_first_name}" for="first_name" />
                             <p:inputText id="first_name" value="#{customerController.selected.first_name}" title="#{bundle.CreateCustomerTitle_first_name}" style="width:293px"/>
@@ -52,7 +52,7 @@
                             <p:inputText id="full_name" value="#{customerController.selected.full_name}" title="#{bundle.CreateCustomerTitle_full_name}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_dob}" for="dob" />
-                            <p:calendar id="dob" pattern="MM/dd/yyyy" value="#{customerController.selected.dob}" title="#{bundle.EditCustomerTitle_dob}"  style="width:293px"/>
+                            <p:calendar id="dob" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.dob}" title="#{bundle.EditCustomerTitle_dob}"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_nationality}" for="nationality" />
                             <p:selectOneMenu id="nationality" value="#{customerController.selected.nationality}" style="width:300px">
@@ -83,10 +83,10 @@
                             <p:inputText id="nic" value="#{customerController.selected.nic}" title="#{bundle.CreateCustomerTitle_nic}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_pp_issued_date}" for="pp_issued_date" />
-                            <p:calendar id="pp_issued_date" pattern="MM/dd/yyyy" value="#{customerController.selected.pp_issued_date}" title="#{bundle.EditCustomerTitle_pp_issued_date}"  style="width:293px"/>
+                            <p:calendar id="pp_issued_date" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.pp_issued_date}" title="#{bundle.EditCustomerTitle_pp_issued_date}"  style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_pp_expire_date}" for="pp_expire_date" />
-                            <p:calendar id="pp_expire_date" pattern="MM/dd/yyyy" value="#{customerController.selected.pp_expire_date}" title="#{bundle.EditCustomerTitle_pp_expire_date}"  style="width:293px"/>
+                            <p:calendar id="pp_expire_date" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.pp_expire_date}" title="#{bundle.EditCustomerTitle_pp_expire_date}"  style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_customer_type}" for="customerType" />
                             <p:selectOneMenu id="customerType" value="#{customerController.selected.customer_type}" style="width:300px">
