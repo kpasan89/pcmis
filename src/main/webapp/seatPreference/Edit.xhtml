@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SeatPreferenceEditDlg" widgetVar="SeatPreferenceEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSeatPreferenceTitle}">
+            <h:form id="SeatPreferenceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{seatPreferenceController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSeatPreferenceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{seatPreferenceController.selected.id}" title="#{bundle.EditSeatPreferenceTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditSeatPreferenceLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{seatPreferenceController.selected.name}" title="#{bundle.EditSeatPreferenceTitle_name}" />
+                        <p:outputLabel value="#{bundle.EditSeatPreferenceLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{seatPreferenceController.selected.description}" title="#{bundle.EditSeatPreferenceTitle_description}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{seatPreferenceController.update}" value="#{bundle.Save}" update="display,:SeatPreferenceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SeatPreferenceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SeatPreferenceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

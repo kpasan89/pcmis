@@ -10,7 +10,7 @@
 
         <p:dialog id="CustomerEditDlg" widgetVar="CustomerEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCustomerTitle}">
             <h:form id="CustomerEditForm">
-                <p:scrollPanel style="height:600px">
+                <p:scrollPanel style="height:600px; width: 475px">
                     <h:panelGroup id="display">
                         <p:panelGrid columns="2" rendered="#{customerController.selected != null}">
                             
@@ -36,7 +36,7 @@
                             </p:selectOneMenu>
                            
                             <p:outputLabel value="#{bundle.EditCustomerLabel_dom}" for="dom" />
-                            <p:calendar id="dom" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.dom}" title="#{bundle.EditCustomerTitle_dom}"  showOn="button"/>
+                            <p:calendar id="dom" pattern="MM/dd/yyyy" value="#{customerController.selected.dom}" title="#{bundle.EditCustomerTitle_dom}"  showOn="button"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_first_name}" for="first_name" />
                             <p:inputText id="first_name" value="#{customerController.selected.first_name}" title="#{bundle.EditCustomerTitle_first_name}" />
@@ -48,7 +48,7 @@
                             <p:inputText id="full_name" value="#{customerController.selected.full_name}" title="#{bundle.EditCustomerTitle_full_name}" />
                            
                             <p:outputLabel value="#{bundle.EditCustomerLabel_dob}" for="dob" />
-                            <p:calendar id="dob" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.dob}" title="#{bundle.EditCustomerTitle_dob}"  showOn="button"/>
+                            <p:calendar id="dob" pattern="MM/dd/yyyy" value="#{customerController.selected.dob}" title="#{bundle.EditCustomerTitle_dob}"  showOn="button"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_nationality}" for="nationality" />
                             <p:selectOneMenu id="nationality" value="#{customerController.selected.nationality}">
@@ -77,10 +77,10 @@
                             <p:inputText id="nic" value="#{customerController.selected.nic}" title="#{bundle.EditCustomerTitle_nic}" />
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_pp_issued_date}" for="pp_issued_date" />
-                            <p:calendar id="pp_issued_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.pp_issued_date}" title="#{bundle.EditCustomerTitle_pp_issued_date}"  showOn="button"/>
+                            <p:calendar id="pp_issued_date" pattern="MM/dd/yyyy" value="#{customerController.selected.pp_issued_date}" title="#{bundle.EditCustomerTitle_pp_issued_date}"  showOn="button"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_pp_expire_date}" for="pp_expire_date" />
-                            <p:calendar id="pp_expire_date" pattern="MM/dd/yyyy HH:mm:ss" value="#{customerController.selected.pp_expire_date}" title="#{bundle.EditCustomerTitle_pp_expire_date}"  showOn="button"/>
+                            <p:calendar id="pp_expire_date" pattern="MM/dd/yyyy" value="#{customerController.selected.pp_expire_date}" title="#{bundle.EditCustomerTitle_pp_expire_date}"  showOn="button"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_customer_type}" for="customerType" />
                             <p:selectOneMenu id="customerType" value="#{customerController.selected.customer_type}">

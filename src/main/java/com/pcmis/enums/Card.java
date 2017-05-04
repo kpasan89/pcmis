@@ -10,6 +10,6 @@ package com.pcmis.enums;
  * @author Pasan
  */
 public enum Card {
-    Naster,
-    Visa,
+    Yes,
+    No,
 }

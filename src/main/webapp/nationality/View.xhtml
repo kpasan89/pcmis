@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NationalityViewDlg" widgetVar="NationalityViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewNationalityTitle}">
+            <h:form id="NationalityViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{nationalityController.selected != null}">
+                        <h:outputText value="#{bundle.ViewNationalityLabel_id}"/>
+                        <h:outputText value="#{nationalityController.selected.id}" title="#{bundle.ViewNationalityTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewNationalityLabel_name}"/>
+                        <h:outputText value="#{nationalityController.selected.name}" title="#{bundle.ViewNationalityTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewNationalityLabel_description}"/>
+                        <h:outputText value="#{nationalityController.selected.description}" title="#{bundle.ViewNationalityTitle_description}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="NationalityViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

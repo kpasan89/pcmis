@@ -6,6 +6,7 @@ import com.pcmis.controllers.util.JsfUtil.PersistAction;
 import com.pcmis.facades.CustomerFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -27,6 +28,7 @@ public class CustomerController implements Serializable {
     private com.pcmis.facades.CustomerFacade ejbFacade;
     private List<Customer> items = null;
     private Customer selected;
+    private PersonController personController;
 
     public CustomerController() {
     }
@@ -95,6 +97,8 @@ public class CustomerController implements Serializable {
                 c.setSport(selected.getSport());
                 c.setTelepone(selected.getTelepone());
                 c.setTitle(selected.getTitle());
+                //c.setCreatedAt(new Date());
+                //c.setCreater(getPersonController().getLoggedPerson());
                 getFacade().create(c);
                 JsfUtil.addSuccessMessage("Customer was successfully created");
 
@@ -140,9 +144,22 @@ public class CustomerController implements Serializable {
 
     public List<Customer> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            String jpql;
+            jpql = "select c from Customer c  Where c.retired=false order by c.id desc";
+            items = getFacade().findBySQL(jpql);
         }
         return items;
+    }
+
+    public String viewCustomerPage() {
+//        if (items == null) {
+//            items = getFacade().findAll();
+//        }
+        String jpql;
+        jpql = "select c from Customer c  Where c.retired=false order by c.id desc";
+        items = getFacade().findBySQL(jpql);
+
+        return "/customer/List.xhtml";
     }
 
     public List<Customer> completeCustomers(String qry) {
@@ -189,6 +206,25 @@ public class CustomerController implements Serializable {
 
     public List<Customer> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public com.pcmis.facades.CustomerFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(com.pcmis.facades.CustomerFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public PersonController getPersonController() {
+        if(personController == null){
+            personController = new PersonController();
+        }
+        return personController;
+    }
+
+    public void setPersonController(PersonController personController) {
+        this.personController = personController;
     }
 
     @FacesConverter(forClass = Customer.class)

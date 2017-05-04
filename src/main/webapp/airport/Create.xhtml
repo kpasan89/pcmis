@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AirportCreateDlg" widgetVar="AirportCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAirportTitle}">
+            <h:form id="AirportCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{airportController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAirportLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{airportController.selected.name}" title="#{bundle.CreateAirportTitle_name}" />
+                        <p:outputLabel value="#{bundle.CreateAirportLabel_code}" for="code" />
+                        <p:inputText id="code" value="#{airportController.selected.code}" title="#{bundle.CreateAirportTitle_code}" />
+                        <p:outputLabel value="#{bundle.CreateAirportLabel_descriton}" for="descriton" />
+                        <p:inputText id="descriton" value="#{airportController.selected.descriton}" title="#{bundle.CreateAirportTitle_descriton}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{airportController.create}" value="#{bundle.Save}" update="display,:AirportListForm:datalist,:growl" oncomplete="handleSubmit(args,'AirportCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AirportCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

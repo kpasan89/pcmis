@@ -4,7 +4,6 @@ import com.pcmis.entity.Reservation;
 import com.pcmis.controllers.util.JsfUtil;
 import com.pcmis.controllers.util.JsfUtil.PersistAction;
 import com.pcmis.entity.Customer;
-import com.pcmis.entity.Person;
 import com.pcmis.facades.CustomerFacade;
 import com.pcmis.facades.ReservationFacade;
 
@@ -79,7 +78,6 @@ public class ReservationController implements Serializable {
         resCount = resCustomer.getReservationCount();
         System.out.println("resCount = " + resCount + "  ..................");
         System.out.println("resCustomer = " + resCustomer+ "  ..................");
-
     }
 
     public void createNew() {
@@ -100,7 +98,7 @@ public class ReservationController implements Serializable {
 
                 selectReservationCustomer();
 
-                if (resCustomer.getReservationCount() <= 1) {
+                if (resCustomer.getReservationCount() < 1) {
                     resCustomer.setPermenant(false);
                     System.out.println("permanent false");
                 } else {
@@ -156,7 +154,9 @@ public class ReservationController implements Serializable {
 
     public List<Reservation> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            String jpql;
+            jpql = "select r from Reservation r  Where r.retired=false order by r.id desc";
+            items = getFacade().findBySQL(jpql);
         }
         return items;
     }

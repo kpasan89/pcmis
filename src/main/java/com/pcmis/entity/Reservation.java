@@ -45,6 +45,16 @@ public class Reservation implements Serializable {
     private Date travel_date;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date return_date;
+    private boolean retired = false;
+    
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date createdAt;
+    @ManyToOne
+    private Person creater;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date retiredAt;
+    @ManyToOne
+    private Person retirer;
 
     public Long getId() {
         return id;
@@ -149,6 +159,46 @@ public class Reservation implements Serializable {
 
     public void setRes_customer(Customer res_customer) {
         this.res_customer = res_customer;
+    }
+
+    public boolean isRetired() {
+        return retired;
+    }
+
+    public void setRetired(boolean retired) {
+        this.retired = retired;
+    }
+
+    public Date getRetiredAt() {
+        return retiredAt;
+    }
+
+    public void setRetiredAt(Date retiredAt) {
+        this.retiredAt = retiredAt;
+    }
+
+    public Person getRetirer() {
+        return retirer;
+    }
+
+    public void setRetirer(Person retirer) {
+        this.retirer = retirer;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Person getCreater() {
+        return creater;
+    }
+
+    public void setCreater(Person creater) {
+        this.creater = creater;
     }
     
 }

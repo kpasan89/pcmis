@@ -7,6 +7,7 @@ import com.pcmis.enums.Appoinment;
 import com.pcmis.facades.PersonFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ public class PersonController implements Serializable {
     private String password;
     private String addPassword;
     private String addCunfirmPassword;
+    private PersonController personController;
 
     private boolean systemAdministrator = false;
     private boolean systemUser = false;
@@ -130,7 +132,7 @@ public class PersonController implements Serializable {
             try {
 
                 if (!userNameAvailable(selected.getUsername())) {
-                    JsfUtil.addErrorMessage("User name already exists. Plese enter another user name");
+                    JsfUtil.addErrorMessage("User name already exists. Plese enter another username");
                 } else if (!selected.getPassword().equals(selected.getCunfirm_password())) {
                     JsfUtil.addErrorMessage("Password and Re-entered password are not matching");
                 } else {
@@ -145,6 +147,8 @@ public class PersonController implements Serializable {
                     p.setUsername(selected.getUsername());
                     p.setPassword(addPassword);
                     p.setCunfirm_password(addCunfirmPassword);
+                    p.setCreatedAt(new Date());
+                    p.setCreater(getPersonController().getLoggedPerson());
                     getFacade().create(p);
                     JsfUtil.addSuccessMessage("Person was successfully created");
                 }
@@ -329,6 +333,22 @@ public class PersonController implements Serializable {
 
     public void setManager(boolean manager) {
         this.manager = manager;
+    }
+
+    public com.pcmis.facades.PersonFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(com.pcmis.facades.PersonFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public PersonController getPersonController() {
+        return personController;
+    }
+
+    public void setPersonController(PersonController personController) {
+        this.personController = personController;
     }
 
     @FacesConverter(forClass = Person.class)

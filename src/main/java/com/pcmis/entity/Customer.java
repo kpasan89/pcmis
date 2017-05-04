@@ -24,6 +24,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -87,6 +88,16 @@ public class Customer implements Serializable {
     private boolean retired = false;
     private boolean permenant = false;
     private int reservationCount;
+    
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date createdAt;
+    @ManyToOne
+    private Person creater;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date retiredAt;
+    @ManyToOne
+    private Person retirer;
+    
 
     public Long getId() {
         return id;
@@ -401,4 +412,35 @@ public class Customer implements Serializable {
         this.permenant = permenant;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Person getCreater() {
+        return creater;
+    }
+
+    public void setCreater(Person creater) {
+        this.creater = creater;
+    }
+
+    public Date getRetiredAt() {
+        return retiredAt;
+    }
+
+    public void setRetiredAt(Date retiredAt) {
+        this.retiredAt = retiredAt;
+    }
+
+    public Person getRetirer() {
+        return retirer;
+    }
+
+    public void setRetirer(Person retirer) {
+        this.retirer = retirer;
+    }
 }

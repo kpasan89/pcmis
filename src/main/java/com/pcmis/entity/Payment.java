@@ -7,6 +7,7 @@ package com.pcmis.entity;
 
 import com.pcmis.enums.ExpenseType;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -33,6 +35,15 @@ public class Payment implements Serializable {
     private List<Integer> ticket_number;
     private float value_ticket;
     private float points;
+    
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date createdAt;
+    @ManyToOne
+    private Person creater;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date retiredAt;
+    @ManyToOne
+    private Person retirer;
 
     public Long getId() {
         return id;
@@ -105,6 +116,38 @@ public class Payment implements Serializable {
 
     public void setPay_customer(Customer pay_customer) {
         this.pay_customer = pay_customer;
+    }
+
+    public Date getRetiredAt() {
+        return retiredAt;
+    }
+
+    public void setRetiredAt(Date retiredAt) {
+        this.retiredAt = retiredAt;
+    }
+
+    public Person getRetirer() {
+        return retirer;
+    }
+
+    public void setRetirer(Person retirer) {
+        this.retirer = retirer;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Person getCreater() {
+        return creater;
+    }
+
+    public void setCreater(Person creater) {
+        this.creater = creater;
     }
     
 }

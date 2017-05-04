@@ -7,7 +7,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
-        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <title><ui:insert name="title">PCMIS</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
     </h:head>
@@ -23,13 +23,18 @@
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
                         <p:menuitem value="Customer Registration" outcome="/customer/List.xhtml" />
                         <p:menuitem value="Reservation Management" outcome="/reservation/List.xhtml" />
-                        <p:menuitem value="Payments" outcome="/payment/List.xhtml" />
+                        <p:menuitem value="Payments Details" outcome="/payment/List.xhtml" />
                         <p:menuitem value="User Control" outcome="/person/List.xhtml"/>
                         <p:submenu label="#{bundle.Maintenance}" rendered="#{personController.systemAdministrator}">
-                            <p:menuitem value="Customer" outcome="/customer/List.xhtml" />
-                            <p:menuitem value="Payment" outcome="/payment/List.xhtml" />
-                            <p:menuitem value="Person" outcome="/person/List.xhtml" />
-                            <p:menuitem value="Reservation" outcome="/reservation/List.xhtml" />
+                            <p:menuitem value="Add Airline" outcome="/airline/List.xhtml" />
+                            <p:menuitem value="Add Airline Class" outcome="/airlineClass/List.xhtml" />
+                            <p:menuitem value="Add Airport" outcome="/airport/List.xhtml" />
+                            <p:menuitem value="Add Country" outcome="/country/List.xhtml" />
+                            <p:menuitem value="Add Job Title" outcome="/jobTitle/List.xhtml" />
+                            <p:menuitem value="Add Meal Preference" outcome="/mealPreference/List.xhtml" />
+                            <p:menuitem value="Add Nationality" outcome="/nationality/List.xhtml" />
+                            <p:menuitem value="Add Seat Preference" outcome="/seatPreference/List.xhtml" />
+                            <p:menuitem value="Add Sport Preference" outcome="/sportPreference/List.xhtml" />
                         </p:submenu>
                     </p:menubar>
                 </h:form>
