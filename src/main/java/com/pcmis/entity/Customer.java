@@ -97,6 +97,7 @@ public class Customer implements Serializable {
     private Date retiredAt;
     @ManyToOne
     private Person retirer;
+    private String introducedCustomer;
     
 
     public Long getId() {
@@ -442,5 +443,13 @@ public class Customer implements Serializable {
 
     public void setRetirer(Person retirer) {
         this.retirer = retirer;
+    }
+
+    public String getIntroducedCustomer() {
+        return introducedCustomer;
+    }
+
+    public void setIntroducedCustomer(String introducedCustomer) {
+        this.introducedCustomer = introducedCustomer;
     }
 }

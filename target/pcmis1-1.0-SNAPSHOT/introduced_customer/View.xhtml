@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CustomerViewDlg" widgetVar="CustomerViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCustomerTitle}">
+            <h:form id="CustomerViewForm">
+                <p:scrollPanel style="height:600px">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{customerController.selected != null}">
+                            <h:outputText value="Introduced Customer"/>
+                            <h:outputText value="#{customerController.selected.introducedCustomer}" title="Introduced Customer"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_title}"/>
+                            <h:outputText value="#{customerController.selected.title}" title="#{bundle.ViewCustomerTitle_title}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_maritial_status}"/>
+                            <h:outputText value="#{customerController.selected.maritial_status}" title="#{bundle.ViewCustomerTitle_maritial_status}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_gender}"/>
+                            <h:outputText value="#{customerController.selected.gender}" title="#{bundle.ViewCustomerTitle_gender}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_dom}"/>
+                            <h:outputText value="#{customerController.selected.dom}" title="#{bundle.ViewCustomerTitle_dom}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_first_name}"/>
+                            <h:outputText value="#{customerController.selected.first_name}" title="#{bundle.ViewCustomerTitle_first_name}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_family_name}"/>
+                            <h:outputText value="#{customerController.selected.family_name}" title="#{bundle.ViewCustomerTitle_family_name}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_full_name}"/>
+                            <h:outputText value="#{customerController.selected.full_name}" title="#{bundle.ViewCustomerTitle_full_name}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_dob}"/>
+                            <h:outputText value="#{customerController.selected.dob}" title="#{bundle.ViewCustomerTitle_dob}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_nationality}"/>
+                            <h:outputText value="#{customerController.selected.nationality}" title="#{bundle.ViewCustomerTitle_nationality}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_country}"/>
+                            <h:outputText value="#{customerController.selected.country}" title="#{bundle.ViewCustomerTitle_country}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_address}"/>
+                            <h:outputText value="#{customerController.selected.address}" title="#{bundle.ViewCustomerTitle_address}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_bussiness_address}"/>
+                            <h:outputText value="#{customerController.selected.bussiness_address}" title="#{bundle.ViewCustomerTitle_bussiness_address}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_passport}"/>
+                            <h:outputText value="#{customerController.selected.passport}" title="#{bundle.ViewCustomerTitle_passport}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_nic}"/>
+                            <h:outputText value="#{customerController.selected.nic}" title="#{bundle.ViewCustomerTitle_nic}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_pp_issued_date}"/>
+                            <h:outputText value="#{customerController.selected.pp_issued_date}" title="#{bundle.ViewCustomerTitle_pp_issued_date}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_pp_expire_date}"/>
+                            <h:outputText value="#{customerController.selected.pp_expire_date}" title="#{bundle.ViewCustomerTitle_pp_expire_date}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_company_name}"/>
+                            <h:outputText value="#{customerController.selected.company_name}" title="#{bundle.ViewCustomerTitle_company_name}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_telepone}"/>
+                            <h:outputText value="#{customerController.selected.telepone}" title="#{bundle.ViewCustomerTitle_telepone}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_mobile}"/>
+                            <h:outputText value="#{customerController.selected.mobile}" title="#{bundle.ViewCustomerTitle_mobile}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_fax}"/>
+                            <h:outputText value="#{customerController.selected.fax}" title="#{bundle.ViewCustomerTitle_fax}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_email}"/>
+                            <h:outputText value="#{customerController.selected.email}" title="#{bundle.ViewCustomerTitle_email}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_sport}"/>
+                            <h:outputText value="#{customerController.selected.sport}" title="#{bundle.ViewCustomerTitle_sport}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_interest}"/>
+                            <h:outputText value="#{customerController.selected.interest}" title="#{bundle.ViewCustomerTitle_interest}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_card_type}"/>
+                            <h:outputText value="#{customerController.selected.card_type}" title="#{bundle.ViewCustomerTitle_card_type}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_bussiness_bought}"/>
+                            <h:outputText value="#{customerController.selected.bussiness_bought}" title="#{bundle.ViewCustomerTitle_bussiness_bought}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_bussiness_tel}"/>
+                            <h:outputText value="#{customerController.selected.bussiness_tel}" title="#{bundle.ViewCustomerTitle_bussiness_tel}"/>
+                            <h:outputText value="#{bundle.ViewCustomerLabel_bussiness_email}"/>
+                            <h:outputText value="#{customerController.selected.bussiness_email}" title="#{bundle.ViewCustomerTitle_bussiness_email}"/>
+                        </p:panelGrid>
+                        <p:commandButton value="#{bundle.Close}" onclick="CustomerViewDialog.hide()"/>
+                    </h:panelGroup>
+                </p:scrollPanel>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -11,10 +11,18 @@
         <p:dialog id="CustomerCreateDlg" widgetVar="CustomerCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCustomerTitle}">
 
             <h:form id="CustomerCreateForm">
-                
+
                 <p:scrollPanel style="height:600px; width: 475px">
                     <h:panelGroup id="display">
                         <p:panelGrid columns="2" rendered="#{customerController.selected != null}">
+
+                            <p:outputLabel value="Introduced Customer Name" for="int_customer" />
+                            <p:autoComplete id="int_customer" value="#{customerController.selected.introducedCustomer}" 
+                                            completeMethod="#{customerController.completeCustomers}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.full_name}"
+                                            itemValue="#{x.full_name}" >
+                            </p:autoComplete>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_title}" for="title" />
                             <p:selectOneMenu id="title" value="#{customerController.selected.title}" style="width:300px">
@@ -160,7 +168,7 @@
                             <p:inputText id="bussiness_email" value="#{customerController.selected.bussiness_email}" title="#{bundle.CreateCustomerTitle_bussiness_email}" style="width:293px"/>
 
                         </p:panelGrid>
-                        <p:commandButton actionListener="#{customerController.createNew()}" value="#{bundle.Save}" update="display,:CustomerListForm:datalist,:growl" oncomplete="handleSubmit(args,'CustomerCreateDialog');"/>
+                        <p:commandButton actionListener="#{customerController.createNewIntroducedCustomer()}" value="#{bundle.Save}" update="display,:CustomerListForm:datalist,:growl" oncomplete="handleSubmit(args,'CustomerCreateDialog');"/>
                         <p:commandButton value="#{bundle.Cancel}" onclick="CustomerCreateDialog.hide()"/>
                     </h:panelGroup>
                 </p:scrollPanel>

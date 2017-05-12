@@ -17,7 +17,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-04T09:50:38")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-12T09:27:11")
 @StaticMetamodel(Customer.class)
 public class Customer_ { 
 
@@ -48,6 +48,7 @@ public class Customer_ {
     public static volatile SingularAttribute<Customer, String> bussiness_bought;
     public static volatile SingularAttribute<Customer, String> mobile;
     public static volatile SingularAttribute<Customer, Card> card_type;
+    public static volatile SingularAttribute<Customer, String> introducedCustomer;
     public static volatile SingularAttribute<Customer, Seat> seat;
     public static volatile SingularAttribute<Customer, Meal> meal;
     public static volatile SingularAttribute<Customer, String> bussiness_address;
