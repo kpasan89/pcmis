@@ -5,14 +5,9 @@
  */
 package com.pcmis.entity;
 
-import com.pcmis.enums.Airline;
-import com.pcmis.enums.AirlineClass;
-import com.pcmis.enums.Airport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,13 +28,13 @@ public class Reservation implements Serializable {
     private Customer res_customer;
     private int adult_count;
     private int kids_count;
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private Airport dep_airport;
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private Airport arr_airport;
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private Airline preff_airline;
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private AirlineClass preff_class;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date travel_date;
