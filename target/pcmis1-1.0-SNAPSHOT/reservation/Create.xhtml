@@ -12,6 +12,14 @@
             <h:form id="ReservationCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{reservationController.selected != null}">
+                        
+                        <p:outputLabel value="#{bundle.CreateReservationLabel_res_customer}" for="res_customer" />
+                        <p:autoComplete id="res_customer" value="#{reservationController.selected.res_customer}" 
+                                        completeMethod="#{reservationController.customerController.completeCustomers}"                                            
+                                        var="rc" forceSelection="true" 
+                                        itemLabel="#{rc.full_name}"
+                                        itemValue="#{rc}" >
+                        </p:autoComplete>
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_adult_count}" for="adult_count" />
                         <p:inputText id="adult_count" value="#{reservationController.selected.adult_count}" title="#{bundle.CreateReservationTitle_adult_count}" />
@@ -20,36 +28,36 @@
                         <p:inputText id="kids_count" value="#{reservationController.selected.kids_count}" title="#{bundle.CreateReservationTitle_kids_count}" />
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_dep_airport}" for="dep_airport" />
-                        <p:selectOneMenu id="dep_airport" value="#{reservationController.selected.dep_airport}">
-                            <f:selectItem itemLabel="Select Airport"></f:selectItem>
-                            <f:selectItems value="#{enumController.airport}"
-                                           var="airport"
-                                           itemValue="#{airport}"/>
-                        </p:selectOneMenu>
+                        <p:autoComplete id="dep_airport" value="#{reservationController.selected.dep_airport}" 
+                                        completeMethod="#{airportController.completeAirports}"                                            
+                                        var="x" forceSelection="true" 
+                                        itemLabel="#{x.name}"
+                                        itemValue="#{x}" >
+                        </p:autoComplete>
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_arr_airport}" for="arr_airport" />
-                        <p:selectOneMenu id="arr_airport" value="#{reservationController.selected.arr_airport}">
-                            <f:selectItem itemLabel="Select Airport"></f:selectItem>
-                            <f:selectItems value="#{enumController.airport}"
-                                           var="airport"
-                                           itemValue="#{airport}"/>
-                        </p:selectOneMenu>
+                        <p:autoComplete id="arr_airport" value="#{reservationController.selected.arr_airport}" 
+                                        completeMethod="#{airportController.completeAirports}"                                            
+                                        var="x" forceSelection="true" 
+                                        itemLabel="#{x.name}"
+                                        itemValue="#{x}" >
+                        </p:autoComplete>
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_preff_airline}" for="preff_airline" />
-                        <p:selectOneMenu id="preff_airline" value="#{reservationController.selected.preff_airline}">
-                            <f:selectItem itemLabel="Select Airport"></f:selectItem>
-                            <f:selectItems value="#{enumController.airline}"
-                                           var="airline"
-                                           itemValue="#{airline}"/>
-                        </p:selectOneMenu>
+                        <p:autoComplete id="preff_airline" value="#{reservationController.selected.preff_airline}" 
+                                        completeMethod="#{airlineController.completeAirlines}"                                            
+                                        var="x" forceSelection="true" 
+                                        itemLabel="#{x.name}"
+                                        itemValue="#{x}" >
+                        </p:autoComplete>
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_preff_class}" for="preff_class" />
-                        <p:selectOneMenu id="preff_class" value="#{reservationController.selected.preff_class}">
-                            <f:selectItem itemLabel="Select Airport"></f:selectItem>
-                            <f:selectItems value="#{enumController.airlineClass}"
-                                           var="airlineClass"
-                                           itemValue="#{airlineClass}"/>
-                        </p:selectOneMenu>
+                        <p:autoComplete id="preff_class" value="#{reservationController.selected.preff_class}" 
+                                        completeMethod="#{airlineClassController.completeAirlineClass}"                                            
+                                        var="x" forceSelection="true" 
+                                        itemLabel="#{x.name}"
+                                        itemValue="#{x}" >
+                        </p:autoComplete>
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_travel_date}" for="travel_date" />
                         <p:calendar id="travel_date" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{reservationController.selected.travel_date}" title="#{bundle.EditReservationTitle_travel_date}"  showOn="button"/>
@@ -57,13 +65,6 @@
                         <p:outputLabel value="#{bundle.CreateReservationLabel_return_date}" for="return_date" />
                         <p:calendar id="return_date" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{reservationController.selected.return_date}" title="#{bundle.EditReservationTitle_return_date}"  showOn="button"/>
 
-                        <p:outputLabel value="#{bundle.CreateReservationLabel_res_customer}" for="res_customer" />
-                        <p:autoComplete id="res_customer" value="#{reservationController.selected.res_customer}" 
-                                        completeMethod="#{reservationController.customerController.completeCustomers}"                                            
-                                        var="rc" forceSelection="true" 
-                                        itemLabel="#{rc.full_name}"
-                                        itemValue="#{rc}" >
-                        </p:autoComplete>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{reservationController.createNew()}" value="#{bundle.Save}" update="display,:ReservationListForm:datalist,:growl" oncomplete="handleSubmit(args,'ReservationCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ReservationCreateDialog.hide()"/>

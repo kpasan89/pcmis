@@ -6,14 +6,13 @@
 package com.pcmis.entity;
 
 import com.pcmis.enums.Card;
-import com.pcmis.enums.Country;
+
 import com.pcmis.enums.CustomerType;
 import com.pcmis.enums.Gender;
-import com.pcmis.enums.Job;
-import com.pcmis.enums.Meal;
-import com.pcmis.enums.Nationality;
-import com.pcmis.enums.Seat;
-import com.pcmis.enums.Sport;
+
+
+
+
 import com.pcmis.enums.Status;
 import com.pcmis.enums.Title;
 import java.io.Serializable;
@@ -51,9 +50,9 @@ public class Customer implements Serializable {
     private String full_name;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dob;
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private Nationality nationality;
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private Country country;
     private String address;
     private String bussiness_address;
@@ -65,20 +64,20 @@ public class Customer implements Serializable {
     private Date pp_expire_date;
     @Enumerated(EnumType.STRING)
     private CustomerType customer_type;
-    @Enumerated(EnumType.STRING)
-    private Job job_title;
+    @ManyToOne
+    private JobTitle job_title;
     private String company_name;
     private String telepone;
     private String mobile;
     private String fax;
     private String email;
-    @Enumerated(EnumType.STRING)
-    private Seat seat;
-    @Enumerated(EnumType.STRING)
-    private Sport sport;
+    @ManyToOne
+    private SeatPreference seat;
+    @ManyToOne
+    private SportPreference sport;
     private String interest;
-    @Enumerated(EnumType.STRING)
-    private Meal meal;
+    @ManyToOne
+    private MealPreference meal;
     private boolean privilage_crd;
     @Enumerated(EnumType.STRING)
     private Card card_type;
@@ -87,7 +86,12 @@ public class Customer implements Serializable {
     private String bussiness_email;
     private boolean retired = false;
     private boolean permenant = false;
+    private boolean selfCustomer = false;
+    private boolean reservation = false;
+    private boolean payment = false;
     private int reservationCount;
+    private String introducedCustomer;
+    private int pointEarned;
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -97,7 +101,6 @@ public class Customer implements Serializable {
     private Date retiredAt;
     @ManyToOne
     private Person retirer;
-    private String introducedCustomer;
     
 
     public Long getId() {
@@ -301,13 +304,6 @@ public class Customer implements Serializable {
         this.email = email;
     }
 
-    public Sport getSport() {
-        return sport;
-    }
-
-    public void setSport(Sport sport) {
-        this.sport = sport;
-    }
 
     public String getInterest() {
         return interest;
@@ -363,30 +359,6 @@ public class Customer implements Serializable {
 
     public void setCustomer_type(CustomerType customer_type) {
         this.customer_type = customer_type;
-    }
-
-    public Job getJob_title() {
-        return job_title;
-    }
-
-    public void setJob_title(Job job_title) {
-        this.job_title = job_title;
-    }
-
-    public Seat getSeat() {
-        return seat;
-    }
-
-    public void setSeat(Seat seat) {
-        this.seat = seat;
-    }
-
-    public Meal getMeal() {
-        return meal;
-    }
-
-    public void setMeal(Meal meal) {
-        this.meal = meal;
     }
 
     public boolean isRetired() {
@@ -451,5 +423,69 @@ public class Customer implements Serializable {
 
     public void setIntroducedCustomer(String introducedCustomer) {
         this.introducedCustomer = introducedCustomer;
+    }
+
+    public boolean isSelfCustomer() {
+        return selfCustomer;
+    }
+
+    public void setSelfCustomer(boolean selfCustomer) {
+        this.selfCustomer = selfCustomer;
+    }
+
+    public boolean isReservation() {
+        return reservation;
+    }
+
+    public void setReservation(boolean reservation) {
+        this.reservation = reservation;
+    }
+
+    public boolean isPayment() {
+        return payment;
+    }
+
+    public void setPayment(boolean payment) {
+        this.payment = payment;
+    }
+
+    public int getPointEarned() {
+        return pointEarned;
+    }
+
+    public void setPointEarned(int pointEarned) {
+        this.pointEarned = pointEarned;
+    }
+
+    public JobTitle getJob_title() {
+        return job_title;
+    }
+
+    public void setJob_title(JobTitle job_title) {
+        this.job_title = job_title;
+    }
+
+    public SeatPreference getSeat() {
+        return seat;
+    }
+
+    public void setSeat(SeatPreference seat) {
+        this.seat = seat;
+    }
+
+    public SportPreference getSport() {
+        return sport;
+    }
+
+    public void setSport(SportPreference sport) {
+        this.sport = sport;
+    }
+
+    public MealPreference getMeal() {
+        return meal;
+    }
+
+    public void setMeal(MealPreference meal) {
+        this.meal = meal;
     }
 }

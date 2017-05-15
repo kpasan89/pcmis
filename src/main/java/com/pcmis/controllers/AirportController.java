@@ -120,6 +120,12 @@ public class AirportController implements Serializable {
     public List<Airport> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    public List<Airport> completeAirports(String qry) {
+        String temSql;
+        temSql = "SELECT x FROM Airport x where x.retired=false and LOWER(x.name) like '%" + qry.toLowerCase() + "%' order by x.name";
+        return getFacade().findBySQL(temSql);
+    }
 
     @FacesConverter(forClass = Airport.class)
     public static class AirportControllerConverter implements Converter {

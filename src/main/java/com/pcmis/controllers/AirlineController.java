@@ -121,6 +121,12 @@ public class AirlineController implements Serializable {
         return getFacade().findAll();
     }
 
+    public List<Airline> completeAirlines(String qry) {
+        String temSql;
+        temSql = "SELECT x FROM Airline x where x.retired=false and LOWER(x.name) like '%" + qry.toLowerCase() + "%' order by x.name";
+        return getFacade().findBySQL(temSql);
+    }
+
     @FacesConverter(forClass = Airline.class)
     public static class AirlineControllerConverter implements Converter {
 

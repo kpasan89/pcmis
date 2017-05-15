@@ -93,6 +93,7 @@ public class CustomerController implements Serializable {
                 c.setPrivilage_crd(selected.isPrivilage_crd());
                 c.setReservationCount(0);
                 c.setRetired(false);
+                c.setSelfCustomer(true);
                 c.setSeat(selected.getSeat());
                 c.setSport(selected.getSport());
                 c.setTelepone(selected.getTelepone());
@@ -160,6 +161,7 @@ public class CustomerController implements Serializable {
                 c.setPrivilage_crd(selected.isPrivilage_crd());
                 c.setReservationCount(0);
                 c.setRetired(false);
+                c.setSelfCustomer(false);
                 c.setSeat(selected.getSeat());
                 c.setSport(selected.getSport());
                 c.setTelepone(selected.getTelepone());
@@ -235,6 +237,20 @@ public class CustomerController implements Serializable {
         temSql = "SELECT c FROM Customer c where c.retired=false and LOWER(c.full_name) like '%" + qry.toLowerCase() + "%' order by c.full_name";
         return getFacade().findBySQL(temSql);
     }
+    
+    private List<String> introducedCustomerList;
+    public List<String> completeIntroducedCustomers(String qry) {
+        String temSql;
+        temSql = "SELECT c.full_name FROM Customer c where c.retired=false and LOWER(c.full_name) like '%" + qry.toLowerCase() + "%' order by c.full_name";
+        introducedCustomerList = getFacade().findString(temSql);
+        return introducedCustomerList;
+    }
+    
+    public List<Customer> completePayCustomers(String qry) {
+        String temSql;
+        temSql = "SELECT c FROM Customer c where c.retired=false and c.reservation=true and LOWER(c.full_name) like '%" + qry.toLowerCase() + "%' order by c.full_name";
+        return getFacade().findBySQL(temSql);
+    }
 
     public String createReservation() {
         return "/customerReservation/List.xhtml";
@@ -276,14 +292,6 @@ public class CustomerController implements Serializable {
         return getFacade().findAll();
     }
 
-    public com.pcmis.facades.CustomerFacade getEjbFacade() {
-        return ejbFacade;
-    }
-
-    public void setEjbFacade(com.pcmis.facades.CustomerFacade ejbFacade) {
-        this.ejbFacade = ejbFacade;
-    }
-
     public PersonController getPersonController() {
         if(personController == null){
             personController = new PersonController();
@@ -293,6 +301,14 @@ public class CustomerController implements Serializable {
 
     public void setPersonController(PersonController personController) {
         this.personController = personController;
+    }
+
+    public List<String> getIntroducedCustomerList() {
+        return introducedCustomerList;
+    }
+
+    public void setIntroducedCustomerList(List<String> introducedCustomerList) {
+        this.introducedCustomerList = introducedCustomerList;
     }
 
     @FacesConverter(forClass = Customer.class)

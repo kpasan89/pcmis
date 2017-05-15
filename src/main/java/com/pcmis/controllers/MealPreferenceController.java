@@ -120,6 +120,12 @@ public class MealPreferenceController implements Serializable {
     public List<MealPreference> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    public List<MealPreference> completeMealPreferences(String qry) {
+        String temSql;
+        temSql = "SELECT x FROM MealPreference x where x.retired=false and LOWER(x.name) like '%" + qry.toLowerCase() + "%' order by x.name";
+        return getFacade().findBySQL(temSql);
+    }
 
     @FacesConverter(forClass = MealPreference.class)
     public static class MealPreferenceControllerConverter implements Converter {

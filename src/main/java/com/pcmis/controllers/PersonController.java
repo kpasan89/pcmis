@@ -148,7 +148,6 @@ public class PersonController implements Serializable {
                     p.setPassword(addPassword);
                     p.setCunfirm_password(addCunfirmPassword);
                     p.setCreatedAt(new Date());
-                    p.setCreater(getPersonController().getLoggedPerson());
                     getFacade().create(p);
                     JsfUtil.addSuccessMessage("Person was successfully created");
                 }
@@ -335,15 +334,10 @@ public class PersonController implements Serializable {
         this.manager = manager;
     }
 
-    public com.pcmis.facades.PersonFacade getEjbFacade() {
-        return ejbFacade;
-    }
-
-    public void setEjbFacade(com.pcmis.facades.PersonFacade ejbFacade) {
-        this.ejbFacade = ejbFacade;
-    }
-
     public PersonController getPersonController() {
+        if(personController == null){
+            personController = new PersonController();
+        }
         return personController;
     }
 

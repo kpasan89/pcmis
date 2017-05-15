@@ -3,10 +3,14 @@ package com.pcmis.controllers;
 import com.pcmis.entity.Payment;
 import com.pcmis.controllers.util.JsfUtil;
 import com.pcmis.controllers.util.JsfUtil.PersistAction;
+import com.pcmis.entity.Customer;
+import com.pcmis.facades.CustomerFacade;
 import com.pcmis.facades.PaymentFacade;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +31,8 @@ public class PaymentController implements Serializable {
     private com.pcmis.facades.PaymentFacade ejbFacade;
     private List<Payment> items = null;
     private Payment selected;
+    @EJB
+    private CustomerFacade customerFacade;
 
     public PaymentController() {
     }
@@ -53,6 +59,38 @@ public class PaymentController implements Serializable {
         selected = new Payment();
         initializeEmbeddableKey();
         return selected;
+    }
+    
+    private Customer payCustomer;
+    
+    public void selectReservationCustomer() {
+        String j = "select c from Customer c where c.retired=false and c.reservation=true and c.id=:pc";
+        Map m = new HashMap();
+        m.put("pc", selected.getPay_customer().getId());
+        payCustomer = getCustomerFacade().findFirstBySQL(j, m);
+    }
+    
+    public void createNew(){
+        if (selected != null) {
+            setEmbeddableKeys();
+            try {
+                
+            } catch (EJBException ex) {
+                String msg = "";
+                Throwable cause = ex.getCause();
+                if (cause != null) {
+                    msg = cause.getLocalizedMessage();
+                }
+                if (msg.length() > 0) {
+                    JsfUtil.addErrorMessage(msg);
+                } else {
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            }
+        }
     }
 
     public void create() {
@@ -115,6 +153,22 @@ public class PaymentController implements Serializable {
 
     public List<Payment> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public CustomerFacade getCustomerFacade() {
+        return customerFacade;
+    }
+
+    public void setCustomerFacade(CustomerFacade customerFacade) {
+        this.customerFacade = customerFacade;
+    }
+
+    public Customer getPayCustomer() {
+        return payCustomer;
+    }
+
+    public void setPayCustomer(Customer payCustomer) {
+        this.payCustomer = payCustomer;
     }
 
     @FacesConverter(forClass = Payment.class)

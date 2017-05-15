@@ -17,6 +17,7 @@ import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
@@ -25,6 +26,7 @@ import javax.persistence.TypedQuery;
  * @author Pasan
  */
 public abstract class AbstractFacade<T> {
+
     private Class<T> entityClass;
 
     public AbstractFacade(Class<T> entityClass) {
@@ -32,7 +34,7 @@ public abstract class AbstractFacade<T> {
     }
 
     protected abstract EntityManager getEntityManager();
-    
+
     public T findFirstBySQL(String temSQL, Map<String, Object> parameters) {
         TypedQuery<T> qry = getEntityManager().createQuery(temSQL, entityClass);
         Set s = parameters.entrySet();
@@ -57,7 +59,6 @@ public abstract class AbstractFacade<T> {
             return null;
         }
     }
-
 
     public void create(T entity) {
         getEntityManager().persist(entity);
@@ -97,12 +98,12 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
+
     public List<T> findBySQL(String temSQL) {
         TypedQuery<T> qry = getEntityManager().createQuery(temSQL, entityClass);
         return qry.getResultList();
     }
-    
+
     public List<T> findBySQL(String temSQL, Map<String, Object> parameters) {
         TypedQuery<T> qry = getEntityManager().createQuery(temSQL, entityClass);
         Set s = parameters.entrySet();
@@ -123,7 +124,7 @@ public abstract class AbstractFacade<T> {
                 ec.set(Calendar.HOUR_OF_DAY, ec.getActualMinimum(Calendar.HOUR_OF_DAY));
                 ec.set(Calendar.MINUTE, ec.getActualMinimum(Calendar.MINUTE));
                 ec.set(Calendar.MILLISECOND, ec.getActualMinimum(Calendar.MILLISECOND));
-                
+
                 Date e = ec.getTime();
                 System.out.println("e = " + e);
 
@@ -136,7 +137,7 @@ public abstract class AbstractFacade<T> {
                 try {
                     date = isoFormat.parse(sd);
                 } catch (ParseException ex) {
-                    date =ec.getTime();
+                    date = ec.getTime();
                     Logger.getLogger(AbstractFacade.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.out.println("date = " + date);
@@ -150,5 +151,37 @@ public abstract class AbstractFacade<T> {
         }
         return qry.getResultList();
     }
-    
+
+    public List<String> findString(String strJQL) {
+        Query q = getEntityManager().createQuery(strJQL);
+        try {
+            return q.getResultList();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public List<String> findString(String strJQL, Map parameters, TemporalType tt) {
+        TypedQuery<String> qry = getEntityManager().createQuery(strJQL, String.class);
+        Set s = parameters.entrySet();
+        Iterator it = s.iterator();
+        while (it.hasNext()) {
+            Map.Entry m = (Map.Entry) it.next();
+            Object pVal = m.getValue();
+            String pPara = (String) m.getKey();
+            if (pVal instanceof Date) {
+                Date d = (Date) pVal;
+                qry.setParameter(pPara, d, tt);
+            } else {
+                qry.setParameter(pPara, pVal);
+            }
+        }
+        return qry.getResultList();
+    }
+
+    public List<String> findString(String strJQL, Map parameters) {
+        return findString(strJQL, parameters, TemporalType.DATE);
+    }
+
 }

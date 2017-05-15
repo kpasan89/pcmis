@@ -24,6 +24,7 @@ public class Airport implements Serializable {
     private String name;
     private String code;
     private String descriton;
+    private boolean retired = false;
 
     public Long getId() {
         return id;
@@ -80,6 +81,14 @@ public class Airport implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public boolean isRetired() {
+        return retired;
+    }
+
+    public void setRetired(boolean retired) {
+        this.retired = retired;
     }
     
 }

@@ -120,6 +120,12 @@ public class JobTitleController implements Serializable {
     public List<JobTitle> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    public List<JobTitle> completeJobTitles(String qry) {
+        String temSql;
+        temSql = "SELECT x FROM JobTitle x where x.retired=false and LOWER(x.name) like '%" + qry.toLowerCase() + "%' order by x.name";
+        return getFacade().findBySQL(temSql);
+    }
 
     @FacesConverter(forClass = JobTitle.class)
     public static class JobTitleControllerConverter implements Converter {

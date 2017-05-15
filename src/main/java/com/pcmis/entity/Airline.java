@@ -24,6 +24,7 @@ public class Airline implements Serializable {
     private String name;
     private String code;
     private String description;
+    private boolean retired = false;
     
     
 
@@ -82,6 +83,14 @@ public class Airline implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public boolean isRetired() {
+        return retired;
+    }
+
+    public void setRetired(boolean retired) {
+        this.retired = retired;
     }
     
 }

@@ -120,6 +120,12 @@ public class SportPreferenceController implements Serializable {
     public List<SportPreference> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    public List<SportPreference> completeSportPreferences(String qry) {
+        String temSql;
+        temSql = "SELECT x FROM SportPreference x where x.retired=false and LOWER(x.name) like '%" + qry.toLowerCase() + "%' order by x.name";
+        return getFacade().findBySQL(temSql);
+    }
 
     @FacesConverter(forClass = SportPreference.class)
     public static class SportPreferenceControllerConverter implements Converter {

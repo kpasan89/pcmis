@@ -18,10 +18,10 @@
 
                             <p:outputLabel value="Introduced Customer Name" for="int_customer" />
                             <p:autoComplete id="int_customer" value="#{customerController.selected.introducedCustomer}" 
-                                            completeMethod="#{customerController.completeCustomers}"                                            
+                                            completeMethod="#{customerController.completeIntroducedCustomers}"                                            
                                             var="x" forceSelection="true" 
-                                            itemLabel="#{x.full_name}"
-                                            itemValue="#{x.full_name}" >
+                                            itemLabel="#{x}"
+                                            itemValue="#{x}" >
                             </p:autoComplete>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_title}" for="title" />

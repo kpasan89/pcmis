@@ -51,18 +51,20 @@
                             <p:calendar id="dob" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.dob}" title="#{bundle.EditCustomerTitle_dob}"  showOn="button"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_nationality}" for="nationality" />
-                            <p:selectOneMenu id="nationality" value="#{customerController.selected.nationality}">
-                                <f:selectItems value="#{enumController.nationality}"
-                                               var="nationality"
-                                               itemValue="#{nationality}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="nationality" value="#{customerController.selected.nationality}" 
+                                            completeMethod="#{nationalityController.completeNationalities}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}">
+                            </p:autoComplete>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_country}" for="country" />
-                            <p:selectOneMenu id="country" value="#{customerController.selected.country}">
-                                <f:selectItems value="#{enumController.country}"
-                                               var="country"
-                                               itemValue="#{country}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="country" value="#{customerController.selected.country}" 
+                                            completeMethod="#{countryController.completeCountries}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}" >
+                            </p:autoComplete>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_address}" for="address" />
                             <p:inputText id="address" value="#{customerController.selected.address}" title="#{bundle.EditCustomerTitle_address}" />
@@ -90,11 +92,12 @@
                             </p:selectOneMenu>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_job_title}" for="jobTitle" />
-                            <p:selectOneMenu id="jobTitle" value="#{customerController.selected.job_title}">
-                                <f:selectItems value="#{enumController.job}"
-                                               var="job"
-                                               itemValue="#{job}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="jobTitle" value="#{customerController.selected.job_title}" 
+                                            completeMethod="#{jobTitleController.completeJobTitles}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}" >
+                            </p:autoComplete>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_company_name}" for="company_name" />
                             <p:inputText id="company_name" value="#{customerController.selected.company_name}" title="#{bundle.EditCustomerTitle_company_name}" />
@@ -112,28 +115,31 @@
                             <p:inputText id="email" value="#{customerController.selected.email}" title="#{bundle.EditCustomerTitle_email}" />
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_seat}" for="seatPreference" />
-                            <p:selectOneMenu id="seatPreference" value="#{customerController.selected.seat}">
-                                <f:selectItems value="#{enumController.seat}"
-                                               var="seat"
-                                               itemValue="#{seat}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="seatPreference" value="#{customerController.selected.seat}" 
+                                            completeMethod="#{seatPreferenceController.completeSeatPreferences}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}" >
+                            </p:autoComplete>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_sport}" for="sport" />
-                            <p:selectOneMenu id="sport" value="#{customerController.selected.sport}">
-                                <f:selectItems value="#{enumController.sport}"
-                                               var="sport"
-                                               itemValue="#{sport}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="sport" value="#{customerController.selected.sport}" 
+                                            completeMethod="#{sportPreferenceController.completeSportPreferences}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}" >
+                            </p:autoComplete>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_interest}" for="interest" />
                             <p:inputText id="interest" value="#{customerController.selected.interest}" title="#{bundle.EditCustomerTitle_interest}" />
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_meal}" for="mealPreference" />
-                            <p:selectOneMenu id="mealPreference" value="#{customerController.selected.meal}">
-                                <f:selectItems value="#{enumController.meal}"
-                                               var="meal"
-                                               itemValue="#{meal}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="mealPreference" value="#{customerController.selected.meal}" 
+                                            completeMethod="#{mealPreferenceController.completeMealPreferences}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}" >
+                            </p:autoComplete>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_card_type}" for="card_type" />
                             <p:inputText id="card_type" value="#{customerController.selected.card_type}" title="#{bundle.EditCustomerTitle_card_type}" />

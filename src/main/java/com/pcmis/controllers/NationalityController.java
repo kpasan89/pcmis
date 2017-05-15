@@ -120,6 +120,12 @@ public class NationalityController implements Serializable {
     public List<Nationality> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    public List<Nationality> completeNationalities(String qry) {
+        String temSql;
+        temSql = "SELECT n FROM Nationality n where n.retired=false and LOWER(n.name) like '%" + qry.toLowerCase() + "%' order by n.name";
+        return getFacade().findBySQL(temSql);
+    }
 
     @FacesConverter(forClass = Nationality.class)
     public static class NationalityControllerConverter implements Converter {

@@ -108,6 +108,8 @@ public class ReservationController implements Serializable {
 
                 resCount = resCount + 1;
                 resCustomer.setReservationCount(resCount);
+                resCustomer.setReservation(true);
+                resCustomer.setPayment(false);
                 getFacade().edit(r);
                 getCustomerFacade().edit(resCustomer);
                 JsfUtil.addSuccessMessage("Reservation was successfully created");
@@ -230,6 +232,9 @@ public class ReservationController implements Serializable {
     }
 
     public Customer getResCustomer() {
+        if(resCustomer == null){
+            resCustomer = new Customer();
+        }
         return resCustomer;
     }
 

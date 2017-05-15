@@ -120,6 +120,12 @@ public class SeatPreferenceController implements Serializable {
     public List<SeatPreference> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    public List<SeatPreference> completeSeatPreferences(String qry) {
+        String temSql;
+        temSql = "SELECT x FROM SeatPreference x where x.retired=false and LOWER(x.name) like '%" + qry.toLowerCase() + "%' order by x.name";
+        return getFacade().findBySQL(temSql);
+    }
 
     @FacesConverter(forClass = SeatPreference.class)
     public static class SeatPreferenceControllerConverter implements Converter {
