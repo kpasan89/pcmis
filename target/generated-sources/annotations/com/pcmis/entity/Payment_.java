@@ -4,12 +4,11 @@ import com.pcmis.entity.Customer;
 import com.pcmis.entity.Person;
 import com.pcmis.enums.ExpenseType;
 import java.util.Date;
-import java.util.List;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-15T15:39:19")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-18T10:25:02")
 @StaticMetamodel(Payment.class)
 public class Payment_ { 
 
@@ -21,7 +20,7 @@ public class Payment_ {
     public static volatile SingularAttribute<Payment, Person> creater;
     public static volatile SingularAttribute<Payment, Date> retiredAt;
     public static volatile SingularAttribute<Payment, Long> id;
-    public static volatile SingularAttribute<Payment, List> ticket_number;
+    public static volatile SingularAttribute<Payment, String> ticket_number;
     public static volatile SingularAttribute<Payment, Float> points;
 
 }

@@ -63,17 +63,48 @@ public class PaymentController implements Serializable {
     
     private Customer payCustomer;
     
-    public void selectReservationCustomer() {
-        String j = "select c from Customer c where c.retired=false and c.reservation=true and c.id=:pc";
+    public void selectPayCustomer() {
+        String j = "select c from Customer c where c.retired=false and c.reservation=true and c.payment=false and c.id=:pc";
         Map m = new HashMap();
         m.put("pc", selected.getPay_customer().getId());
         payCustomer = getCustomerFacade().findFirstBySQL(j, m);
     }
     
+    private int customerPoint;
+    
     public void createNew(){
         if (selected != null) {
             setEmbeddableKeys();
             try {
+                Payment p = new Payment();
+                p.setPay_customer(selected.getPay_customer());
+                p.setTicket_number(selected.getTicket_number());
+                p.setValue_ticket(selected.getValue_ticket());
+                
+                selectPayCustomer();
+                
+                float a = selected.getValue_ticket();
+                System.out.println("a = " + a);
+                
+                if(payCustomer.isPermenant() == true){
+                    int permenentPoint = (int)  Math.round((a/1000));
+                    System.out.println("permenent Point = " + permenentPoint);
+                    customerPoint = payCustomer.getPointEarned() + permenentPoint;
+                    System.out.println("customerPoint = " + customerPoint);
+                }
+                if(payCustomer.isPermenant() == false){
+                    int nonPermentntPoint = (int) Math.round((a/10000));
+                    System.out.println("non Permentnt Point = " + nonPermentntPoint);
+                    customerPoint = payCustomer.getPointEarned() + nonPermentntPoint;
+                    System.out.println("customerPoint = " + customerPoint);
+                }
+                
+                payCustomer.setPointEarned(customerPoint);
+                payCustomer.setPayment(true);
+                payCustomer.setReservation(false);
+                getCustomerFacade().edit(payCustomer);
+                getFacade().create(p);
+                JsfUtil.addSuccessMessage("Payment was successfully Added");
                 
             } catch (EJBException ex) {
                 String msg = "";
@@ -90,6 +121,10 @@ public class PaymentController implements Serializable {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
+        }
+        
+        if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
@@ -169,6 +204,14 @@ public class PaymentController implements Serializable {
 
     public void setPayCustomer(Customer payCustomer) {
         this.payCustomer = payCustomer;
+    }
+
+    public int getCustomerPoint() {
+        return customerPoint;
+    }
+
+    public void setCustomerPoint(int customerPoint) {
+        this.customerPoint = customerPoint;
     }
 
     @FacesConverter(forClass = Payment.class)

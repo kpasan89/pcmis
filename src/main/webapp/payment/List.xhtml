@@ -29,10 +29,11 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPaymentTitle_expenseType}"/>
+                                <h:outputText value="#{bundle.ListPaymentTitle_pay_customer}"/>
                             </f:facet>
-                            <h:outputText value="#{item.expenseType}"/>
+                            <h:outputText value="#{item.pay_customer.full_name}"/>
                         </p:column>
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPaymentTitle_ticket_number}"/>
@@ -45,18 +46,7 @@
                             </f:facet>
                             <h:outputText value="#{item.value_ticket}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPaymentTitle_points}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.points}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPaymentTitle_pay_customer}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.pay_customer}"/>
-                        </p:column>
+
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{paymentController.prepareCreate}" update=":PaymentCreateForm" oncomplete="PF('PaymentCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PaymentViewForm" oncomplete="PF('PaymentViewDialog').show()" disabled="#{empty paymentController.selected}"/>

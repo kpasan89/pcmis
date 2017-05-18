@@ -8,7 +8,6 @@ package com.pcmis.entity;
 import com.pcmis.enums.ExpenseType;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -32,7 +31,7 @@ public class Payment implements Serializable {
     private Customer pay_customer;
     @Enumerated(EnumType.STRING)
     private ExpenseType expenseType;
-    private List<Integer> ticket_number;
+    private String ticket_number;
     private float value_ticket;
     private float points;
     
@@ -84,14 +83,6 @@ public class Payment implements Serializable {
 
     public void setExpenseType(ExpenseType expenseType) {
         this.expenseType = expenseType;
-    }
-
-    public List<Integer> getTicket_number() {
-        return ticket_number;
-    }
-
-    public void setTicket_number(List<Integer> ticket_number) {
-        this.ticket_number = ticket_number;
     }
 
     public float getValue_ticket() {
@@ -149,5 +140,12 @@ public class Payment implements Serializable {
     public void setCreater(Person creater) {
         this.creater = creater;
     }
-    
+
+    public String getTicket_number() {
+        return ticket_number;
+    }
+
+    public void setTicket_number(String ticket_number) {
+        this.ticket_number = ticket_number;
+    }
 }

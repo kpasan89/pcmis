@@ -1,16 +1,16 @@
 package com.pcmis.entity;
 
+import com.pcmis.entity.Airline;
+import com.pcmis.entity.AirlineClass;
+import com.pcmis.entity.Airport;
 import com.pcmis.entity.Customer;
 import com.pcmis.entity.Person;
-import com.pcmis.enums.Airline;
-import com.pcmis.enums.AirlineClass;
-import com.pcmis.enums.Airport;
 import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-15T15:39:19")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-18T10:25:02")
 @StaticMetamodel(Reservation.class)
 public class Reservation_ { 
 
