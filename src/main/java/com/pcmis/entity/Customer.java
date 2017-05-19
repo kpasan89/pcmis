@@ -92,6 +92,11 @@ public class Customer implements Serializable {
     private int reservationCount;
     private String introducedCustomer;
     private int pointEarned;
+    private String customerCategory;
+    private boolean normalCustomer = false;
+    private boolean silverCustomer = false;
+    private boolean goldCustomer = false;
+    private boolean platinumCustomer = false;
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -487,5 +492,45 @@ public class Customer implements Serializable {
 
     public void setMeal(MealPreference meal) {
         this.meal = meal;
+    }
+
+    public String getCustomerCategory() {
+        return customerCategory;
+    }
+
+    public void setCustomerCategory(String customerCategory) {
+        this.customerCategory = customerCategory;
+    }
+
+    public boolean isNormalCustomer() {
+        return normalCustomer;
+    }
+
+    public void setNormalCustomer(boolean normalCustomer) {
+        this.normalCustomer = normalCustomer;
+    }
+
+    public boolean isSilverCustomer() {
+        return silverCustomer;
+    }
+
+    public void setSilverCustomer(boolean silverCustomer) {
+        this.silverCustomer = silverCustomer;
+    }
+
+    public boolean isGoldCustomer() {
+        return goldCustomer;
+    }
+
+    public void setGoldCustomer(boolean goldCustomer) {
+        this.goldCustomer = goldCustomer;
+    }
+
+    public boolean isPlatinumCustomer() {
+        return platinumCustomer;
+    }
+
+    public void setPlatinumCustomer(boolean platinumCustomer) {
+        this.platinumCustomer = platinumCustomer;
     }
 }

@@ -21,8 +21,8 @@
                 <h:form id="menuForm">
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                        <p:menuitem value="Customer Registration" outcome="/customer/List.xhtml" />
-                        <p:menuitem value="Introduced Customer Registration" outcome="/introduced_customer/List.xhtml" />
+                        <p:menuitem value="Customer Registration" action="#{customerController.viewCustomerPage}"/>
+                        <p:menuitem value="Introduced Customer Registration" action="#{customerController.viewCustomerPage}" />
                         <p:menuitem value="Reservation Management" outcome="/reservation/List.xhtml" />
                         <p:menuitem value="Payments Details" outcome="/payment/List.xhtml" />
                         <p:menuitem value="User Control" outcome="/person/List.xhtml"/>

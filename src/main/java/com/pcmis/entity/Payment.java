@@ -34,6 +34,7 @@ public class Payment implements Serializable {
     private String ticket_number;
     private float value_ticket;
     private float points;
+    private boolean retired;
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -147,5 +148,13 @@ public class Payment implements Serializable {
 
     public void setTicket_number(String ticket_number) {
         this.ticket_number = ticket_number;
+    }
+
+    public boolean isRetired() {
+        return retired;
+    }
+
+    public void setRetired(boolean retired) {
+        this.retired = retired;
     }
 }

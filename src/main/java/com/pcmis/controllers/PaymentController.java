@@ -99,6 +99,39 @@ public class PaymentController implements Serializable {
                     System.out.println("customerPoint = " + customerPoint);
                 }
                 
+                if(customerPoint < 1000){
+                    payCustomer.setCustomerCategory("Normal Customer");
+                    payCustomer.setNormalCustomer(true);
+                    payCustomer.setSilverCustomer(false);
+                    payCustomer.setGoldCustomer(false);
+                    payCustomer.setPlatinumCustomer(false);
+                    System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
+                }
+                if(customerPoint >= 1000 && customerPoint <= 2000){
+                    payCustomer.setCustomerCategory("Silver Customer");
+                    payCustomer.setNormalCustomer(false);
+                    payCustomer.setSilverCustomer(true);
+                    payCustomer.setGoldCustomer(false);
+                    payCustomer.setPlatinumCustomer(false);
+                    System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
+                }
+                if(customerPoint >= 2001 && customerPoint <= 4000){
+                    payCustomer.setCustomerCategory("Gold Customer");
+                    payCustomer.setNormalCustomer(false);
+                    payCustomer.setSilverCustomer(false);
+                    payCustomer.setGoldCustomer(true);
+                    payCustomer.setPlatinumCustomer(false);
+                    System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
+                }
+                if(customerPoint > 4000){
+                    payCustomer.setCustomerCategory("Platinum Customer");
+                    payCustomer.setNormalCustomer(false);
+                    payCustomer.setSilverCustomer(false);
+                    payCustomer.setGoldCustomer(false);
+                    payCustomer.setPlatinumCustomer(true);
+                    System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
+                }
+                
                 payCustomer.setPointEarned(customerPoint);
                 payCustomer.setPayment(true);
                 payCustomer.setReservation(false);
@@ -149,7 +182,9 @@ public class PaymentController implements Serializable {
 
     public List<Payment> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            String jpql;
+            jpql = "select p from Payment p  Where p.retired=false order by p.id desc";
+            items = getFacade().findBySQL(jpql);
         }
         return items;
     }
