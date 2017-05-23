@@ -84,6 +84,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Customer Ranks"/>
                             </f:facet>
+                            <h:outputText style="color: grey" rendered="#{item.normalCustomer eq false and item.normalCustomer eq false and item.silverCustomer eq false and item.goldCustomer eq false and item.platinumCustomer eq false}" value="#{item.normalCustomer eq true ; 'Reservation Pending'}"/>
                             <h:outputText style="color: mediumslateblue" rendered="#{item.normalCustomer eq true}" value="#{item.normalCustomer eq true ; 'Normal Category Customer'}"/>
                             <h:outputText style="color: darkgreen" rendered="#{item.silverCustomer eq true}" value="#{item.silverCustomer eq true ; 'Silver Category Customer'}"/>
                             <h:outputText style="color: orangered" rendered="#{item.goldCustomer eq true}" value="#{item.goldCustomer eq true ; 'Gold Category Customer'}"/>
