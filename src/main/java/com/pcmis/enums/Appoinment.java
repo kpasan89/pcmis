@@ -10,9 +10,9 @@ package com.pcmis.enums;
  * @author Pasan
  */
 public enum Appoinment {
-    Manager,
-    Technician,
+    Ticketing_Officer,
+    Accountant,
     Operator,
+    Officer_Commanding,
     System_Administrator,
-    System_User,
 }

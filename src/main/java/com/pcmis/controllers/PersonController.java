@@ -41,9 +41,10 @@ public class PersonController implements Serializable {
     private PersonController personController;
 
     private boolean systemAdministrator = false;
-    private boolean systemUser = false;
+    private boolean ticketingOfficer = false;
     private boolean operator = false;
-    private boolean manager = false;
+    private boolean accountant = false;
+    private boolean officerCommanding = false;
 
     public PersonController() {
     }
@@ -75,12 +76,14 @@ public class PersonController implements Serializable {
             JsfUtil.addSuccessMessage("Logged Successfully");
             if (p.getAppoinment().equals(Appoinment.System_Administrator)) {
                 systemAdministrator = true;
-            } else if (p.getAppoinment().equals(Appoinment.System_User)) {
-                systemUser = true;
+            } else if (p.getAppoinment().equals(Appoinment.Accountant)) {
+                accountant = true;
             } else if (p.getAppoinment().equals(Appoinment.Operator)) {
                 operator = true;
-            } else if (p.getAppoinment().equals(Appoinment.Manager)) {
-                manager = true;
+            } else if (p.getAppoinment().equals(Appoinment.Officer_Commanding)) {
+                officerCommanding = true;
+            } else if (p.getAppoinment().equals(Appoinment.Ticketing_Officer)) {
+                ticketingOfficer = true;
             }
         } else {
             logged = false;
@@ -96,9 +99,10 @@ public class PersonController implements Serializable {
         loggedPerson = null;
         username = null;
         systemAdministrator = false;
-        systemUser = false;
+        accountant = false;
         operator = false;
-        manager = false;
+        ticketingOfficer = false;
+        officerCommanding = false;
         return "/index";
     }
 
@@ -310,28 +314,12 @@ public class PersonController implements Serializable {
         this.systemAdministrator = systemAdministrator;
     }
 
-    public boolean isSystemUser() {
-        return systemUser;
-    }
-
-    public void setSystemUser(boolean systemUser) {
-        this.systemUser = systemUser;
-    }
-
     public boolean isOperator() {
         return operator;
     }
 
     public void setOperator(boolean operator) {
         this.operator = operator;
-    }
-
-    public boolean isManager() {
-        return manager;
-    }
-
-    public void setManager(boolean manager) {
-        this.manager = manager;
     }
 
     public PersonController getPersonController() {
@@ -343,6 +331,30 @@ public class PersonController implements Serializable {
 
     public void setPersonController(PersonController personController) {
         this.personController = personController;
+    }
+
+    public boolean isTicketingOfficer() {
+        return ticketingOfficer;
+    }
+
+    public void setTicketingOfficer(boolean ticketingOfficer) {
+        this.ticketingOfficer = ticketingOfficer;
+    }
+
+    public boolean isAccountant() {
+        return accountant;
+    }
+
+    public void setAccountant(boolean accountant) {
+        this.accountant = accountant;
+    }
+
+    public boolean isOfficerCommanding() {
+        return officerCommanding;
+    }
+
+    public void setOfficerCommanding(boolean officerCommanding) {
+        this.officerCommanding = officerCommanding;
     }
 
     @FacesConverter(forClass = Person.class)
