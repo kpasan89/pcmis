@@ -46,7 +46,7 @@
                             <h:outputText value="#{item.descriton}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{airportController.prepareCreate}" update=":AirportCreateForm" oncomplete="PF('AirportCreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Add}" actionListener="#{airportController.prepareCreate}" update=":AirportCreateForm" oncomplete="PF('AirportCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AirportViewForm" oncomplete="PF('AirportViewDialog').show()" disabled="#{empty airportController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AirportEditForm" oncomplete="PF('AirportEditDialog').show()" disabled="#{empty airportController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{airportController.destroy}" update=":growl,datalist" disabled="#{empty airportController.selected}"/>

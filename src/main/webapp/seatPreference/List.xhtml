@@ -40,7 +40,7 @@
                             <h:outputText value="#{item.description}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{seatPreferenceController.prepareCreate}" update=":SeatPreferenceCreateForm" oncomplete="PF('SeatPreferenceCreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Add}" actionListener="#{seatPreferenceController.prepareCreate}" update=":SeatPreferenceCreateForm" oncomplete="PF('SeatPreferenceCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SeatPreferenceViewForm" oncomplete="PF('SeatPreferenceViewDialog').show()" disabled="#{empty seatPreferenceController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SeatPreferenceEditForm" oncomplete="PF('SeatPreferenceEditDialog').show()" disabled="#{empty seatPreferenceController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{seatPreferenceController.destroy}" update=":growl,datalist" disabled="#{empty seatPreferenceController.selected}"/>

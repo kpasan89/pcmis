@@ -40,7 +40,7 @@
                             <h:outputText value="#{item.description}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{jobTitleController.prepareCreate}" update=":JobTitleCreateForm" oncomplete="PF('JobTitleCreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Add}" actionListener="#{jobTitleController.prepareCreate}" update=":JobTitleCreateForm" oncomplete="PF('JobTitleCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":JobTitleViewForm" oncomplete="PF('JobTitleViewDialog').show()" disabled="#{empty jobTitleController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":JobTitleEditForm" oncomplete="PF('JobTitleEditDialog').show()" disabled="#{empty jobTitleController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{jobTitleController.destroy}" update=":growl,datalist" disabled="#{empty jobTitleController.selected}"/>

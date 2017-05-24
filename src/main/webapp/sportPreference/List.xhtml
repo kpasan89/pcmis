@@ -40,7 +40,7 @@
                             <h:outputText value="#{item.description}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{sportPreferenceController.prepareCreate}" update=":SportPreferenceCreateForm" oncomplete="PF('SportPreferenceCreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Add}" actionListener="#{sportPreferenceController.prepareCreate}" update=":SportPreferenceCreateForm" oncomplete="PF('SportPreferenceCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SportPreferenceViewForm" oncomplete="PF('SportPreferenceViewDialog').show()" disabled="#{empty sportPreferenceController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SportPreferenceEditForm" oncomplete="PF('SportPreferenceEditDialog').show()" disabled="#{empty sportPreferenceController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{sportPreferenceController.destroy}" update=":growl,datalist" disabled="#{empty sportPreferenceController.selected}"/>

@@ -179,6 +179,47 @@ public class PaymentController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
+    
+    public void retire(){
+        if (selected != null) {
+            setEmbeddableKeys();
+            try {
+                Payment p = new Payment();
+                p.setPay_customer(selected.getPay_customer());
+                p.setTicket_number(selected.getTicket_number());
+                p.setValue_ticket(selected.getValue_ticket());
+                
+                selectPayCustomer();
+                
+                payCustomer.setPointEarned(customerPoint);
+                payCustomer.setPayment(true);
+                payCustomer.setReservation(false);
+                getCustomerFacade().edit(payCustomer);
+                getFacade().create(p);
+                JsfUtil.addSuccessMessage("Payment was successfully Added");
+                
+            } catch (EJBException ex) {
+                String msg = "";
+                Throwable cause = ex.getCause();
+                if (cause != null) {
+                    msg = cause.getLocalizedMessage();
+                }
+                if (msg.length() > 0) {
+                    JsfUtil.addErrorMessage(msg);
+                } else {
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            }
+        }
+        
+         if (!JsfUtil.isValidationFailed()) {
+            selected = null; // Remove selection
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
+    }
 
     public List<Payment> getItems() {
         if (items == null) {

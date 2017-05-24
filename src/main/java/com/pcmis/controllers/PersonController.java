@@ -70,6 +70,12 @@ public class PersonController implements Serializable {
             JsfUtil.addErrorMessage("No such user");
             return "index";
         }
+        if(getUsername() == null || getPassword() == null){
+            logged = false;
+            loggedPerson = null;
+            JsfUtil.addErrorMessage("Empty Fields");
+            return "index";
+        }
         if (CommonController.checkPassword(password, p.getPassword())) {
             logged = true;
             loggedPerson = p;
@@ -90,6 +96,7 @@ public class PersonController implements Serializable {
             loggedPerson = null;
             username = null;
             JsfUtil.addErrorMessage("Wrong Username or Password");
+            return "index";
         }
         return "index";
     }
