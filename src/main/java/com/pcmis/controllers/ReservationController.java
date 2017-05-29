@@ -69,51 +69,65 @@ public class ReservationController implements Serializable {
 
     private Customer resCustomer;
     private int resCount;
+    private int poinEarned;
 
     public void selectReservationCustomer() {
+        resCustomer = new Customer();
         String j = "select c from Customer c where c.retired=false and c.id=:rc";
         Map m = new HashMap();
         m.put("rc", selected.getRes_customer().getId());
         resCustomer = getCustomerFacade().findFirstBySQL(j, m);
         resCount = resCustomer.getReservationCount();
+        poinEarned = resCustomer.getPointEarned();
         System.out.println("resCount = " + resCount + "  ..................");
-        System.out.println("resCustomer = " + resCustomer+ "  ..................");
+        System.out.println("resCustomer = " + resCustomer + "  ..................");
+        System.out.println("poinEarned = " + poinEarned + "  ..................");
     }
 
     public void createNew() {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                Reservation r = new Reservation();
-                Customer c = new Customer();
-                r.setAdult_count(selected.getAdult_count());
-                r.setArr_airport(selected.getArr_airport());
-                r.setDep_airport(selected.getDep_airport());
-                r.setKids_count(selected.getKids_count());
-                r.setPreff_airline(selected.getPreff_airline());
-                r.setPreff_class(selected.getPreff_class());
-                r.setRes_customer(selected.getRes_customer());
-                r.setReturn_date(selected.getReturn_date());
-                r.setTravel_date(selected.getTravel_date());
-
-                selectReservationCustomer();
-
-                if (resCustomer.getReservationCount() < 1) {
-                    resCustomer.setPermenant(false);
-                    System.out.println("permanent false");
-                } else {
-                    resCustomer.setPermenant(true);
-                    System.out.println("permanent true");
+                if (selected.getRes_customer() == null) {
+                    JsfUtil.addErrorMessage("No Reservation customer");
                 }
+                if (selected.getTravel_date() == null) {
+                    JsfUtil.addErrorMessage("No Traveling date");
+                }
+                if (selected.getReturn_date() == null) {
+                    JsfUtil.addErrorMessage("No Return date");
+                } else {
+                    Reservation r = new Reservation();
+                    Customer c = new Customer();
+                    r.setAdult_count(selected.getAdult_count());
+                    r.setArr_airport(selected.getArr_airport());
+                    r.setDep_airport(selected.getDep_airport());
+                    r.setKids_count(selected.getKids_count());
+                    r.setPreff_airline(selected.getPreff_airline());
+                    r.setPreff_class(selected.getPreff_class());
+                    r.setRes_customer(selected.getRes_customer());
+                    r.setReturn_date(selected.getReturn_date());
+                    r.setTravel_date(selected.getTravel_date());
 
-                resCount = resCount + 1;
-                resCustomer.setReservationCount(resCount);
-                resCustomer.setReservation(true);
-                resCustomer.setPayment(false);
-                getFacade().edit(r);
-                getCustomerFacade().edit(resCustomer);
-                JsfUtil.addSuccessMessage("Reservation was successfully created");
-                
+                    selectReservationCustomer();
+
+                    if (resCustomer.getReservationCount() < 1) {
+                        resCustomer.setPermenant(false);
+                        System.out.println("permanent false");
+                    } else {
+                        resCustomer.setPermenant(true);
+                        System.out.println("permanent true");
+                    }
+
+                    resCount = resCount + 1;
+                    resCustomer.setReservationCount(resCount);
+                    resCustomer.setReservation(true);
+                    resCustomer.setPayment(false);
+                    getFacade().edit(r);
+                    getCustomerFacade().edit(resCustomer);
+                    JsfUtil.addSuccessMessage("Reservation was successfully created");
+                    JsfUtil.addSuccessMessage("Customer details successfully updated");
+                }
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
@@ -148,6 +162,60 @@ public class ReservationController implements Serializable {
 
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ReservationDeleted"));
+        if (!JsfUtil.isValidationFailed()) {
+            selected = null; // Remove selection
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
+    }
+
+    private int pointDeduction;
+    private int countDeducted;
+
+    public void retire() {
+        if (selected != null) {
+            setEmbeddableKeys();
+            try {
+                if (selected.getRes_customer().isPayment() == true) {
+                    JsfUtil.addErrorMessage("Delete Payment details before delete Reservation");
+                }
+                selected.setRetired(true);
+                getFacade().edit(selected);
+                JsfUtil.addSuccessMessage("Reservation was successfully Deleted");
+
+                selectReservationCustomer();
+
+                if (resCustomer.getPointEarned() == 0) {
+                    resCustomer.setPointEarned(0);
+                } else {
+                    System.out.println("Point Earned = " + resCustomer.getPointEarned());
+                    pointDeduction = poinEarned - 1;
+                    resCustomer.setPointEarned(pointDeduction);
+                    System.out.println("Point Earned = " + resCustomer.getPointEarned());
+                }
+                System.out.println("Count = " + resCustomer.getReservationCount());
+                countDeducted = resCount - 1;
+                resCustomer.setReservationCount(countDeducted);
+                System.out.println("Count = " + resCustomer.getReservationCount());
+                resCustomer.setReservation(false);
+                resCustomer.setPayment(false);
+                getCustomerFacade().edit(resCustomer);
+                JsfUtil.addSuccessMessage("Customer details successfully updated");
+            } catch (EJBException ex) {
+                String msg = "";
+                Throwable cause = ex.getCause();
+                if (cause != null) {
+                    msg = cause.getLocalizedMessage();
+                }
+                if (msg.length() > 0) {
+                    JsfUtil.addErrorMessage(msg);
+                } else {
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            }
+        }
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -232,7 +300,7 @@ public class ReservationController implements Serializable {
     }
 
     public Customer getResCustomer() {
-        if(resCustomer == null){
+        if (resCustomer == null) {
             resCustomer = new Customer();
         }
         return resCustomer;
@@ -256,6 +324,30 @@ public class ReservationController implements Serializable {
 
     public void setResCount(int resCount) {
         this.resCount = resCount;
+    }
+
+    public int getPointDeduction() {
+        return pointDeduction;
+    }
+
+    public void setPointDeduction(int pointDeduction) {
+        this.pointDeduction = pointDeduction;
+    }
+
+    public int getPoinEarned() {
+        return poinEarned;
+    }
+
+    public void setPoinEarned(int poinEarned) {
+        this.poinEarned = poinEarned;
+    }
+
+    public int getCountDeducted() {
+        return countDeducted;
+    }
+
+    public void setCountDeducted(int countDeducted) {
+        this.countDeducted = countDeducted;
     }
 
     @FacesConverter(forClass = Reservation.class)

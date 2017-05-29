@@ -51,10 +51,16 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Add}" actionListener="#{paymentController.prepareCreate}" update=":PaymentCreateForm" oncomplete="PF('PaymentCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PaymentViewForm" oncomplete="PF('PaymentViewDialog').show()" disabled="#{empty paymentController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PaymentEditForm" oncomplete="PF('PaymentEditDialog').show()" disabled="#{empty paymentController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{paymentController.destroy}" update=":growl,datalist" disabled="#{empty paymentController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{paymentController.retire()}" update=":growl,datalist" disabled="#{empty paymentController.selected}">
+                                <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                            </p:commandButton>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

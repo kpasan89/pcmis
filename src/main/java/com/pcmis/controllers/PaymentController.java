@@ -4,6 +4,7 @@ import com.pcmis.entity.Payment;
 import com.pcmis.controllers.util.JsfUtil;
 import com.pcmis.controllers.util.JsfUtil.PersistAction;
 import com.pcmis.entity.Customer;
+import com.pcmis.entity.Reservation;
 import com.pcmis.facades.CustomerFacade;
 import com.pcmis.facades.PaymentFacade;
 
@@ -60,85 +61,95 @@ public class PaymentController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-    
+
     private Customer payCustomer;
-    
+    private Reservation reservation;
+
     public void selectPayCustomer() {
         String j = "select c from Customer c where c.retired=false and c.reservation=true and c.payment=false and c.id=:pc";
         Map m = new HashMap();
         m.put("pc", selected.getPay_customer().getId());
         payCustomer = getCustomerFacade().findFirstBySQL(j, m);
     }
-    
+
     private int customerPoint;
-    
-    public void createNew(){
+
+    public void createNew() {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                Payment p = new Payment();
-                p.setPay_customer(selected.getPay_customer());
-                p.setTicket_number(selected.getTicket_number());
-                p.setValue_ticket(selected.getValue_ticket());
-                
-                selectPayCustomer();
-                
-                float a = selected.getValue_ticket();
-                System.out.println("a = " + a);
-                
-                if(payCustomer.isPermenant() == true){
-                    int permenentPoint = (int)  Math.round((a/1000));
-                    System.out.println("permenent Point = " + permenentPoint);
-                    customerPoint = payCustomer.getPointEarned() + permenentPoint;
-                    System.out.println("customerPoint = " + customerPoint);
+                if (selected.getPay_customer() == null) {
+                    JsfUtil.addErrorMessage("No Pay customer");
                 }
-                if(payCustomer.isPermenant() == false){
-                    int nonPermentntPoint = (int) Math.round((a/10000));
-                    System.out.println("non Permentnt Point = " + nonPermentntPoint);
-                    customerPoint = payCustomer.getPointEarned() + nonPermentntPoint;
-                    System.out.println("customerPoint = " + customerPoint);
+                if (selected.getTicket_number() == null) {
+                    JsfUtil.addErrorMessage("No Ticket number");
                 }
-                
-                if(customerPoint < 1000){
-                    payCustomer.setCustomerCategory("Normal Customer");
-                    payCustomer.setNormalCustomer(true);
-                    payCustomer.setSilverCustomer(false);
-                    payCustomer.setGoldCustomer(false);
-                    payCustomer.setPlatinumCustomer(false);
-                    System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
+                if (selected.getValue_ticket() == 0) {
+                    JsfUtil.addErrorMessage("Zero Value...?");
+                } else {
+                    Payment p = new Payment();
+                    p.setPay_customer(selected.getPay_customer());
+                    p.setTicket_number(selected.getTicket_number());
+                    p.setValue_ticket(selected.getValue_ticket());
+
+                    selectPayCustomer();
+
+                    float a = selected.getValue_ticket();
+                    System.out.println("a = " + a);
+
+                    if (payCustomer.isPermenant() == true) {
+                        int permenentPoint = (int) Math.round((a / 1000));
+                        System.out.println("permenent Point = " + permenentPoint);
+                        customerPoint = payCustomer.getPointEarned() + permenentPoint;
+                        System.out.println("customerPoint = " + customerPoint);
+                    }
+                    if (payCustomer.isPermenant() == false) {
+                        int nonPermentntPoint = (int) Math.round((a / 10000));
+                        System.out.println("non Permentnt Point = " + nonPermentntPoint);
+                        customerPoint = payCustomer.getPointEarned() + nonPermentntPoint;
+                        System.out.println("customerPoint = " + customerPoint);
+                    }
+
+                    if (customerPoint < 1000) {
+                        payCustomer.setCustomerCategory("Normal Customer");
+                        payCustomer.setNormalCustomer(true);
+                        payCustomer.setSilverCustomer(false);
+                        payCustomer.setGoldCustomer(false);
+                        payCustomer.setPlatinumCustomer(false);
+                        System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
+                    }
+                    if (customerPoint >= 1000 && customerPoint <= 2000) {
+                        payCustomer.setCustomerCategory("Silver Customer");
+                        payCustomer.setNormalCustomer(false);
+                        payCustomer.setSilverCustomer(true);
+                        payCustomer.setGoldCustomer(false);
+                        payCustomer.setPlatinumCustomer(false);
+                        System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
+                    }
+                    if (customerPoint >= 2001 && customerPoint <= 4000) {
+                        payCustomer.setCustomerCategory("Gold Customer");
+                        payCustomer.setNormalCustomer(false);
+                        payCustomer.setSilverCustomer(false);
+                        payCustomer.setGoldCustomer(true);
+                        payCustomer.setPlatinumCustomer(false);
+                        System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
+                    }
+                    if (customerPoint > 4000) {
+                        payCustomer.setCustomerCategory("Platinum Customer");
+                        payCustomer.setNormalCustomer(false);
+                        payCustomer.setSilverCustomer(false);
+                        payCustomer.setGoldCustomer(false);
+                        payCustomer.setPlatinumCustomer(true);
+                        System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
+                    }
+
+                    payCustomer.setPointEarned(customerPoint);
+                    payCustomer.setPayment(true);
+                    payCustomer.setReservation(false);
+                    getCustomerFacade().edit(payCustomer);
+                    getFacade().create(p);
+                    JsfUtil.addSuccessMessage("Payment was successfully Added");
                 }
-                if(customerPoint >= 1000 && customerPoint <= 2000){
-                    payCustomer.setCustomerCategory("Silver Customer");
-                    payCustomer.setNormalCustomer(false);
-                    payCustomer.setSilverCustomer(true);
-                    payCustomer.setGoldCustomer(false);
-                    payCustomer.setPlatinumCustomer(false);
-                    System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
-                }
-                if(customerPoint >= 2001 && customerPoint <= 4000){
-                    payCustomer.setCustomerCategory("Gold Customer");
-                    payCustomer.setNormalCustomer(false);
-                    payCustomer.setSilverCustomer(false);
-                    payCustomer.setGoldCustomer(true);
-                    payCustomer.setPlatinumCustomer(false);
-                    System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
-                }
-                if(customerPoint > 4000){
-                    payCustomer.setCustomerCategory("Platinum Customer");
-                    payCustomer.setNormalCustomer(false);
-                    payCustomer.setSilverCustomer(false);
-                    payCustomer.setGoldCustomer(false);
-                    payCustomer.setPlatinumCustomer(true);
-                    System.out.println("payCustomer = " + payCustomer.getCustomerCategory());
-                }
-                
-                payCustomer.setPointEarned(customerPoint);
-                payCustomer.setPayment(true);
-                payCustomer.setReservation(false);
-                getCustomerFacade().edit(payCustomer);
-                getFacade().create(p);
-                JsfUtil.addSuccessMessage("Payment was successfully Added");
-                
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
@@ -155,7 +166,7 @@ public class PaymentController implements Serializable {
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
-        
+
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
@@ -179,25 +190,16 @@ public class PaymentController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-    
-    public void retire(){
+
+    public void retire() {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                Payment p = new Payment();
-                p.setPay_customer(selected.getPay_customer());
-                p.setTicket_number(selected.getTicket_number());
-                p.setValue_ticket(selected.getValue_ticket());
-                
-                selectPayCustomer();
-                
-                payCustomer.setPointEarned(customerPoint);
-                payCustomer.setPayment(true);
-                payCustomer.setReservation(false);
-                getCustomerFacade().edit(payCustomer);
-                getFacade().create(p);
-                JsfUtil.addSuccessMessage("Payment was successfully Added");
-                
+
+                selected.setRetired(true);
+                getFacade().edit(selected);
+                JsfUtil.addSuccessMessage("Payment was successfully Deleted");
+
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
@@ -214,8 +216,8 @@ public class PaymentController implements Serializable {
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
-        
-         if (!JsfUtil.isValidationFailed()) {
+
+        if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
@@ -275,6 +277,9 @@ public class PaymentController implements Serializable {
     }
 
     public Customer getPayCustomer() {
+        if(payCustomer == null){
+            payCustomer = new Customer();
+        }
         return payCustomer;
     }
 
@@ -288,6 +293,14 @@ public class PaymentController implements Serializable {
 
     public void setCustomerPoint(int customerPoint) {
         this.customerPoint = customerPoint;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 
     @FacesConverter(forClass = Payment.class)

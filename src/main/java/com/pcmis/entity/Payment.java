@@ -44,6 +44,8 @@ public class Payment implements Serializable {
     private Date retiredAt;
     @ManyToOne
     private Person retirer;
+    @ManyToOne
+    private Reservation reservation;
 
     public Long getId() {
         return id;
@@ -156,5 +158,13 @@ public class Payment implements Serializable {
 
     public void setRetired(boolean retired) {
         this.retired = retired;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 }

@@ -10,7 +10,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-24T10:58:31")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-29T11:07:33")
 @StaticMetamodel(Reservation.class)
 public class Reservation_ { 
 
@@ -26,6 +26,7 @@ public class Reservation_ {
     public static volatile SingularAttribute<Reservation, Person> creater;
     public static volatile SingularAttribute<Reservation, Date> retiredAt;
     public static volatile SingularAttribute<Reservation, Boolean> retired;
+    public static volatile SingularAttribute<Reservation, Boolean> payment;
     public static volatile SingularAttribute<Reservation, Long> id;
     public static volatile SingularAttribute<Reservation, Integer> adult_count;
     public static volatile SingularAttribute<Reservation, Date> return_date;

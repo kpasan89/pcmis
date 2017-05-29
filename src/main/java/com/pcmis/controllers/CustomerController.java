@@ -61,48 +61,62 @@ public class CustomerController implements Serializable {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                Customer c = new Customer();
-                c.setAddress(selected.getAddress());
-                c.setBussiness_address(selected.getBussiness_address());
-                c.setBussiness_bought(selected.getBussiness_bought());
-                c.setBussiness_email(selected.getBussiness_email());
-                c.setBussiness_tel(selected.getBussiness_tel());
-                c.setCard_type(selected.getCard_type());
-                c.setCompany_name(selected.getCompany_name());
-                c.setCountry(selected.getCountry());
-                c.setPermenant(false);
-                c.setCustomer_type(selected.getCustomer_type());
-                c.setDob(selected.getDob());
-                c.setDom(selected.getDom());
-                c.setEmail(selected.getEmail());
-                c.setFamily_name(selected.getFamily_name());
-                c.setFax(selected.getFax());
-                c.setFirst_name(selected.getFirst_name());
-                c.setFull_name(selected.getFull_name());
-                c.setGender(selected.getGender());
-                c.setInterest(selected.getInterest());
-                c.setJob_title(selected.getJob_title());
-                c.setMaritial_status(selected.getMaritial_status());
-                c.setMeal(selected.getMeal());
-                c.setMobile(selected.getMobile());
-                c.setNationality(selected.getNationality());
-                c.setNic(selected.getNic());
-                c.setPassport(selected.getPassport());
-                c.setPp_expire_date(selected.getPp_expire_date());
-                c.setPp_issued_date(selected.getPp_issued_date());
-                c.setPrivilage_crd(selected.isPrivilage_crd());
-                c.setReservationCount(0);
-                c.setRetired(false);
-                c.setSelfCustomer(true);
-                c.setSeat(selected.getSeat());
-                c.setSport(selected.getSport());
-                c.setTelepone(selected.getTelepone());
-                c.setTitle(selected.getTitle());
-                c.setIntroducedCustomer("Self Customer");
+
+                if (selected.getFirst_name() == null) {
+                    JsfUtil.addErrorMessage("No First name");
+                }
+                if (selected.getFamily_name() == null) {
+                    JsfUtil.addErrorMessage("No Last name");
+                }
+                if (selected.getPassport() == null) {
+                    JsfUtil.addErrorMessage("No Passport number");
+                }
+                if (selected.getGender() == null) {
+                    JsfUtil.addErrorMessage("No Gender");
+                } else {
+                    Customer c = new Customer();
+                    c.setAddress(selected.getAddress());
+                    c.setBussiness_address(selected.getBussiness_address());
+                    c.setBussiness_bought(selected.getBussiness_bought());
+                    c.setBussiness_email(selected.getBussiness_email());
+                    c.setBussiness_tel(selected.getBussiness_tel());
+                    c.setCard_type(selected.getCard_type());
+                    c.setCompany_name(selected.getCompany_name());
+                    c.setCountry(selected.getCountry());
+                    c.setPermenant(false);
+                    c.setCustomer_type(selected.getCustomer_type());
+                    c.setDob(selected.getDob());
+                    c.setDom(selected.getDom());
+                    c.setEmail(selected.getEmail());
+                    c.setFamily_name(selected.getFamily_name());
+                    c.setFax(selected.getFax());
+                    c.setFirst_name(selected.getFirst_name());
+                    c.setFull_name(selected.getFull_name());
+                    c.setGender(selected.getGender());
+                    c.setInterest(selected.getInterest());
+                    c.setJob_title(selected.getJob_title());
+                    c.setMaritial_status(selected.getMaritial_status());
+                    c.setMeal(selected.getMeal());
+                    c.setMobile(selected.getMobile());
+                    c.setNationality(selected.getNationality());
+                    c.setNic(selected.getNic());
+                    c.setPassport(selected.getPassport());
+                    c.setPp_expire_date(selected.getPp_expire_date());
+                    c.setPp_issued_date(selected.getPp_issued_date());
+                    c.setPrivilage_crd(selected.isPrivilage_crd());
+                    c.setReservationCount(0);
+                    c.setRetired(false);
+                    c.setSelfCustomer(true);
+                    c.setSeat(selected.getSeat());
+                    c.setSport(selected.getSport());
+                    c.setTelepone(selected.getTelepone());
+                    c.setTitle(selected.getTitle());
+                    c.setIntroducedCustomer("Self Customer");
                 //c.setCreatedAt(new Date());
-                //c.setCreater(getPersonController().getLoggedPerson());
-                getFacade().create(c);
-                JsfUtil.addSuccessMessage("Customer was successfully created");
+                    //c.setCreater(getPersonController().getLoggedPerson());
+                    getFacade().create(c);
+                    JsfUtil.addSuccessMessage("Customer was successfully created");
+                }
 
             } catch (EJBException ex) {
                 String msg = "";
@@ -124,7 +138,7 @@ public class CustomerController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-    
+
     public void createNewIntroducedCustomer() {
         if (selected != null) {
             setEmbeddableKeys();
@@ -237,15 +251,16 @@ public class CustomerController implements Serializable {
         temSql = "SELECT c FROM Customer c where c.retired=false and LOWER(c.full_name) like '%" + qry.toLowerCase() + "%' order by c.full_name";
         return getFacade().findBySQL(temSql);
     }
-    
+
     private List<String> introducedCustomerList;
+
     public List<String> completeIntroducedCustomers(String qry) {
         String temSql;
         temSql = "SELECT c.full_name FROM Customer c where c.retired=false and LOWER(c.full_name) like '%" + qry.toLowerCase() + "%' order by c.full_name";
         introducedCustomerList = getFacade().findString(temSql);
         return introducedCustomerList;
     }
-    
+
     public List<Customer> completePayCustomers(String qry) {
         String temSql;
         temSql = "SELECT c FROM Customer c where c.retired=false and c.reservation=true and LOWER(c.full_name) like '%" + qry.toLowerCase() + "%' order by c.full_name";
@@ -293,7 +308,7 @@ public class CustomerController implements Serializable {
     }
 
     public PersonController getPersonController() {
-        if(personController == null){
+        if (personController == null) {
             personController = new PersonController();
         }
         return personController;

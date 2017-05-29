@@ -50,6 +50,8 @@ public class Reservation implements Serializable {
     private Date retiredAt;
     @ManyToOne
     private Person retirer;
+    private boolean payment = false;
+    private boolean reservation = false;
 
     public Long getId() {
         return id;
@@ -194,6 +196,22 @@ public class Reservation implements Serializable {
 
     public void setCreater(Person creater) {
         this.creater = creater;
+    }
+
+    public boolean isPayment() {
+        return payment;
+    }
+
+    public void setPayment(boolean payment) {
+        this.payment = payment;
+    }
+
+    public boolean isReservation() {
+        return reservation;
+    }
+
+    public void setReservation(boolean reservation) {
+        this.reservation = reservation;
     }
     
 }

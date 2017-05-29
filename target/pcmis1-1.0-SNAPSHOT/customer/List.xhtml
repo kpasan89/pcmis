@@ -46,7 +46,7 @@
                             </f:facet>
                             <h:outputText value="#{item.full_name}"/>
                         </p:column>
-                        
+
                         <p:column width="75">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_passport}"/>
@@ -65,32 +65,32 @@
                             </f:facet>
                             <h:outputText value="#{item.telepone}"/>
                         </p:column>
-                        
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_email}"/>
                             </f:facet>
                             <h:outputText value="#{item.email}"/>
                         </p:column>
-                        
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Points Earned"/>
                             </f:facet>
                             <h:outputText value="#{item.pointEarned}"/>
                         </p:column>
-                        
-                        <p:column width="175">
+
+                        <p:column width="125">
                             <f:facet name="header">
                                 <h:outputText value="Customer Ranks"/>
                             </f:facet>
-                            <h:outputText style="color: grey" rendered="#{item.normalCustomer eq false and item.normalCustomer eq false and item.silverCustomer eq false and item.goldCustomer eq false and item.platinumCustomer eq false}" value="#{item.normalCustomer eq true ; 'Reservation Pending'}"/>
-                            <h:outputText style="color: mediumslateblue" rendered="#{item.normalCustomer eq true}" value="#{item.normalCustomer eq true ; 'Normal Category Customer'}"/>
-                            <h:outputText style="color: darkgreen" rendered="#{item.silverCustomer eq true}" value="#{item.silverCustomer eq true ; 'Silver Category Customer'}"/>
-                            <h:outputText style="color: orangered" rendered="#{item.goldCustomer eq true}" value="#{item.goldCustomer eq true ; 'Gold Category Customer'}"/>
-                            <h:outputText style="color: darkred" rendered="#{item.platinumCustomer eq true}" value="#{item.platinumCustomer eq true ; 'Platinum Category Customer'}"/>
+                            <h:outputText style="color: grey" rendered="#{item.normalCustomer eq false and item.normalCustomer eq false and item.silverCustomer eq false and item.goldCustomer eq false and item.platinumCustomer eq false}" value="#{item.normalCustomer eq true ; 'No Reservations'}"/>
+                            <h:outputText style="color: mediumslateblue" rendered="#{item.normalCustomer eq true}" value="#{item.normalCustomer eq true ; 'Normal Category'}"/>
+                            <h:outputText style="color: darkgreen" rendered="#{item.silverCustomer eq true}" value="#{item.silverCustomer eq true ; 'Silver Category'}"/>
+                            <h:outputText style="color: orangered" rendered="#{item.goldCustomer eq true}" value="#{item.goldCustomer eq true ; 'Gold Category'}"/>
+                            <h:outputText style="color: darkred" rendered="#{item.platinumCustomer eq true}" value="#{item.platinumCustomer eq true ; 'Platinum Category'}"/>
                         </p:column>
-                        
+
                         <p:column width="150">
                             <f:facet name="header">
                                 <h:outputText value="Customer Category"/>
@@ -103,10 +103,16 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{customerController.prepareCreate}" update=":CustomerCreateForm" oncomplete="PF('CustomerCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CustomerViewForm" oncomplete="PF('CustomerViewDialog').show()" disabled="#{empty customerController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CustomerEditForm" oncomplete="PF('CustomerEditDialog').show()" disabled="#{empty customerController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{customerController.destroy}" update=":growl,datalist" disabled="#{empty customerController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{customerController.destroy}" update=":growl,datalist" disabled="#{empty customerController.selected}">
+                                <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                            </p:commandButton>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

@@ -50,32 +50,32 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservationTitle_dep_airport}"/>
                             </f:facet>
-                            <h:outputText value="#{item.dep_airport}"/>
+                            <h:outputText value="#{item.dep_airport.name}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservationTitle_arr_airport}"/>
                             </f:facet>
-                            <h:outputText value="#{item.arr_airport}"/>
+                            <h:outputText value="#{item.arr_airport.name}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservationTitle_preff_airline}"/>
                             </f:facet>
-                            <h:outputText value="#{item.preff_airline}"/>
+                            <h:outputText value="#{item.preff_airline.name}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservationTitle_preff_class}"/>
                             </f:facet>
-                            <h:outputText value="#{item.preff_class}"/>
+                            <h:outputText value="#{item.preff_class.name}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservationTitle_travel_date}"/>
                             </f:facet>
                             <h:outputText value="#{item.travel_date}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </p:column>
                         <p:column>
@@ -83,7 +83,7 @@
                                 <h:outputText value="#{bundle.ListReservationTitle_return_date}"/>
                             </f:facet>
                             <h:outputText value="#{item.return_date}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </p:column>
                         <p:column>
@@ -92,15 +92,21 @@
                             </f:facet>
                             <h:outputText value="#{item.res_customer.full_name}"/>
                         </p:column>
-                        
+
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Add}" actionListener="#{reservationController.prepareCreate}" update=":ReservationCreateForm" oncomplete="PF('ReservationCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ReservationViewForm" oncomplete="PF('ReservationViewDialog').show()" disabled="#{empty reservationController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ReservationEditForm" oncomplete="PF('ReservationEditDialog').show()" disabled="#{empty reservationController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{reservationController.destroy}" update=":growl,datalist" disabled="#{empty reservationController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{reservationController.retire()}" update=":growl,datalist" disabled="#{empty reservationController.selected}">
+                                <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                            </p:commandButton>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
             </h:form>
 
             <ui:include src="Create.xhtml"/>
