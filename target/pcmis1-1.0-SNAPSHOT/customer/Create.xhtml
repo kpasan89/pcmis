@@ -11,7 +11,7 @@
         <p:dialog id="CustomerCreateDlg" widgetVar="CustomerCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCustomerTitle}">
 
             <h:form id="CustomerCreateForm">
-                
+
                 <p:scrollPanel style="height:600px; width: 475px">
                     <h:panelGroup id="display">
                         <p:panelGrid columns="2" rendered="#{customerController.selected != null}">
@@ -147,8 +147,20 @@
                                             itemValue="#{x}" >
                             </p:autoComplete>
 
-                            <p:outputLabel value="#{bundle.CreateCustomerLabel_card_type}" for="card_type" />
-                            <p:inputText id="card_type" value="#{customerController.selected.card_type}" title="#{bundle.CreateCustomerTitle_card_type}" style="width:293px"/>
+                            <p:outputLabel value="Privilage Card Availability" for="card_available" />
+                            <p:selectOneRadio value="#{customerController.selected.privilage_crd}" id="card_available">
+                                <f:selectItem itemValue="true" itemLabel="Yes"></f:selectItem>
+                                <f:selectItem itemValue="false" itemLabel="No"></f:selectItem>
+                                <p:ajax process="@this" update="@form"></p:ajax>
+                            </p:selectOneRadio>
+
+                            <p:outputLabel id="card_type_lable" value="#{bundle.CreateCustomerLabel_card_type}" for="card_type" rendered="#{customerController.selected.privilage_crd}" />
+                            <p:selectOneMenu id="card_type" value="#{customerController.selected.card_type}" rendered="#{customerController.selected.privilage_crd}" style="width:300px">
+                                <f:selectItem itemLabel="Select Card Type"></f:selectItem>
+                                <f:selectItems value="#{enumController.card}"
+                                               var="card"
+                                               itemValue="#{card}"/>
+                            </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_bussiness_bought}" for="bussiness_bought" />
                             <p:inputText id="bussiness_bought" value="#{customerController.selected.bussiness_bought}" title="#{bundle.CreateCustomerTitle_bussiness_bought}" style="width:293px"/>

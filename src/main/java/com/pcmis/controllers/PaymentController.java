@@ -23,6 +23,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @ManagedBean(name = "paymentController")
 @SessionScoped
@@ -34,6 +35,8 @@ public class PaymentController implements Serializable {
     private Payment selected;
     @EJB
     private CustomerFacade customerFacade;
+    @Inject
+    private ReservationController reservationController;
 
     public PaymentController() {
     }
@@ -301,6 +304,14 @@ public class PaymentController implements Serializable {
 
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
+    }
+
+    public ReservationController getReservationController() {
+        return reservationController;
+    }
+
+    public void setReservationController(ReservationController reservationController) {
+        this.reservationController = reservationController;
     }
 
     @FacesConverter(forClass = Payment.class)

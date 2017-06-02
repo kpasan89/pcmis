@@ -12,21 +12,30 @@
             <h:form id="PaymentCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{paymentController.selected != null}">
-                        
+
                         <p:outputLabel value="#{bundle.CreatePaymentLabel_pay_customer}" for="pay_customer" />
                         <p:autoComplete id="pay_customer" value="#{paymentController.selected.pay_customer}" 
                                         completeMethod="#{reservationController.customerController.completePayCustomers}"                                            
                                         var="rc" forceSelection="true" 
                                         itemLabel="#{rc.full_name}"
                                         itemValue="#{rc}" >
+                            <p:column>
+                                <h:outputText value="#{r.arr_airport.name}" />
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{r.arr_airport.name}" />
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{r.arr_airport.name}" />
+                            </p:column>
                         </p:autoComplete>
-                        
+
                         <p:outputLabel value="#{bundle.CreatePaymentLabel_ticket_number}" for="ticket_number" />
                         <p:inputText id="ticket_number" value="#{paymentController.selected.ticket_number}" title="#{bundle.CreatePaymentTitle_ticket_number}" />
-                        
+
                         <p:outputLabel value="#{bundle.CreatePaymentLabel_value_ticket}" for="value_ticket" />
                         <p:inputText id="value_ticket" value="#{paymentController.selected.value_ticket}" title="#{bundle.CreatePaymentTitle_value_ticket}" />
-                        
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{paymentController.createNew()}" value="#{bundle.Save}" update="display,:PaymentListForm:datalist,:growl" oncomplete="handleSubmit(args,'PaymentCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PaymentCreateDialog.hide()"/>

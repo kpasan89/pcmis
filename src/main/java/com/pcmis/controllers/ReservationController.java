@@ -108,6 +108,9 @@ public class ReservationController implements Serializable {
                     r.setRes_customer(selected.getRes_customer());
                     r.setReturn_date(selected.getReturn_date());
                     r.setTravel_date(selected.getTravel_date());
+                    r.setCustomerName(selected.getRes_customer().getFull_name());
+                    r.setPayment(false);
+                    r.setReservation(true);
 
                     selectReservationCustomer();
 
@@ -230,7 +233,19 @@ public class ReservationController implements Serializable {
         }
         return items;
     }
-
+    
+    public List<Reservation> reservationList(){
+        String temSql;
+        temSql = "SELECT x FROM Reservation x where x.retired=false and x.reservation=true and x.payment=false order by x.res_customer.full_name";
+        return getFacade().findBySQL(temSql);
+    }
+    
+    public List<Reservation> allReservations(String qry){
+        String temSql;
+        temSql = "SELECT x FROM Reservation x where x.retired=false and x.reservation=true and x.payment=false and LOWER(x.customerName) like '%" + qry.toLowerCase() + "%' order by x.customerName";
+        return getFacade().findBySQL(temSql);
+    }
+    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();

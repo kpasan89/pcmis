@@ -26,6 +26,7 @@ public class Reservation implements Serializable {
     private Long id;
     @ManyToOne
     private Customer res_customer;
+    private String customerName;
     private int adult_count;
     private int kids_count;
     @ManyToOne
@@ -212,6 +213,14 @@ public class Reservation implements Serializable {
 
     public void setReservation(boolean reservation) {
         this.reservation = reservation;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
     
 }

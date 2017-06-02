@@ -263,7 +263,7 @@ public class CustomerController implements Serializable {
 
     public List<Customer> completePayCustomers(String qry) {
         String temSql;
-        temSql = "SELECT c FROM Customer c where c.retired=false and c.reservation=true and LOWER(c.full_name) like '%" + qry.toLowerCase() + "%' order by c.full_name";
+        temSql = "SELECT c FROM Customer c where c.retired=false and c.reservation=true and c.payment=false and LOWER(c.full_name) like '%" + qry.toLowerCase() + "%' order by c.full_name";
         return getFacade().findBySQL(temSql);
     }
 
