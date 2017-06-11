@@ -1,42 +1,18 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
-    </h:head>
-    <h:body>
-        <ui:composition template="./template.xhtml"></ui:composition>
-        Hello from Facelets
-        <br />
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml">
 
-        <br />
-        <h:link outcome="/userRole/List" value="Show All UserRole Items"/>
-        <br />
-        <h:link outcome="/userRole/List" value="Show All UserRole Items"/>
-        <br />
-        <h:link outcome="/userRole/List" value="Show All UserRole Items"/>
-        <br />
-        <h:link outcome="/airline/List" value="Show All Airline Items"/>
-        <br />
-        <h:link outcome="/airlineClass/List" value="Show All AirlineClass Items"/>
-        <br />
-        <h:link outcome="/airport/List" value="Show All Airport Items"/>
-        <br />
-        <h:link outcome="/country/List" value="Show All Country Items"/>
-        <br />
-        <h:link outcome="/jobTitle/List" value="Show All JobTitle Items"/>
-        <br />
-        <h:link outcome="/mealPreference/List" value="Show All MealPreference Items"/>
-        <br />
-        <h:link outcome="/nationality/List" value="Show All Nationality Items"/>
-        <br />
-        <h:link outcome="/seatPreference/List" value="Show All SeatPreference Items"/>
-        <br />
-        <h:link outcome="/sportPreference/List" value="Show All SportPreference Items"/>
-    </h:body>
+    <ui:define name="title">
+       
+    </ui:define>
 
-</html>
+    <ui:define name="body">
+        <div align="right" style="padding-top: 10%; padding-right: 2%">
+            <img src="resources/images/a380.png" alt="" style="height: 50%; width: 50%"/>
+        </div>
+    </ui:define>
 
+</ui:composition>
