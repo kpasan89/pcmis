@@ -109,8 +109,8 @@ public class ReservationController implements Serializable {
                     r.setReturn_date(selected.getReturn_date());
                     r.setTravel_date(selected.getTravel_date());
                     r.setCustomerName(selected.getRes_customer().getFull_name());
-                    r.setPayment(false);
                     r.setReservation(true);
+                    r.getRes_customer().setReservation(true);
 
                     selectReservationCustomer();
 
@@ -178,31 +178,27 @@ public class ReservationController implements Serializable {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                if (selected.getRes_customer().isPayment() == true) {
-                    JsfUtil.addErrorMessage("Delete Payment details before delete Reservation");
-                }
-                selected.setRetired(true);
-                getFacade().edit(selected);
-                JsfUtil.addSuccessMessage("Reservation was successfully Deleted");
+                    selected.setRetired(true);
+                    getFacade().edit(selected);
+                    JsfUtil.addSuccessMessage("Reservation was successfully Deleted");
 
-                selectReservationCustomer();
+                    selectReservationCustomer();
 
-                if (resCustomer.getPointEarned() == 0) {
-                    resCustomer.setPointEarned(0);
-                } else {
-                    System.out.println("Point Earned = " + resCustomer.getPointEarned());
-                    pointDeduction = poinEarned - 1;
-                    resCustomer.setPointEarned(pointDeduction);
-                    System.out.println("Point Earned = " + resCustomer.getPointEarned());
-                }
-                System.out.println("Count = " + resCustomer.getReservationCount());
-                countDeducted = resCount - 1;
-                resCustomer.setReservationCount(countDeducted);
-                System.out.println("Count = " + resCustomer.getReservationCount());
-                resCustomer.setReservation(false);
-                resCustomer.setPayment(false);
-                getCustomerFacade().edit(resCustomer);
-                JsfUtil.addSuccessMessage("Customer details successfully updated");
+                    if (resCustomer.getPointEarned() == 0) {
+                        resCustomer.setPointEarned(0);
+                    } else {
+                        System.out.println("Point Earned = " + resCustomer.getPointEarned());
+                        pointDeduction = poinEarned - 1;
+                        resCustomer.setPointEarned(pointDeduction);
+                        System.out.println("Point Earned = " + resCustomer.getPointEarned());
+                    }
+                    System.out.println("Count = " + resCustomer.getReservationCount());
+                    countDeducted = resCount - 1;
+                    resCustomer.setReservationCount(countDeducted);
+                    System.out.println("Count = " + resCustomer.getReservationCount());
+                    resCustomer.setReservation(false);
+                    getCustomerFacade().edit(resCustomer);
+                    JsfUtil.addSuccessMessage("Customer details successfully updated");
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
@@ -233,19 +229,19 @@ public class ReservationController implements Serializable {
         }
         return items;
     }
-    
-    public List<Reservation> reservationList(){
+
+    public List<Reservation> reservationList() {
         String temSql;
         temSql = "SELECT x FROM Reservation x where x.retired=false and x.reservation=true and x.payment=false order by x.res_customer.full_name";
         return getFacade().findBySQL(temSql);
     }
-    
-    public List<Reservation> allReservations(String qry){
+
+    public List<Reservation> allReservations(String qry) {
         String temSql;
         temSql = "SELECT x FROM Reservation x where x.retired=false and x.reservation=true and x.payment=false and LOWER(x.customerName) like '%" + qry.toLowerCase() + "%' order by x.customerName";
         return getFacade().findBySQL(temSql);
     }
-    
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();

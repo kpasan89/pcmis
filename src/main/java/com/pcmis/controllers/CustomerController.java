@@ -245,6 +245,17 @@ public class CustomerController implements Serializable {
 
         return "/customer/List.xhtml";
     }
+    
+    public String viewIntroducedCustomerPage() {
+//        if (items == null) {
+//            items = getFacade().findAll();
+//        }
+        String jpql;
+        jpql = "select c from Customer c  Where c.retired=false order by c.id desc";
+        items = getFacade().findBySQL(jpql);
+
+        return "/introduced_customer/List.xhtml";
+    }
 
     public List<Customer> completeCustomers(String qry) {
         String temSql;

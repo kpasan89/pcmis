@@ -152,6 +152,9 @@ public class Reservation implements Serializable {
     }
 
     public Customer getRes_customer() {
+        if(res_customer == null){
+            res_customer = new Customer();
+        }
         return res_customer;
     }
 

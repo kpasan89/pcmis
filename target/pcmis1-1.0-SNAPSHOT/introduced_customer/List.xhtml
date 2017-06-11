@@ -40,25 +40,12 @@
                             </f:facet>
                             <h:outputText value="#{item.title}"/>
                         </p:column>
-                        <p:column width="250">
+                        <p:column width="200">
                             <f:facet name="header">
                                 <h:outputText value="Name"/>
                             </f:facet>
                             <h:outputText value="#{item.full_name}"/>
                         </p:column>
-                        <p:column width="60">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCustomerTitle_maritial_status}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.maritial_status}"/>
-                        </p:column>
-                        <p:column width="50">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCustomerTitle_gender}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.gender}"/>
-                        </p:column>
-                        
                         <p:column width="75">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_passport}"/>
@@ -77,18 +64,33 @@
                             </f:facet>
                             <h:outputText value="#{item.telepone}"/>
                         </p:column>
-                        <p:column width="75">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCustomerTitle_mobile}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.mobile}"/>
-                        </p:column>
-                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_email}"/>
                             </f:facet>
                             <h:outputText value="#{item.email}"/>
+                        </p:column>
+                        <p:column width="200">
+                            <f:facet name="header">
+                                <h:outputText value="Introduced customer name"/>
+                            </f:facet>
+                            <h:outputText value="#{item.introducedCustomer}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Points Earned"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pointEarned}"/>
+                        </p:column>
+                        <p:column width="125">
+                            <f:facet name="header">
+                                <h:outputText value="Customer Ranks"/>
+                            </f:facet>
+                            <h:outputText style="color: grey" rendered="#{item.normalCustomer eq false and item.normalCustomer eq false and item.silverCustomer eq false and item.goldCustomer eq false and item.platinumCustomer eq false}" value="#{item.normalCustomer eq true ; 'No Reservations'}"/>
+                            <h:outputText style="color: mediumslateblue" rendered="#{item.normalCustomer eq true}" value="#{item.normalCustomer eq true ; 'Normal Category'}"/>
+                            <h:outputText style="color: darkgreen" rendered="#{item.silverCustomer eq true}" value="#{item.silverCustomer eq true ; 'Silver Category'}"/>
+                            <h:outputText style="color: orangered" rendered="#{item.goldCustomer eq true}" value="#{item.goldCustomer eq true ; 'Gold Category'}"/>
+                            <h:outputText style="color: darkred" rendered="#{item.platinumCustomer eq true}" value="#{item.platinumCustomer eq true ; 'Platinum Category'}"/>
                         </p:column>
                         <p:column width="150">
                             <f:facet name="header">

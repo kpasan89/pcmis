@@ -16,12 +16,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.validator.ValidatorException;
 
 @ManagedBean(name = "personController")
 @SessionScoped
@@ -50,6 +52,14 @@ public class PersonController implements Serializable {
     }
 
     public String login() {
+
+        if (!getUsername().trim().matches("\\p{Alnum}*")) {
+            logged = false;
+            loggedPerson = null;
+            JsfUtil.addErrorMessage("Invalid Characters");
+            return "index";
+        }
+
         if (getFacade().count() == 0) {
             Person p = new Person();
             p.setFull_name(username);
@@ -70,7 +80,7 @@ public class PersonController implements Serializable {
             JsfUtil.addErrorMessage("No such user");
             return "index";
         }
-        if(getUsername() == null || getPassword() == null){
+        if (getUsername() == null || getPassword() == null) {
             logged = false;
             loggedPerson = null;
             JsfUtil.addErrorMessage("Empty Fields");
@@ -141,9 +151,10 @@ public class PersonController implements Serializable {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-
-                if (!userNameAvailable(selected.getUsername())) {
-                    JsfUtil.addErrorMessage("User name already exists. Plese enter another username");
+                if (!selected.getUsername().trim().matches("\\p{Alnum}*")) {
+                    JsfUtil.addErrorMessage("User name contains with special characters. Please remove special characters");
+                } else if (!userNameAvailable(selected.getUsername())) {
+                    JsfUtil.addErrorMessage("User name already exists. Please enter another username");
                 } else if (!selected.getPassword().equals(selected.getCunfirm_password())) {
                     JsfUtil.addErrorMessage("Password and Re-entered password are not matching");
                 } else {
@@ -330,7 +341,7 @@ public class PersonController implements Serializable {
     }
 
     public PersonController getPersonController() {
-        if(personController == null){
+        if (personController == null) {
             personController = new PersonController();
         }
         return personController;

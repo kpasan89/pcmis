@@ -7,6 +7,7 @@ import com.pcmis.entity.Customer;
 import com.pcmis.entity.Reservation;
 import com.pcmis.facades.CustomerFacade;
 import com.pcmis.facades.PaymentFacade;
+import com.pcmis.facades.ReservationFacade;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -37,6 +38,8 @@ public class PaymentController implements Serializable {
     private CustomerFacade customerFacade;
     @Inject
     private ReservationController reservationController;
+    @EJB
+    private ReservationFacade reservatioFacade;
 
     public PaymentController() {
     }
@@ -91,6 +94,7 @@ public class PaymentController implements Serializable {
                     JsfUtil.addErrorMessage("Zero Value...?");
                 } else {
                     Payment p = new Payment();
+                    Reservation r = new Reservation();
                     p.setPay_customer(selected.getPay_customer());
                     p.setTicket_number(selected.getTicket_number());
                     p.setValue_ticket(selected.getValue_ticket());
@@ -148,7 +152,6 @@ public class PaymentController implements Serializable {
 
                     payCustomer.setPointEarned(customerPoint);
                     payCustomer.setPayment(true);
-                    payCustomer.setReservation(false);
                     getCustomerFacade().edit(payCustomer);
                     getFacade().create(p);
                     JsfUtil.addSuccessMessage("Payment was successfully Added");
@@ -200,6 +203,7 @@ public class PaymentController implements Serializable {
             try {
 
                 selected.setRetired(true);
+                selected.getPay_customer().setPayment(false);
                 getFacade().edit(selected);
                 JsfUtil.addSuccessMessage("Payment was successfully Deleted");
 
@@ -312,6 +316,14 @@ public class PaymentController implements Serializable {
 
     public void setReservationController(ReservationController reservationController) {
         this.reservationController = reservationController;
+    }
+
+    public ReservationFacade getReservatioFacade() {
+        return reservatioFacade;
+    }
+
+    public void setReservatioFacade(ReservationFacade reservatioFacade) {
+        this.reservatioFacade = reservatioFacade;
     }
 
     @FacesConverter(forClass = Payment.class)

@@ -10,45 +10,45 @@
 
         <p:dialog id="CustomerEditDlg" widgetVar="CustomerEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCustomerTitle}">
             <h:form id="CustomerEditForm">
-                <p:scrollPanel style="height:600px; width: 475px">
+                <p:scrollPanel  style="height:600px; width: 475px">
                     <h:panelGroup id="display">
                         <p:panelGrid columns="2" rendered="#{customerController.selected != null}">
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_title}" for="title" />
-                            <p:selectOneMenu id="title" value="#{customerController.selected.title}">
+                            <p:selectOneMenu id="title" value="#{customerController.selected.title}" style="width:300px">
                                 <f:selectItems value="#{enumController.title}"
                                                var="title"
                                                itemValue="#{title}"/>
                             </p:selectOneMenu>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_maritial_status}" for="maritial_status" />
-                            <p:selectOneMenu id="maritial_status" value="#{customerController.selected.maritial_status}">
+                            <p:selectOneMenu id="maritial_status" value="#{customerController.selected.maritial_status}" style="width:300px">
                                 <f:selectItems value="#{enumController.status}"
                                                var="status"
                                                itemValue="#{status}"/>
                             </p:selectOneMenu>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_gender}" for="gender" />
-                            <p:selectOneMenu id="gender" value="#{customerController.selected.gender}">
+                            <p:selectOneMenu id="gender" value="#{customerController.selected.gender}" style="width:300px">
                                 <f:selectItems value="#{enumController.gender}"
                                                var="gender"
                                                itemValue="#{gender}"/>
                             </p:selectOneMenu>
                            
                             <p:outputLabel value="#{bundle.EditCustomerLabel_dom}" for="dom" />
-                            <p:calendar id="dom" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.dom}" title="#{bundle.EditCustomerTitle_dom}"  showOn="button"/>
+                            <p:calendar id="dom" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.dom}" title="#{bundle.EditCustomerTitle_dom}"  />
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_first_name}" for="first_name" />
-                            <p:inputText id="first_name" value="#{customerController.selected.first_name}" title="#{bundle.EditCustomerTitle_first_name}" />
+                            <p:inputText id="first_name" value="#{customerController.selected.first_name}" title="#{bundle.EditCustomerTitle_first_name}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_family_name}" for="family_name" />
-                            <p:inputText id="family_name" value="#{customerController.selected.family_name}" title="#{bundle.EditCustomerTitle_family_name}" />
+                            <p:inputText id="family_name" value="#{customerController.selected.family_name}" title="#{bundle.EditCustomerTitle_family_name}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_full_name}" for="full_name" />
-                            <p:inputText id="full_name" value="#{customerController.selected.full_name}" title="#{bundle.EditCustomerTitle_full_name}" />
+                            <p:inputText id="full_name" value="#{customerController.selected.full_name}" title="#{bundle.EditCustomerTitle_full_name}" style="width:293px"/>
                            
                             <p:outputLabel value="#{bundle.EditCustomerLabel_dob}" for="dob" />
-                            <p:calendar id="dob" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.dob}" title="#{bundle.EditCustomerTitle_dob}"  showOn="button"/>
+                            <p:calendar id="dob" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.dob}" title="#{bundle.EditCustomerTitle_dob}"  />
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_nationality}" for="nationality" />
                             <p:autoComplete id="nationality" value="#{customerController.selected.nationality}" 
@@ -67,25 +67,25 @@
                             </p:autoComplete>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_address}" for="address" />
-                            <p:inputText id="address" value="#{customerController.selected.address}" title="#{bundle.EditCustomerTitle_address}" />
+                            <p:inputText id="address" value="#{customerController.selected.address}" title="#{bundle.EditCustomerTitle_address}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_bussiness_address}" for="bussiness_address" />
-                            <p:inputText id="bussiness_address" value="#{customerController.selected.bussiness_address}" title="#{bundle.EditCustomerTitle_bussiness_address}" />
+                            <p:inputText id="bussiness_address" value="#{customerController.selected.bussiness_address}" title="#{bundle.EditCustomerTitle_bussiness_address}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_passport}" for="passport" />
-                            <p:inputText id="passport" value="#{customerController.selected.passport}" title="#{bundle.EditCustomerTitle_passport}" />
+                            <p:inputText id="passport" value="#{customerController.selected.passport}" title="#{bundle.EditCustomerTitle_passport}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_nic}" for="nic" />
-                            <p:inputText id="nic" value="#{customerController.selected.nic}" title="#{bundle.EditCustomerTitle_nic}" />
+                            <p:inputText id="nic" value="#{customerController.selected.nic}" title="#{bundle.EditCustomerTitle_nic}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_pp_issued_date}" for="pp_issued_date" />
-                            <p:calendar id="pp_issued_date" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.pp_issued_date}" title="#{bundle.EditCustomerTitle_pp_issued_date}"  showOn="button"/>
+                            <p:calendar id="pp_issued_date" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.pp_issued_date}" title="#{bundle.EditCustomerTitle_pp_issued_date}"  />
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_pp_expire_date}" for="pp_expire_date" />
-                            <p:calendar id="pp_expire_date" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.pp_expire_date}" title="#{bundle.EditCustomerTitle_pp_expire_date}"  showOn="button"/>
+                            <p:calendar id="pp_expire_date" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.pp_expire_date}" title="#{bundle.EditCustomerTitle_pp_expire_date}"  />
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_customer_type}" for="customerType" />
-                            <p:selectOneMenu id="customerType" value="#{customerController.selected.customer_type}">
+                            <p:selectOneMenu id="customerType" value="#{customerController.selected.customer_type}" style="width:300px">
                                 <f:selectItems value="#{enumController.customerType}"
                                                var="customerType"
                                                itemValue="#{customerType}"/>
@@ -100,19 +100,19 @@
                             </p:autoComplete>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_company_name}" for="company_name" />
-                            <p:inputText id="company_name" value="#{customerController.selected.company_name}" title="#{bundle.EditCustomerTitle_company_name}" />
+                            <p:inputText id="company_name" value="#{customerController.selected.company_name}" title="#{bundle.EditCustomerTitle_company_name}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_telepone}" for="telepone" />
-                            <p:inputText id="telepone" value="#{customerController.selected.telepone}" title="#{bundle.EditCustomerTitle_telepone}" />
+                            <p:inputText id="telepone" value="#{customerController.selected.telepone}" title="#{bundle.EditCustomerTitle_telepone}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_mobile}" for="mobile" />
-                            <p:inputText id="mobile" value="#{customerController.selected.mobile}" title="#{bundle.EditCustomerTitle_mobile}" />
+                            <p:inputText id="mobile" value="#{customerController.selected.mobile}" title="#{bundle.EditCustomerTitle_mobile}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_fax}" for="fax" />
-                            <p:inputText id="fax" value="#{customerController.selected.fax}" title="#{bundle.EditCustomerTitle_fax}" />
+                            <p:inputText id="fax" value="#{customerController.selected.fax}" title="#{bundle.EditCustomerTitle_fax}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_email}" for="email" />
-                            <p:inputText id="email" value="#{customerController.selected.email}" title="#{bundle.EditCustomerTitle_email}" />
+                            <p:inputText id="email" value="#{customerController.selected.email}" title="#{bundle.EditCustomerTitle_email}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_seat}" for="seatPreference" />
                             <p:autoComplete id="seatPreference" value="#{customerController.selected.seat}" 
@@ -131,7 +131,7 @@
                             </p:autoComplete>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_interest}" for="interest" />
-                            <p:inputText id="interest" value="#{customerController.selected.interest}" title="#{bundle.EditCustomerTitle_interest}" />
+                            <p:inputText id="interest" value="#{customerController.selected.interest}" title="#{bundle.EditCustomerTitle_interest}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_meal}" for="mealPreference" />
                             <p:autoComplete id="mealPreference" value="#{customerController.selected.meal}" 
@@ -141,17 +141,14 @@
                                             itemValue="#{x}" >
                             </p:autoComplete>
                             
-                            <p:outputLabel value="#{bundle.EditCustomerLabel_card_type}" for="card_type" />
-                            <p:inputText id="card_type" value="#{customerController.selected.card_type}" title="#{bundle.EditCustomerTitle_card_type}" />
-                            
                             <p:outputLabel value="#{bundle.EditCustomerLabel_bussiness_bought}" for="bussiness_bought" />
-                            <p:inputText id="bussiness_bought" value="#{customerController.selected.bussiness_bought}" title="#{bundle.EditCustomerTitle_bussiness_bought}" />
+                            <p:inputText id="bussiness_bought" value="#{customerController.selected.bussiness_bought}" title="#{bundle.EditCustomerTitle_bussiness_bought}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_bussiness_tel}" for="bussiness_tel" />
-                            <p:inputText id="bussiness_tel" value="#{customerController.selected.bussiness_tel}" title="#{bundle.EditCustomerTitle_bussiness_tel}" />
+                            <p:inputText id="bussiness_tel" value="#{customerController.selected.bussiness_tel}" title="#{bundle.EditCustomerTitle_bussiness_tel}" style="width:293px"/>
                             
                             <p:outputLabel value="#{bundle.EditCustomerLabel_bussiness_email}" for="bussiness_email" />
-                            <p:inputText id="bussiness_email" value="#{customerController.selected.bussiness_email}" title="#{bundle.EditCustomerTitle_bussiness_email}" />
+                            <p:inputText id="bussiness_email" value="#{customerController.selected.bussiness_email}" title="#{bundle.EditCustomerTitle_bussiness_email}" style="width:293px"/>
                         
                         </p:panelGrid>
                         <p:commandButton actionListener="#{customerController.update}" value="#{bundle.Save}" update="display,:CustomerListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CustomerEditDialog');"/>
