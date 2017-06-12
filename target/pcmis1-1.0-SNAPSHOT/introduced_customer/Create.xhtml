@@ -64,20 +64,20 @@
                             <p:calendar id="dob" navigator="true" yearRange="c-44:c+16" pattern="MM/dd/yyyy" value="#{customerController.selected.dob}" title="#{bundle.EditCustomerTitle_dob}"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_nationality}" for="nationality" />
-                            <p:selectOneMenu id="nationality" value="#{customerController.selected.nationality}" style="width:300px">
-                                <f:selectItem itemLabel="Select Nationality"></f:selectItem>
-                                <f:selectItems value="#{enumController.nationality}"
-                                               var="nationality"
-                                               itemValue="#{nationality}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="nationality" value="#{customerController.selected.nationality}" 
+                                            completeMethod="#{nationalityController.completeNationalities}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}">
+                            </p:autoComplete>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_country}" for="country" />
-                            <p:selectOneMenu id="country" value="#{customerController.selected.country}" style="width:300px">
-                                <f:selectItem itemLabel="Select Country"></f:selectItem>
-                                <f:selectItems value="#{enumController.country}"
-                                               var="country"
-                                               itemValue="#{country}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="country" value="#{customerController.selected.country}" 
+                                            completeMethod="#{countryController.completeCountries}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}" >
+                            </p:autoComplete>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_address}" for="address" />
                             <p:inputText id="address" value="#{customerController.selected.address}" title="#{bundle.CreateCustomerTitle_address}" style="width:293px"/>
@@ -106,12 +106,12 @@
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_job_title}" for="jobTitle" />
-                            <p:selectOneMenu id="jobTitle" value="#{customerController.selected.job_title}" style="width:300px">
-                                <f:selectItem itemLabel="Select Job Title"></f:selectItem>
-                                <f:selectItems value="#{enumController.job}"
-                                               var="job"
-                                               itemValue="#{job}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="jobTitle" value="#{customerController.selected.job_title}" 
+                                            completeMethod="#{jobTitleController.completeJobTitles}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}" >
+                            </p:autoComplete>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_company_name}" for="company_name" />
                             <p:inputText id="company_name" value="#{customerController.selected.company_name}" title="#{bundle.CreateCustomerTitle_company_name}" style="width:293px"/>
@@ -129,31 +129,31 @@
                             <p:inputText id="email" value="#{customerController.selected.email}" title="#{bundle.CreateCustomerTitle_email}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_seat}" for="seatPreference" />
-                            <p:selectOneMenu id="seatPreference" value="#{customerController.selected.seat}" style="width:300px">
-                                <f:selectItem itemLabel="Select Seat"></f:selectItem>
-                                <f:selectItems value="#{enumController.seat}"
-                                               var="seat"
-                                               itemValue="#{seat}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="seatPreference" value="#{customerController.selected.seat}" 
+                                            completeMethod="#{seatPreferenceController.completeSeatPreferences}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}" >
+                            </p:autoComplete>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_sport}" for="sport" />
-                            <p:selectOneMenu id="sport" value="#{customerController.selected.sport}" style="width:300px">
-                                <f:selectItem itemLabel="Select Sport"></f:selectItem>
-                                <f:selectItems value="#{enumController.sport}"
-                                               var="sport"
-                                               itemValue="#{sport}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="sport" value="#{customerController.selected.sport}" 
+                                            completeMethod="#{sportPreferenceController.completeSportPreferences}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}" >
+                            </p:autoComplete>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_interest}" for="interest" />
                             <p:inputText id="interest" value="#{customerController.selected.interest}" title="#{bundle.CreateCustomerTitle_interest}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_meal}" for="mealPreference" />
-                            <p:selectOneMenu id="mealPreference" value="#{customerController.selected.meal}" style="width:300px">
-                                <f:selectItem itemLabel="Select Meal"></f:selectItem>
-                                <f:selectItems value="#{enumController.meal}"
-                                               var="meal"
-                                               itemValue="#{meal}"/>
-                            </p:selectOneMenu>
+                            <p:autoComplete id="mealPreference" value="#{customerController.selected.meal}" 
+                                            completeMethod="#{mealPreferenceController.completeMealPreferences}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}" >
+                            </p:autoComplete>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_bussiness_bought}" for="bussiness_bought" />
                             <p:inputText id="bussiness_bought" value="#{customerController.selected.bussiness_bought}" title="#{bundle.CreateCustomerTitle_bussiness_bought}" style="width:293px"/>
