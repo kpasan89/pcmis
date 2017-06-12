@@ -29,8 +29,8 @@
                         <p:menuitem value="Introduced Customer Registration" action="#{customerController.viewIntroducedCustomerPage}" />
                         <p:menuitem value="Reservation Management" outcome="/reservation/List.xhtml" />
                         <p:menuitem value="Payments Details" outcome="/payment/List.xhtml" />
-                        <p:menuitem value="User Control" outcome="/person/List.xhtml"/>
-                        <p:submenu label="#{bundle.Maintenance}" rendered="#{personController.systemAdministrator}">
+                        <p:menuitem value="User Control" outcome="/person/List.xhtml"  rendered="#{personController.systemAdministrator}"/>
+                        <p:submenu label="#{bundle.Maintenance}">
                             <p:menuitem value="Add Airline" outcome="/airline/List.xhtml" />
                             <p:menuitem value="Add Airline Class" outcome="/airlineClass/List.xhtml" />
                             <p:menuitem value="Add Airport" outcome="/airport/List.xhtml" />

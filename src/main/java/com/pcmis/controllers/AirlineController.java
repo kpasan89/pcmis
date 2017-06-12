@@ -123,7 +123,7 @@ public class AirlineController implements Serializable {
 
     public List<Airline> completeAirlines(String qry) {
         String temSql;
-        temSql = "SELECT x FROM Airline x where x.retired=false and LOWER(x.name) like '%" + qry.toLowerCase() + "%' order by x.name";
+        temSql = "SELECT x FROM Airline x where x.retired=false and LOWER(x.code) like '%" + qry.toLowerCase() + "%' order by x.code";
         return getFacade().findBySQL(temSql);
     }
 

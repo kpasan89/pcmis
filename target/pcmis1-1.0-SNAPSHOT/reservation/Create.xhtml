@@ -31,24 +31,42 @@
                         <p:autoComplete id="dep_airport" value="#{reservationController.selected.dep_airport}" 
                                         completeMethod="#{airportController.completeAirports}"                                            
                                         var="x" forceSelection="true" 
-                                        itemLabel="#{x.name}"
+                                        itemLabel="#{x.code}"
                                         itemValue="#{x}" >
+                            <p:column>
+                                <p:outputLabel value="#{x.code}"></p:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{x.name}"></p:outputLabel>
+                            </p:column>
                         </p:autoComplete>
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_arr_airport}" for="arr_airport" />
                         <p:autoComplete id="arr_airport" value="#{reservationController.selected.arr_airport}" 
                                         completeMethod="#{airportController.completeAirports}"                                            
                                         var="x" forceSelection="true" 
-                                        itemLabel="#{x.name}"
+                                        itemLabel="#{x.code}"
                                         itemValue="#{x}" >
+                            <p:column>
+                                <p:outputLabel value="#{x.code}"></p:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{x.name}"></p:outputLabel>
+                            </p:column>
                         </p:autoComplete>
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_preff_airline}" for="preff_airline" />
                         <p:autoComplete id="preff_airline" value="#{reservationController.selected.preff_airline}" 
                                         completeMethod="#{airlineController.completeAirlines}"                                            
                                         var="x" forceSelection="true" 
-                                        itemLabel="#{x.name}"
+                                        itemLabel="#{x.code}"
                                         itemValue="#{x}" >
+                            <p:column>
+                                <p:outputLabel value="#{x.code}"></p:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{x.name}"></p:outputLabel>
+                            </p:column>
                         </p:autoComplete>
 
                         <p:outputLabel value="#{bundle.CreateReservationLabel_preff_class}" for="preff_class" />

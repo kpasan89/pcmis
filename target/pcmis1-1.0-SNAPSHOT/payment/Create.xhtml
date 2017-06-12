@@ -22,7 +22,7 @@
                         </p:autoComplete>
 
                         <p:outputLabel value="#{bundle.CreatePaymentLabel_ticket_number}" for="ticket_number" />
-                        <p:inputText id="ticket_number" value="#{paymentController.selected.ticket_number}" title="#{bundle.CreatePaymentTitle_ticket_number}" />
+                        <p:inputText id="ticket_number" value="#{paymentController.selected.ticket_number}" title="#{bundle.CreatePaymentTitle_ticket_number}" maxlength="15"/>
 
                         <p:outputLabel value="#{bundle.CreatePaymentLabel_value_ticket}" for="value_ticket" />
                         <p:inputText id="value_ticket" value="#{paymentController.selected.value_ticket}" title="#{bundle.CreatePaymentTitle_value_ticket}" />

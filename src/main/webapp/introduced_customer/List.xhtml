@@ -84,7 +84,7 @@
                         </p:column>
                         <p:column width="125">
                             <f:facet name="header">
-                                <h:outputText value="Customer Ranks"/>
+                                <h:outputText value="Customer Category"/>
                             </f:facet>
                             <h:outputText style="color: grey" rendered="#{item.normalCustomer eq false and item.normalCustomer eq false and item.silverCustomer eq false and item.goldCustomer eq false and item.platinumCustomer eq false}" value="#{item.normalCustomer eq true ; 'No Reservations'}"/>
                             <h:outputText style="color: mediumslateblue" rendered="#{item.normalCustomer eq true}" value="#{item.normalCustomer eq true ; 'Normal Category'}"/>
@@ -94,7 +94,7 @@
                         </p:column>
                         <p:column width="150">
                             <f:facet name="header">
-                                <h:outputText value="Customer Category"/>
+                                <h:outputText value="Customer Type"/>
                             </f:facet>
                             <h:outputText style="color: deeppink" rendered="#{item.permenant eq true}" value="#{item.permenant eq true ; 'Permanent Customer'}"/>
                             <h:outputText style="color: blue" rendered="#{item.permenant eq false}" value="#{item.permenant eq false ; 'Registered Customer'}"/>
@@ -104,7 +104,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{customerController.prepareCreate}" update=":CustomerCreateForm" oncomplete="PF('CustomerCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CustomerViewForm" oncomplete="PF('CustomerViewDialog').show()" disabled="#{empty customerController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CustomerEditForm" oncomplete="PF('CustomerEditDialog').show()" disabled="#{empty customerController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{customerController.destroy}" update=":growl,datalist" disabled="#{empty customerController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{customerController.destroy}" update=":growl,datalist" disabled="#{empty customerController.selected}" rendered="#{personController.systemAdministrator}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

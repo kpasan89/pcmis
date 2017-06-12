@@ -128,14 +128,6 @@
                                             itemValue="#{x}" >
                             </p:autoComplete>
 
-                            <p:outputLabel value="#{bundle.CreateCustomerLabel_sport}" for="sport" />
-                            <p:autoComplete id="sport" value="#{customerController.selected.sport}" 
-                                            completeMethod="#{sportPreferenceController.completeSportPreferences}"                                            
-                                            var="x" forceSelection="true" 
-                                            itemLabel="#{x.name}"
-                                            itemValue="#{x}" >
-                            </p:autoComplete>
-
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_interest}" for="interest" />
                             <p:inputText id="interest" value="#{customerController.selected.interest}" title="#{bundle.CreateCustomerTitle_interest}" style="width:293px"/>
 
@@ -147,14 +139,14 @@
                                             itemValue="#{x}" >
                             </p:autoComplete>
 
-                            <p:outputLabel value="#{bundle.CreateCustomerLabel_bussiness_bought}" for="bussiness_bought" />
-                            <p:inputText id="bussiness_bought" value="#{customerController.selected.bussiness_bought}" title="#{bundle.CreateCustomerTitle_bussiness_bought}" style="width:293px"/>
-
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_bussiness_tel}" for="bussiness_tel" />
                             <p:inputText id="bussiness_tel" value="#{customerController.selected.bussiness_tel}" title="#{bundle.CreateCustomerTitle_bussiness_tel}" style="width:293px"/>
 
                             <p:outputLabel value="#{bundle.CreateCustomerLabel_bussiness_email}" for="bussiness_email" />
                             <p:inputText id="bussiness_email" value="#{customerController.selected.bussiness_email}" title="#{bundle.CreateCustomerTitle_bussiness_email}" style="width:293px"/>
+                            
+                            <p:outputLabel value="Remarks" for="bussiness_bought" />
+                            <p:inputText id="bussiness_bought" value="#{customerController.selected.bussiness_bought}" title="#{bundle.CreateCustomerTitle_bussiness_bought}" style="width:293px"/>
 
                         </p:panelGrid>
                         <p:commandButton actionListener="#{customerController.createNew()}" value="#{bundle.Save}" update="display,:CustomerListForm:datalist,:growl" oncomplete="handleSubmit(args,'CustomerCreateDialog');"/>

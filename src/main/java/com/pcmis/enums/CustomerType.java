@@ -14,4 +14,6 @@ public enum CustomerType {
     Army,
     Navy,
     Air_Force,
+    Police,
+    Civil_Defence_Force,
 }
