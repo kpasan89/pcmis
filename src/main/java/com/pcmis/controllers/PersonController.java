@@ -3,6 +3,7 @@ package com.pcmis.controllers;
 import com.pcmis.entity.Person;
 import com.pcmis.controllers.util.JsfUtil;
 import com.pcmis.controllers.util.JsfUtil.PersistAction;
+import com.pcmis.entity.Customer;
 import com.pcmis.enums.Appoinment;
 import com.pcmis.facades.PersonFacade;
 
@@ -47,6 +48,7 @@ public class PersonController implements Serializable {
     private boolean operator = false;
     private boolean accountant = false;
     private boolean officerCommanding = false;
+    private CustomerController customerController;
 
     public PersonController() {
     }
@@ -237,6 +239,8 @@ public class PersonController implements Serializable {
         return getFacade().findBySQL(temSql);
     }
 
+    
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -373,6 +377,17 @@ public class PersonController implements Serializable {
 
     public void setOfficerCommanding(boolean officerCommanding) {
         this.officerCommanding = officerCommanding;
+    }
+
+    public CustomerController getCustomerController() {
+        if(customerController == null){
+            customerController = new CustomerController();
+        }
+        return customerController;
+    }
+
+    public void setCustomerController(CustomerController customerController) {
+        this.customerController = customerController;
     }
 
     @FacesConverter(forClass = Person.class)

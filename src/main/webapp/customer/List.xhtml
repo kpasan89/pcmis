@@ -85,7 +85,7 @@
                                 <h:outputText value="Customer Category"/>
                             </f:facet>
                             <h:outputText style="color: grey" rendered="#{item.normalCustomer eq false and item.normalCustomer eq false and item.silverCustomer eq false and item.goldCustomer eq false and item.platinumCustomer eq false}" value="#{item.normalCustomer eq true ; 'No Reservations'}"/>
-                            <h:outputText style="color: mediumslateblue" rendered="#{item.normalCustomer eq true}" value="#{item.normalCustomer eq true ; 'Normal Category'}"/>
+                            <h:outputText style="color: mediumslateblue" rendered="#{item.normalCustomer eq true}" value="#{item.normalCustomer eq true ; 'Regular Category'}"/>
                             <h:outputText style="color: darkgreen" rendered="#{item.silverCustomer eq true}" value="#{item.silverCustomer eq true ; 'Silver Category'}"/>
                             <h:outputText style="color: orangered" rendered="#{item.goldCustomer eq true}" value="#{item.goldCustomer eq true ; 'Gold Category'}"/>
                             <h:outputText style="color: darkred" rendered="#{item.platinumCustomer eq true}" value="#{item.platinumCustomer eq true ; 'Platinum Category'}"/>

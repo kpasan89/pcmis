@@ -184,4 +184,8 @@ public abstract class AbstractFacade<T> {
         return findString(strJQL, parameters, TemporalType.DATE);
     }
 
+    public Long countBySql(String sql) {
+        Query q = getEntityManager().createQuery(sql);
+        return (Long) q.getSingleResult();
+    }
 }

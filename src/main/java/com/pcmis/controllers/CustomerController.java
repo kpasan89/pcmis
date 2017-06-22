@@ -7,7 +7,9 @@ import com.pcmis.facades.CustomerFacade;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -256,6 +258,41 @@ public class CustomerController implements Serializable {
 
         return "/introduced_customer/List.xhtml";
     }
+    
+    public void customerCounts(){
+        regularCustomerCount();
+        silverCustomerCount();
+        goldCustomerCount();
+        platinumCustomerCount();
+    }
+    
+    private long regularCount;
+    public void regularCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c  Where c.retired=false and c.normalCustomer=true";
+        regularCount = getFacade().countBySql(jpql);
+    }
+    
+    private long silverCount;
+    public void silverCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c  Where c.retired=false and c.silverCustomer=true";
+        silverCount = getFacade().countBySql(jpql);
+    }
+    
+    private long goldCount;
+    public void goldCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c  Where c.retired=false and c.goldCustomer=true";
+        goldCount = getFacade().countBySql(jpql);
+    }
+    
+    private long platinumCount;
+    public void platinumCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c  Where c.retired=false and c.platinumCustomer=true";
+        platinumCount = getFacade().countBySql(jpql);
+    }
 
     public List<Customer> completeCustomers(String qry) {
         String temSql;
@@ -277,7 +314,7 @@ public class CustomerController implements Serializable {
         temSql = "SELECT c FROM Customer c where c.retired=false and c.reservation=true and c.payment=false and LOWER(c.full_name) like '%" + qry.toLowerCase() + "%' order by c.full_name";
         return getFacade().findBySQL(temSql);
     }
-
+    
     public String createReservation() {
         return "/customerReservation/List.xhtml";
     }
@@ -335,6 +372,38 @@ public class CustomerController implements Serializable {
 
     public void setIntroducedCustomerList(List<String> introducedCustomerList) {
         this.introducedCustomerList = introducedCustomerList;
+    }
+
+    public long getRegularCount() {
+        return regularCount;
+    }
+
+    public void setRegularCount(long regularCount) {
+        this.regularCount = regularCount;
+    }
+
+    public long getSilverCount() {
+        return silverCount;
+    }
+
+    public void setSilverCount(long silverCount) {
+        this.silverCount = silverCount;
+    }
+
+    public long getGoldCount() {
+        return goldCount;
+    }
+
+    public void setGoldCount(long goldCount) {
+        this.goldCount = goldCount;
+    }
+
+    public long getPlatinumCount() {
+        return platinumCount;
+    }
+
+    public void setPlatinumCount(long platinumCount) {
+        this.platinumCount = platinumCount;
     }
 
     @FacesConverter(forClass = Customer.class)

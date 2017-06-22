@@ -3,16 +3,35 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./template.xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns="http://www.w3.org/1999/xhtml">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="title">
-       
+
     </ui:define>
 
     <ui:define name="body">
-        <div align="right" style="padding-top: 10%; padding-right: 2%">
-            <img src="resources/images/a380.png" alt="" style="height: 50%; width: 50%"/>
-        </div>
+        <h:form >
+            <div align="left" style="padding-top: 10%; padding-left: 2%; padding-right: 50%; position: absolute">
+                <p:commandButton ajax="false" action="#{customerController.customerCounts()}" value="Refresh"></p:commandButton>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Regular Customer Count"></p:outputLabel>
+                    <p:outputLabel value="#{customerController.regularCount}"></p:outputLabel>
+
+                    <p:outputLabel value="Silver Customer Count"></p:outputLabel>
+                    <p:outputLabel value="#{customerController.silverCount}"></p:outputLabel>
+
+                    <p:outputLabel value="Gold Customer Count"></p:outputLabel>
+                    <p:outputLabel value="#{customerController.goldCount}"></p:outputLabel>
+
+                    <p:outputLabel value="Platinum Customer Count"></p:outputLabel>
+                    <p:outputLabel value="#{customerController.platinumCount}"></p:outputLabel>
+                </p:panelGrid>
+            </div>
+            <div align="right" style="padding-top: 10%; padding-right: 2%; position: absolute">
+                <img src="resources/images/a380.png" alt="" style="height: 50%; width: 50%"/>
+            </div>
+        </h:form >
     </ui:define>
 
 </ui:composition>
