@@ -24,9 +24,9 @@
             <p:layoutUnit position="north" size="65" header="#{bundle.AppName}" rendered="#{personController.logged}">
                 <h:form id="menuForm">
                     <p:menubar>
-                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                        <p:menuitem value="Customer Registration" action="#{customerController.viewCustomerPage}"/>
-                        <p:menuitem value="Introduced Customer Registration" action="#{customerController.viewIntroducedCustomerPage}" />
+                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home" actionListener="#{personController.customerCounts()}"/>
+                        <p:menuitem value="Customer Registration" outcome="/customer/List.xhtml" actionListener="#{customerController.viewCustomerPage()}"/>
+                        <p:menuitem value="Introduced Customer Registration" outcome="/introduced_customer/List.xhtml" actionListener="#{customerController.viewIntroducedCustomerPage()}"/>
                         <p:menuitem value="Reservation Management" outcome="/reservation/List.xhtml" />
                         <p:menuitem value="Payments Details" outcome="/payment/List.xhtml" />
                         <p:menuitem value="User Control" outcome="/person/List.xhtml"  rendered="#{personController.systemAdministrator}"/>
@@ -41,9 +41,24 @@
                             <p:menuitem value="Add Seat Preference" outcome="/seatPreference/List.xhtml" />
                             <p:menuitem value="Add Sport Preference" outcome="/sportPreference/List.xhtml" />
                         </p:submenu>
+                        <p:submenu label="Reports">
+                            <p:menuitem value="Permanent Customers by Year" outcome="/reports/report_permenant_customer_by_year.xhtml" />
+                            <p:menuitem value="Registered Customers by Year" outcome="/reports/report_registered_customer_by_year.xhtml" />
+                            <p:menuitem value="Customers by Year" outcome="/reports/report_customer_by_year.xhtml" />
+                            <p:menuitem value="Customers by Title" outcome="/reports/report_customer_by_title.xhtml" />
+                            <p:menuitem value="Customers by Date of Birth" outcome="/reports/report_customer_by_dob.xhtml" />
+                            <p:menuitem value="Customers by Anniversary" outcome="/reports/report_customer_by_dom.xhtml" />
+                            <p:menuitem value="Customers by Gender" outcome="/reports/report_customer_by_gender.xhtml" />
+                            <p:menuitem value="Customers by Job Title" outcome="/reports/report_customer_by_job_title.xhtml" />
+                            <p:menuitem value="Customers by Meal Preference" outcome="/reports/report_customer_by_meal_preference.xhtml" />
+                            <p:menuitem value="Customers by Passport Expiry Date Range" outcome="/reports/report_customer_by_passport_expiry_date.xhtml" />
+                            <p:menuitem value="Customers by Introduced Customer" outcome="/reports/report_customer_by_introduced_customer.xhtml" />
+                            <p:menuitem value="Customers by Preferred Countries" outcome="/reports/report_customer_by_travel_country.xhtml" />
+                            <p:menuitem value="Customers by Preferred Airlines" outcome="/reports/report_customer_by_travel_airline.xhtml" />
+                        </p:submenu>
                     </p:menubar>
-                    
-                    
+
+
                 </h:form>
             </p:layoutUnit>
             <p:layoutUnit position="north" size="65" header="Login form" rendered="#{!personController.logged}">

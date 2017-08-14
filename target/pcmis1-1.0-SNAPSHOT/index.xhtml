@@ -4,31 +4,76 @@
                 template="./template.xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="title">
 
     </ui:define>
 
     <ui:define name="body">
-        <h:form >
-            <div align="left" style="padding-top: 10%; padding-left: 2%; padding-right: 50%; position: absolute">
-                <p:commandButton ajax="false" action="#{customerController.customerCounts()}" value="Refresh"></p:commandButton>
-                <p:panelGrid columns="2">
-                    <p:outputLabel value="Regular Customer Count"></p:outputLabel>
-                    <p:outputLabel value="#{customerController.regularCount}"></p:outputLabel>
+        <h:form>
+            <div align="left" style="padding-top: 2%; padding-left: 1%;">
+                <h:panelGrid columns="5" style="width: 60%; height: 10%">
+                    <p:panel>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Non Category Customers" styleClass="ui-color-grey"></p:outputLabel>
+                            <p:outputLabel value="#{personController.nonReservationCount}" styleClass="ui-indexText ui-color-grey"></p:outputLabel>
+                        </h:panelGrid>
+                    </p:panel>
 
-                    <p:outputLabel value="Silver Customer Count"></p:outputLabel>
-                    <p:outputLabel value="#{customerController.silverCount}"></p:outputLabel>
+                    <p:panel>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Regular Customers" styleClass="ui-color-mediumslateblue"></p:outputLabel>
+                            <p:outputLabel value="#{personController.regularCount}" styleClass="ui-indexText ui-color-mediumslateblue"></p:outputLabel>
+                        </h:panelGrid>
+                    </p:panel>
 
-                    <p:outputLabel value="Gold Customer Count"></p:outputLabel>
-                    <p:outputLabel value="#{customerController.goldCount}"></p:outputLabel>
+                    <p:panel>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Silver Customers" styleClass="ui-color-darkgreen"></p:outputLabel>
+                            <p:outputLabel value="#{personController.silverCount}" styleClass="ui-indexText ui-color-darkgreen"></p:outputLabel>
+                        </h:panelGrid>
+                    </p:panel>
 
-                    <p:outputLabel value="Platinum Customer Count"></p:outputLabel>
-                    <p:outputLabel value="#{customerController.platinumCount}"></p:outputLabel>
-                </p:panelGrid>
+                    <p:panel>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Gold Customers" styleClass="ui-color-orangered"></p:outputLabel>
+                            <p:outputLabel value="#{personController.goldCount}" styleClass="ui-indexText ui-color-orangered"></p:outputLabel>
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:panel>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Platinum Customers" styleClass="ui-color-darkred"></p:outputLabel>
+                            <p:outputLabel value="#{personController.platinumCount}" styleClass="ui-indexText ui-color-darkred"></p:outputLabel>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:panelGrid>
+                <h:panelGrid columns="2" style="width: 60%; height: 10%">
+                    <p:panel>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Registered Customers" styleClass="ui-color-blue"></p:outputLabel>
+                            <p:outputLabel value="#{personController.registeredCount}" styleClass="ui-indexText ui-color-blue"></p:outputLabel>
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:panel>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Permenant Customers" styleClass="ui-color-deeppink"></p:outputLabel>
+                            <p:outputLabel value="#{personController.permenantCount}" styleClass="ui-indexText ui-color-deeppink"></p:outputLabel>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:panelGrid>
+                <h:panelGrid columns="1" style="width: 60%; height: 10%">
+                    <p:panel>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Payment Pending" ></p:outputLabel>
+                            <p:outputLabel value="#{personController.permenantCount}" styleClass="ui-indexText"></p:outputLabel>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:panelGrid>
             </div>
-            <div align="right" style="padding-top: 10%; padding-right: 2%; position: absolute">
+            <div align="right" style="padding-top: 2%; padding-right: 2%;">
                 <img src="resources/images/a380.png" alt="" style="height: 50%; width: 50%"/>
             </div>
         </h:form >

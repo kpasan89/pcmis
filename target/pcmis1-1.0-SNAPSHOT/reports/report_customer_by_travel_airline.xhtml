@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                Report by Customer Preferred Airline 
+            </ui:define>
+
+            <ui:define name="body">
+                <h:form>
+                    <p:panel>
+                        <f:facet name="header">
+                            <h:outputLabel value="Report by Customer Preferred Airline " ></h:outputLabel>
+                        </f:facet>
+                        <p:panelGrid columns="3">
+                            <p:outputLabel value="Airline:" for="Airline" />
+                            <p:autoComplete id="Airline" value="#{reservationController.airline}" 
+                                            completeMethod="#{airlineController.completeAirlines}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.code}"
+                                            itemValue="#{x}" >
+                                <p:column>
+                                    <p:outputLabel value="#{x.code}"></p:outputLabel>
+                                </p:column>
+                                <p:column>
+                                    <p:outputLabel value="#{x.name}"></p:outputLabel>
+                                </p:column>
+                            </p:autoComplete>
+                            <p:commandButton ajax="false" action="#{reservationController.reportCustomerByPreferredAirline()}" value="Refresh" ></p:commandButton>
+                        </p:panelGrid>
+
+                        <p:dataTable value="#{reservationController.anualTravelCountries}" var="item" rowIndexVar="se"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     rows="10" 
+                                     >
+                            <p:column headerText="No" width="25">
+                                <h:outputLabel value="#{se + 1}"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListReservationTitle_res_customer}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.res_customer.full_name}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Airport"/>
+                                </f:facet>
+                                <h:outputText value="#{item.arr_airport.name}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListReservationTitle_preff_airline}"/>
+                                </f:facet>
+                                <h:outputText style="color: red" value="#{item.preff_airline.name}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListReservationTitle_preff_class}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.preff_class.name}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListReservationTitle_travel_date}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.travel_date}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListReservationTitle_return_date}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.return_date}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

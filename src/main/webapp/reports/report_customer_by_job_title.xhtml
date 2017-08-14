@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                Report by Customer Job Title
+            </ui:define>
+
+            <ui:define name="body">
+                <h:form>
+                    <p:panel>
+                        <f:facet name="header">
+                            <h:outputLabel value="Report by Customer Gender" ></h:outputLabel>
+                        </f:facet>
+                        <p:panelGrid columns="3">
+                            <p:outputLabel value="#{bundle.CreateCustomerLabel_job_title}" for="jobTitle" />
+                            <p:autoComplete id="jobTitle" value="#{customerController.job_title}" 
+                                            completeMethod="#{jobTitleController.completeJobTitles}"                                            
+                                            var="x" forceSelection="true" 
+                                            itemLabel="#{x.name}"
+                                            itemValue="#{x}" >
+                            </p:autoComplete>
+                            <p:commandButton ajax="false" action="#{customerController.reportCustomerByJobTitle()}" value="Refresh" ></p:commandButton>
+                        </p:panelGrid>
+
+                        <p:dataTable value="#{customerController.customersByJobTitle}" var="item" rowIndexVar="se"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     rows="10" 
+                                     >
+                            <p:column headerText="No" width="25">
+                                <h:outputLabel value="#{se + 1}"></h:outputLabel>
+                            </p:column>
+                            <p:column  width="25">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListCustomerTitle_title}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.title}"/>
+                            </p:column>
+                            <p:column headerText="Reg No">
+                                <h:outputLabel value="#{item.full_name}"></h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Job Title">
+                                <h:outputLabel style="color: red" value="#{item.job_title}"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Points Earned"/>
+                                </f:facet>
+                                <h:outputText value="#{item.pointEarned}"/>
+                            </p:column>
+                            <p:column width="125">
+                                <f:facet name="header">
+                                    <h:outputText value="Customer Category"/>
+                                </f:facet>
+                                <h:outputText style="color: grey" rendered="#{item.normalCustomer eq false and item.normalCustomer eq false and item.silverCustomer eq false and item.goldCustomer eq false and item.platinumCustomer eq false}" value="#{item.normalCustomer eq true ; 'No Reservations'}"/>
+                                <h:outputText style="color: mediumslateblue" rendered="#{item.normalCustomer eq true}" value="#{item.normalCustomer eq true ; 'Normal Category'}"/>
+                                <h:outputText style="color: darkgreen" rendered="#{item.silverCustomer eq true}" value="#{item.silverCustomer eq true ; 'Silver Category'}"/>
+                                <h:outputText style="color: orangered" rendered="#{item.goldCustomer eq true}" value="#{item.goldCustomer eq true ; 'Gold Category'}"/>
+                                <h:outputText style="color: darkred" rendered="#{item.platinumCustomer eq true}" value="#{item.platinumCustomer eq true ; 'Platinum Category'}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

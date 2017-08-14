@@ -3,6 +3,8 @@ package com.pcmis.controllers;
 import com.pcmis.entity.Reservation;
 import com.pcmis.controllers.util.JsfUtil;
 import com.pcmis.controllers.util.JsfUtil.PersistAction;
+import com.pcmis.entity.Airline;
+import com.pcmis.entity.Airport;
 import com.pcmis.entity.Customer;
 import com.pcmis.facades.CustomerFacade;
 import com.pcmis.facades.ReservationFacade;
@@ -23,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import javax.persistence.ManyToOne;
 
 @ManagedBean(name = "reservationController")
 @SessionScoped
@@ -39,6 +42,10 @@ public class ReservationController implements Serializable {
     private Customer customer;
     @EJB
     private CustomerFacade customerFacade;
+    @ManyToOne
+    private Airport travelCountry;
+    @ManyToOne
+    private Airline airline;
 
     public ReservationController() {
     }
@@ -220,6 +227,26 @@ public class ReservationController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
+    
+    private List<Reservation> anualTravelCountries = null;
+    public String reportCustomerByTravelCountry() {
+        String jpql;
+        Map m = new HashMap();
+        m.put("c", travelCountry);
+        jpql = "select r from Reservation r Where r.retired=false and r.arr_airport=:c";
+        anualTravelCountries = getFacade().findBySQL(jpql, m);
+        return "report_customer_by_travel_country";
+    }
+    
+    private List<Reservation> anualTravelAirlines = null;
+    public String reportCustomerByPreferredAirline() {
+        String jpql;
+        Map m = new HashMap();
+        m.put("al", airline);
+        jpql = "select r from Reservation r Where r.retired=false and r.preff_airline=:al";
+        anualTravelAirlines = getFacade().findBySQL(jpql, m);
+        return "report_customer_by_travel_airline";
+    }
 
     public List<Reservation> getItems() {
         if (items == null) {
@@ -359,6 +386,38 @@ public class ReservationController implements Serializable {
 
     public void setCountDeducted(int countDeducted) {
         this.countDeducted = countDeducted;
+    }
+
+    public List<Reservation> getAnualTravelCountries() {
+        return anualTravelCountries;
+    }
+
+    public void setAnualTravelCountries(List<Reservation> anualTravelCountries) {
+        this.anualTravelCountries = anualTravelCountries;
+    }
+
+    public Airport getTravelCountry() {
+        return travelCountry;
+    }
+
+    public void setTravelCountry(Airport travelCountry) {
+        this.travelCountry = travelCountry;
+    }
+
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
+    }
+
+    public List<Reservation> getAnualTravelAirlines() {
+        return anualTravelAirlines;
+    }
+
+    public void setAnualTravelAirlines(List<Reservation> anualTravelAirlines) {
+        this.anualTravelAirlines = anualTravelAirlines;
     }
 
     @FacesConverter(forClass = Reservation.class)

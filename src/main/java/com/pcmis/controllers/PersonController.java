@@ -5,6 +5,7 @@ import com.pcmis.controllers.util.JsfUtil;
 import com.pcmis.controllers.util.JsfUtil.PersistAction;
 import com.pcmis.entity.Customer;
 import com.pcmis.enums.Appoinment;
+import com.pcmis.facades.CustomerFacade;
 import com.pcmis.facades.PersonFacade;
 
 import java.io.Serializable;
@@ -32,6 +33,8 @@ public class PersonController implements Serializable {
 
     @EJB
     private com.pcmis.facades.PersonFacade ejbFacade;
+    @EJB
+    private CustomerFacade customerFacade;
     private List<Person> items = null;
     private Person selected;
 
@@ -91,6 +94,7 @@ public class PersonController implements Serializable {
         if (CommonController.checkPassword(password, p.getPassword())) {
             logged = true;
             loggedPerson = p;
+            customerCounts();
             JsfUtil.addSuccessMessage("Logged Successfully");
             if (p.getAppoinment().equals(Appoinment.System_Administrator)) {
                 systemAdministrator = true;
@@ -123,6 +127,73 @@ public class PersonController implements Serializable {
         ticketingOfficer = false;
         officerCommanding = false;
         return "/index";
+    }
+    
+    public void customerCounts(){
+        nonReservationCustomerCount();
+        regularCustomerCount();
+        silverCustomerCount();
+        goldCustomerCount();
+        platinumCustomerCount();
+        registeredCustomerCount();
+        permenantCustomerCount();
+        reservedCustomerCount();
+    }
+    
+    private long nonReservationCount;
+    public void nonReservationCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c Where c.retired=false and c.normalCustomer=false and c.silverCustomer=false and c.goldCustomer=false and c.platinumCustomer=false";
+        nonReservationCount = getCustomerFacade().countBySql(jpql);
+    }
+    
+    private long regularCount;
+    public void regularCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c Where c.retired=false and c.normalCustomer=true";
+        regularCount = getCustomerFacade().countBySql(jpql);
+    }
+    
+    private long silverCount;
+    public void silverCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c Where c.retired=false and c.silverCustomer=true";
+        silverCount = getCustomerFacade().countBySql(jpql);
+    }
+    
+    private long goldCount;
+    public void goldCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c Where c.retired=false and c.goldCustomer=true";
+        goldCount = getCustomerFacade().countBySql(jpql);
+    }
+    
+    private long platinumCount;
+    public void platinumCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c Where c.retired=false and c.platinumCustomer=true";
+        platinumCount = getCustomerFacade().countBySql(jpql);
+    }
+    
+    private long registeredCount;
+    public void registeredCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c Where c.retired=false and c.permenant=false";
+        registeredCount = getCustomerFacade().countBySql(jpql);
+    }
+    
+    private long permenantCount;
+    public void permenantCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c Where c.retired=false and c.permenant=true";
+        permenantCount = getCustomerFacade().countBySql(jpql);
+    }
+    
+    private long reservedCount;
+    public void reservedCustomerCount(){
+        String jpql;
+        jpql = "select count(c) from Customer c Where c.retired=false and c.reservation=true and c.payment=false";
+        reservedCount = getCustomerFacade().countBySql(jpql);
     }
 
     public Person getSelected() {
@@ -388,6 +459,78 @@ public class PersonController implements Serializable {
 
     public void setCustomerController(CustomerController customerController) {
         this.customerController = customerController;
+    }
+
+    public long getRegularCount() {
+        return regularCount;
+    }
+
+    public void setRegularCount(long regularCount) {
+        this.regularCount = regularCount;
+    }
+
+    public long getSilverCount() {
+        return silverCount;
+    }
+
+    public void setSilverCount(long silverCount) {
+        this.silverCount = silverCount;
+    }
+
+    public long getGoldCount() {
+        return goldCount;
+    }
+
+    public void setGoldCount(long goldCount) {
+        this.goldCount = goldCount;
+    }
+
+    public long getPlatinumCount() {
+        return platinumCount;
+    }
+
+    public void setPlatinumCount(long platinumCount) {
+        this.platinumCount = platinumCount;
+    }
+
+    public CustomerFacade getCustomerFacade() {
+        return customerFacade;
+    }
+
+    public void setCustomerFacade(CustomerFacade customerFacade) {
+        this.customerFacade = customerFacade;
+    }
+
+    public long getNonReservationCount() {
+        return nonReservationCount;
+    }
+
+    public void setNonReservationCount(long nonReservationCount) {
+        this.nonReservationCount = nonReservationCount;
+    }
+
+    public long getRegisteredCount() {
+        return registeredCount;
+    }
+
+    public void setRegisteredCount(long registeredCount) {
+        this.registeredCount = registeredCount;
+    }
+
+    public long getPermenantCount() {
+        return permenantCount;
+    }
+
+    public void setPermenantCount(long permenantCount) {
+        this.permenantCount = permenantCount;
+    }
+
+    public long getReservedCount() {
+        return reservedCount;
+    }
+
+    public void setReservedCount(long reservedCount) {
+        this.reservedCount = reservedCount;
     }
 
     @FacesConverter(forClass = Person.class)

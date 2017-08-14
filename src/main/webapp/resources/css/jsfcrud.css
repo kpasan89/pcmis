@@ -15,3 +15,29 @@
 .ui-button {
     margin-top: 10px !important;
 }
+
+.ui-indexText {
+    font-size: 24px !important;
+    
+}
+.ui-color-grey {
+    color: grey !important;
+}
+.ui-color-mediumslateblue {
+    color: mediumslateblue !important;
+}
+.ui-color-darkgreen {
+    color: darkgreen !important;
+}
+.ui-color-orangered {
+    color: orangered !important;
+}
+.ui-color-darkred {
+    color: darkred !important;
+}
+.ui-color-deeppink {
+    color: deeppink !important;
+}
+.ui-color-blue {
+    color: blue !important;
+}
