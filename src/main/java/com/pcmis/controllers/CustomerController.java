@@ -414,6 +414,49 @@ public class CustomerController implements Serializable {
         customersByYear = getFacade().findBySQL(jpql, m);
         return "report_customer_by_year";
     }
+    
+    public void customerCategories(){
+        platinumCustomers();
+        goldCustomers();
+        silverCustomers();
+        regularCustomers();
+        nonCategoryCustomers();
+    }
+
+    private List<Customer> platinumCustomerList;
+    public void platinumCustomers(){
+        String jpql;
+        jpql = "select c from Customer c Where c.retired=false and c.platinumCustomer=true";
+        platinumCustomerList = getFacade().findBySQL(jpql);
+    }
+    
+    private List<Customer> goldCustomerList;
+    public void goldCustomers(){
+        String jpql;
+        jpql = "select c from Customer c Where c.retired=false and c.goldCustomer=true";
+        goldCustomerList = getFacade().findBySQL(jpql);
+    }
+    
+    private List<Customer> silverCustomerList;
+    public void silverCustomers(){
+        String jpql;
+        jpql = "select c from Customer c Where c.retired=false and c.silverCustomer=true";
+        silverCustomerList = getFacade().findBySQL(jpql);
+    }
+    
+    private List<Customer> regularCustomerList;
+    public void regularCustomers(){
+        String jpql;
+        jpql = "select c from Customer c Where c.retired=false and c.normalCustomer=true";
+        regularCustomerList = getFacade().findBySQL(jpql);
+    }
+    
+    private List<Customer> nonCategoryCustomerList;
+    public void nonCategoryCustomers(){
+        String jpql;
+        jpql = "select c from Customer c Where c.retired=false and c.normalCustomer=false and c.silverCustomer=false and c.goldCustomer=false and c.platinumCustomer=false";
+        nonCategoryCustomerList = getFacade().findBySQL(jpql);
+    }
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -668,6 +711,46 @@ public class CustomerController implements Serializable {
 
     public void setCustomersByYear(List<Customer> customersByYear) {
         this.customersByYear = customersByYear;
+    }
+
+    public List<Customer> getPlatinumCustomerList() {
+        return platinumCustomerList;
+    }
+
+    public void setPlatinumCustomerList(List<Customer> platinumCustomerList) {
+        this.platinumCustomerList = platinumCustomerList;
+    }
+
+    public List<Customer> getGoldCustomerList() {
+        return goldCustomerList;
+    }
+
+    public void setGoldCustomerList(List<Customer> goldCustomerList) {
+        this.goldCustomerList = goldCustomerList;
+    }
+
+    public List<Customer> getSilverCustomerList() {
+        return silverCustomerList;
+    }
+
+    public void setSilverCustomerList(List<Customer> silverCustomerList) {
+        this.silverCustomerList = silverCustomerList;
+    }
+
+    public List<Customer> getRegularCustomerList() {
+        return regularCustomerList;
+    }
+
+    public void setRegularCustomerList(List<Customer> regularCustomerList) {
+        this.regularCustomerList = regularCustomerList;
+    }
+
+    public List<Customer> getNonCategoryCustomerList() {
+        return nonCategoryCustomerList;
+    }
+
+    public void setNonCategoryCustomerList(List<Customer> nonCategoryCustomerList) {
+        this.nonCategoryCustomerList = nonCategoryCustomerList;
     }
 
     @FacesConverter(forClass = Customer.class)
