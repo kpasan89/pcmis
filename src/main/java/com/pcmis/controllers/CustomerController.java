@@ -421,6 +421,7 @@ public class CustomerController implements Serializable {
         silverCustomers();
         regularCustomers();
         nonCategoryCustomers();
+        System.out.println("activated...");
     }
 
     private List<Customer> platinumCustomerList;
@@ -428,6 +429,7 @@ public class CustomerController implements Serializable {
         String jpql;
         jpql = "select c from Customer c Where c.retired=false and c.platinumCustomer=true";
         platinumCustomerList = getFacade().findBySQL(jpql);
+        System.out.println("platinumCustomerList = " + platinumCustomerList);
     }
     
     private List<Customer> goldCustomerList;
@@ -435,6 +437,7 @@ public class CustomerController implements Serializable {
         String jpql;
         jpql = "select c from Customer c Where c.retired=false and c.goldCustomer=true";
         goldCustomerList = getFacade().findBySQL(jpql);
+        System.out.println("goldCustomerList = " + goldCustomerList);
     }
     
     private List<Customer> silverCustomerList;
@@ -442,6 +445,7 @@ public class CustomerController implements Serializable {
         String jpql;
         jpql = "select c from Customer c Where c.retired=false and c.silverCustomer=true";
         silverCustomerList = getFacade().findBySQL(jpql);
+        System.out.println("silverCustomerList = " + silverCustomerList);
     }
     
     private List<Customer> regularCustomerList;
@@ -449,6 +453,7 @@ public class CustomerController implements Serializable {
         String jpql;
         jpql = "select c from Customer c Where c.retired=false and c.normalCustomer=true";
         regularCustomerList = getFacade().findBySQL(jpql);
+        System.out.println("regularCustomerList = " + regularCustomerList);
     }
     
     private List<Customer> nonCategoryCustomerList;
@@ -456,6 +461,7 @@ public class CustomerController implements Serializable {
         String jpql;
         jpql = "select c from Customer c Where c.retired=false and c.normalCustomer=false and c.silverCustomer=false and c.goldCustomer=false and c.platinumCustomer=false";
         nonCategoryCustomerList = getFacade().findBySQL(jpql);
+        System.out.println("nonCategoryCustomerList = " + nonCategoryCustomerList);
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
