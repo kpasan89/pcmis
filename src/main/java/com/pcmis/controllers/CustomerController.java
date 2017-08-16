@@ -53,8 +53,7 @@ public class CustomerController implements Serializable {
     private Title title;
     private Date dob;
     private Date dom;
-    @ManyToOne
-    private Customer introduced_customer;
+    private String introduced_customer;
     private Date startDate;
     private Date endDate;
     
@@ -376,7 +375,8 @@ public class CustomerController implements Serializable {
     public String reportCustomerByIntroducedCustomer() {
         String jpql;
         Map m = new HashMap();
-        m.put("ic", introduced_customer);
+        m.put("ic", getIntroduced_customer());
+        System.out.println("Introduced customer = " + getIntroduced_customer());
         jpql = "select c from Customer c Where c.retired=false and c.introducedCustomer=:ic";
         customersByIntroducedCustomers = getFacade().findBySQL(jpql, m);
         return "report_customer_by_introduced_customer";
@@ -639,14 +639,6 @@ public class CustomerController implements Serializable {
         this.customersByAniiversary = customersByAniiversary;
     }
 
-    public Customer getIntroduced_customer() {
-        return introduced_customer;
-    }
-
-    public void setIntroduced_customer(Customer introduced_customer) {
-        this.introduced_customer = introduced_customer;
-    }
-
     public List<Customer> getCustomersByIntroducedCustomers() {
         return customersByIntroducedCustomers;
     }
@@ -757,6 +749,14 @@ public class CustomerController implements Serializable {
 
     public void setNonCategoryCustomerList(List<Customer> nonCategoryCustomerList) {
         this.nonCategoryCustomerList = nonCategoryCustomerList;
+    }
+
+    public String getIntroduced_customer() {
+        return introduced_customer;
+    }
+
+    public void setIntroduced_customer(String introduced_customer) {
+        this.introduced_customer = introduced_customer;
     }
 
     @FacesConverter(forClass = Customer.class)
