@@ -26,6 +26,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.validator.ValidatorException;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean(name = "personController")
 @SessionScoped
@@ -57,6 +60,15 @@ public class PersonController implements Serializable {
     }
 
     public String login() {
+
+        //Get IP Address---------------------------------
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+        System.out.println("IP Address = " + ipAddress);
+        //-----------------------------------------------
 
         if (!getUsername().trim().matches("\\p{Alnum}*")) {
             logged = false;
@@ -128,8 +140,8 @@ public class PersonController implements Serializable {
         officerCommanding = false;
         return "/index";
     }
-    
-    public void customerCounts(){
+
+    public void customerCounts() {
         nonReservationCustomerCount();
         regularCustomerCount();
         silverCustomerCount();
@@ -139,58 +151,66 @@ public class PersonController implements Serializable {
         permenantCustomerCount();
         reservedCustomerCount();
     }
-    
+
     private long nonReservationCount;
-    public void nonReservationCustomerCount(){
+
+    public void nonReservationCustomerCount() {
         String jpql;
         jpql = "select count(c) from Customer c Where c.retired=false and c.normalCustomer=false and c.silverCustomer=false and c.goldCustomer=false and c.platinumCustomer=false";
         nonReservationCount = getCustomerFacade().countBySql(jpql);
     }
-    
+
     private long regularCount;
-    public void regularCustomerCount(){
+
+    public void regularCustomerCount() {
         String jpql;
         jpql = "select count(c) from Customer c Where c.retired=false and c.normalCustomer=true";
         regularCount = getCustomerFacade().countBySql(jpql);
     }
-    
+
     private long silverCount;
-    public void silverCustomerCount(){
+
+    public void silverCustomerCount() {
         String jpql;
         jpql = "select count(c) from Customer c Where c.retired=false and c.silverCustomer=true";
         silverCount = getCustomerFacade().countBySql(jpql);
     }
-    
+
     private long goldCount;
-    public void goldCustomerCount(){
+
+    public void goldCustomerCount() {
         String jpql;
         jpql = "select count(c) from Customer c Where c.retired=false and c.goldCustomer=true";
         goldCount = getCustomerFacade().countBySql(jpql);
     }
-    
+
     private long platinumCount;
-    public void platinumCustomerCount(){
+
+    public void platinumCustomerCount() {
         String jpql;
         jpql = "select count(c) from Customer c Where c.retired=false and c.platinumCustomer=true";
         platinumCount = getCustomerFacade().countBySql(jpql);
     }
-    
+
     private long registeredCount;
-    public void registeredCustomerCount(){
+
+    public void registeredCustomerCount() {
         String jpql;
         jpql = "select count(c) from Customer c Where c.retired=false and c.permenant=false";
         registeredCount = getCustomerFacade().countBySql(jpql);
     }
-    
+
     private long permenantCount;
-    public void permenantCustomerCount(){
+
+    public void permenantCustomerCount() {
         String jpql;
         jpql = "select count(c) from Customer c Where c.retired=false and c.permenant=true";
         permenantCount = getCustomerFacade().countBySql(jpql);
     }
-    
+
     private long reservedCount;
-    public void reservedCustomerCount(){
+
+    public void reservedCustomerCount() {
         String jpql;
         jpql = "select count(c) from Customer c Where c.retired=false and c.reservation=true and c.payment=false";
         reservedCount = getCustomerFacade().countBySql(jpql);
@@ -309,8 +329,6 @@ public class PersonController implements Serializable {
         temSql = "SELECT p FROM Person p where p.retired=false and LOWER(p.full_name) like '%" + qry.toLowerCase() + "%' order by p.full_name";
         return getFacade().findBySQL(temSql);
     }
-
-    
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -451,7 +469,7 @@ public class PersonController implements Serializable {
     }
 
     public CustomerController getCustomerController() {
-        if(customerController == null){
+        if (customerController == null) {
             customerController = new CustomerController();
         }
         return customerController;
