@@ -16,7 +16,7 @@
         <ui:define name="body" rendered="#{personController.logged}">
             <h:form id="CustomerListForm">
                 <p:panel header="#{bundle.ListCustomerTitle}">
-                    <p:dataTable id="datalist" value="#{customerController.items}" var="item"
+                    <p:dataTable id="datalist" value="#{customerController.items}" var="item" 
                                  selectionMode="single" selection="#{customerController.selected}"
                                  rowIndexVar="iv"
                                  paginator="true"
@@ -24,7 +24,7 @@
                                  rows="50"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
-
+                        
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
@@ -34,26 +34,26 @@
                             </f:facet>
                             <h:outputLabel value="#{iv + 1}"></h:outputLabel>
                         </p:column>
-                        <p:column  width="25">
+                        <p:column  width="25" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_title}"/>
                             </f:facet>
                             <h:outputText value="#{item.title}"/>
                         </p:column>
-                        <p:column width="250">
+                        <p:column width="250" filterBy="#{item.full_name}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="Name"/>
                             </f:facet>
                             <h:outputText value="#{item.full_name}"/>
                         </p:column>
 
-                        <p:column width="75">
+                        <p:column width="120" filterBy="#{item.passport}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_passport}"/>
                             </f:facet>
                             <h:outputText value="#{item.passport}"/>
                         </p:column>
-                        <p:column width="75">
+                        <p:column width="120" filterBy="#{item.nic}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_nic}"/>
                             </f:facet>

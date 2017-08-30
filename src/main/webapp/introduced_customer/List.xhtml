@@ -40,19 +40,19 @@
                             </f:facet>
                             <h:outputText value="#{item.title}"/>
                         </p:column>
-                        <p:column width="200">
+                        <p:column width="150" filterBy="#{item.full_name}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="Name"/>
                             </f:facet>
                             <h:outputText value="#{item.full_name}"/>
                         </p:column>
-                        <p:column width="75">
+                        <p:column width="120" filterBy="#{item.passport}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_passport}"/>
                             </f:facet>
                             <h:outputText value="#{item.passport}"/>
                         </p:column>
-                        <p:column width="75">
+                        <p:column width="120" filterBy="#{item.nic}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCustomerTitle_nic}"/>
                             </f:facet>
@@ -70,13 +70,13 @@
                             </f:facet>
                             <h:outputText value="#{item.email}"/>
                         </p:column>
-                        <p:column width="200">
+                        <p:column width="150">
                             <f:facet name="header">
                                 <h:outputText value="Introduced customer name"/>
                             </f:facet>
                             <h:outputText value="#{item.introducedCustomer}"/>
                         </p:column>
-                        <p:column>
+                        <p:column width="50">
                             <f:facet name="header">
                                 <h:outputText value="Points Earned"/>
                             </f:facet>
